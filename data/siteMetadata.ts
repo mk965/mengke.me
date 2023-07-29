@@ -1,0 +1,71 @@
+export let siteMetadata = {
+  title: "Ke's blog - Ke's coding journey",
+  author: 'Mengke',
+  fullName: 'Mengke',
+  headerTitle: "Ke's blog - Ke's coding journey",
+  footerTitle: "Ke's blog - Ke's coding journey",
+  description: "Ke's coding journey - work and life stories through the keyboard of an open-minded Software Engineer",
+  language: 'en-us',
+  siteUrl: 'https://www.mengke.me',
+  siteRepo: 'https://github.com/mk965/mengke.me',
+  siteLogo: '/static/images/logo.jpg',
+  image: '/static/images/logo.jpg',
+  socialBanner: '/static/images/logo.jpg',
+  email: 'z9mk65@gmail.com',
+  github: 'https://github.com/mk965',
+  // twitter: 'https://twitter.com/hta218_',
+  // facebook: 'https://facebook.com/hta218',
+  // youtube: 'https://www.youtube.com/@hta218_',
+  juejin: 'https://juejin.cn/user/4037062430299912',
+  linkedin: 'https://www.linkedin.com/in/zhangmk/',
+  locale: 'en-US',
+  analyticsURL: 'https://analytics.mengke.me/share/jkwRskv0/mengke.me',
+  analytics: {
+    plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
+    simpleAnalytics: false, // true or false
+    umamiWebsiteId: '3d411e30-9376-4df4-9858-f54c8358d0d1', // e.g. 123e4567-e89b-12d3-a456-426614174000
+    googleAnalyticsId: 'G-N8GYBZ8V57', // e.g. UA-000000-2 or G-XXXXXXX
+  },
+  socialAccounts: {
+    github: 'mk965',
+    twitter: 'hta218_',
+    juejin: 'Mengke',
+    linkedin: 'mengke',
+  },
+}
+
+/**
+ * Select a provider and use the environment variables associated to it
+ * https://vercel.com/docs/environment-variables
+ * --
+ *
+ * Visit each provider's documentation link and follow the instructions, then add the environment variable to your project.
+ */
+export let commentConfig = {
+  provider: 'giscus', // 'giscus' | 'utterances' | 'disqus',
+  // https://giscus.app/
+  giscusConfig: {
+    repo: '', // process.env.GISCUS_REPO
+    repositoryId: '', // process.env.GISCUS_REPOSITORY_ID
+    category: '', // process.env.GISCUS_CATEGORY
+    categoryId: '', // process.env.GISCUS_CATEGORY_ID
+    mapping: 'title',
+    reactions: '1',
+    metadata: '0',
+    lightTheme: 'light',
+    darkTheme: 'transparent_dark',
+    themeURL: '',
+  },
+  // https://utteranc.es/
+  utterancesConfig: {
+    repo: '', // process.env.UTTERANCES_REPO
+    issueTerm: '',
+    label: '',
+    lightTheme: '',
+    darkTheme: '',
+  },
+  // https://help.disqus.com/en/articles/1717111-what-s-a-shortname
+  disqus: {
+    shortname: '', // process.env.DISQUS_SHORTNAME
+  },
+}

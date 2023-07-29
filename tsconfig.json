@@ -1,0 +1,25 @@
+{
+  "include": ["next-env.d.ts", "./**/*.ts", "./**/*.tsx"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"]
+    },
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true
+  }
+}
