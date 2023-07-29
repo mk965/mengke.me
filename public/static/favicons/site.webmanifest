@@ -1,0 +1,36 @@
+{
+  "name": "mengke.me",
+  "short_name": "mengke.me",
+  "description": "Ke's blog - Ke's coding journey",
+  "start_url": "./index.html",
+  "icons": [
+    {
+      "src": "/static/favicons/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicons/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicons/favicon-76x76.png",
+      "sizes": "76x76",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicons/favicon-150x150.png",
+      "sizes": "150x150",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicons/favicon-800x800.png",
+      "sizes": "800x800",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#E3F6E6",
+  "background_color": "#FFFFFF",
+  "display": "standalone"
+}
