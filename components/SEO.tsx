@@ -17,7 +17,7 @@ export function PageSeo({ title, description }: PageSeoProps) {
       <meta property="og:title" content={title} />
       <meta property="og:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={siteMetadata.twitter} />
+      {/* <meta name="twitter:site" content={siteMetadata.twitter} /> */}
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={`${siteMetadata.siteUrl}${siteMetadata.socialBanner}`} />
@@ -31,12 +31,7 @@ export function BlogSeo(props: BlogSeoProps) {
   let { authorDetails, title, summary, date, lastmod, url, images = [] } = props
   let publishedAt = new Date(date).toISOString()
   let modifiedAt = new Date(lastmod || date).toISOString()
-  let imagesArr =
-    images.length === 0
-      ? [siteMetadata.socialBanner]
-      : typeof images === 'string'
-      ? [images]
-      : images
+  let imagesArr = images.length === 0 ? [siteMetadata.socialBanner] : typeof images === 'string' ? [images] : images
 
   let featuredImages = imagesArr.map((img) => {
     return {
@@ -98,17 +93,14 @@ export function BlogSeo(props: BlogSeoProps) {
           <meta property="og:image" content={img.url} key={img.url} />
         ))}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content={siteMetadata.twitter} />
+        {/* <meta name="twitter:site" content={siteMetadata.twitter} /> */}
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={summary} />
         <meta name="twitter:image" content={featuredImages[0].url} />
         {date && <meta property="article:published_time" content={publishedAt} />}
         {lastmod && <meta property="article:modified_time" content={modifiedAt} />}
         <link rel="canonical" href={`${siteMetadata.siteUrl}${router.asPath}`} />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData, null, 2) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData, null, 2) }} />
       </Head>
     </>
   )
