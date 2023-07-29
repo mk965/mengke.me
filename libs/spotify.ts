@@ -1,7 +1,11 @@
 import fetch from 'isomorphic-unfetch'
 import { SPOTIFY_TOKEN_API, SPOTIFY_NOW_PLAYING_API, SPOTIFY_TOP_TRACKS_API } from '~/constant'
 
-let { SPOTIFY_CLIENT_ID: client_id, SPOTIFY_CLIENT_SECRET: client_secret, SPOTIFY_REFRESH_TOKEN: refresh_token } = process.env
+let {
+  SPOTIFY_CLIENT_ID: client_id,
+  SPOTIFY_CLIENT_SECRET: client_secret,
+  SPOTIFY_REFRESH_TOKEN: refresh_token,
+} = process.env
 
 let basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
 
