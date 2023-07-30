@@ -5,8 +5,8 @@ export function UmamiScript() {
   return (
     <Script
       async
+      src="https://analytics.umami.is/script.js"
       data-website-id={siteMetadata.analytics.umamiWebsiteId}
-      src="https://analytics.mengke.me/script.js"
-    />
+    ></Script>
   )
 }
