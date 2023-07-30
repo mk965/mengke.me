@@ -12,8 +12,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
   let href = repository?.url || url
 
   return (
-    <div className="md p-4 md:w-1/2" style={{ maxWidth: '544px' }}>
-      <div className="flex h-full flex-col overflow-hidden rounded-md border border-gray-400 border-opacity-60 hover:border-gray-500 dark:border-gray-600 dark:hover:border-gray-400">
+    <div className="p-4 md md:w-1/2" style={{ maxWidth: '544px' }}>
+      <div className="flex flex-col h-full overflow-hidden border border-gray-400 rounded-md border-opacity-60 hover:border-gray-500 dark:border-gray-600 dark:hover:border-gray-400">
         <Image
           alt={title}
           src={imgSrc}
@@ -21,7 +21,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           width={1088}
           height={612}
         />
-        <div className="flex grow flex-col justify-between space-y-6 p-6">
+        <div className="flex flex-col justify-between p-6 space-y-6 grow">
           <div className="space-y-3">
             <h2 className="text-2xl font-bold leading-8 tracking-tight">
               {href ? (
@@ -32,7 +32,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 title
               )}
             </h2>
-            <div className="max-w-none space-y-2 text-gray-500 dark:text-gray-400">
+            <div className="space-y-2 text-gray-500 max-w-none dark:text-gray-400">
               <p>{repository?.description || description}</p>
               <div className="flex flex-wrap space-x-1.5">
                 <span className="shrink-0">Built with:</span>

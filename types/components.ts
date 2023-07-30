@@ -1,9 +1,10 @@
 import type { ImageProps as NextImageProps } from 'next/image'
 import type React from 'react'
 import type { SocialIconsMap } from '~/components/SocialIcon'
-import type { projectsData } from '~/data/projectsData'
+// import type { projectsData } from '~/data/projectsData'
 import type { commentConfig } from '~/data/siteMetadata'
 import type { MdxFrontMatter, ReadingTime } from './mdx'
+import type { Project, Friend } from './data'
 
 export interface PageTitleProps {
   children: React.ReactNode
@@ -22,10 +23,14 @@ export interface ImageProps extends NextImageProps {
   shouldOpenLightbox?: boolean
 }
 
-export type ProjectDataType = (typeof projectsData)[0]
+// export type ProjectDataType = (typeof projectsData)[0]
 
 export interface ProjectCardProps {
-  project: ProjectDataType
+  project: Project
+}
+
+export interface FriendCardProps {
+  friend: Friend
 }
 
 export interface SocialButtonsProps {
