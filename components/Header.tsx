@@ -9,15 +9,15 @@ import { ThemeSwitcher } from './ThemeSwitcher'
 export function Header({ onToggleNav }: { onToggleNav: () => void }) {
   let router = useRouter()
   return (
-    <header className="supports-backdrop-blur:bg-white/95 sticky top-0 z-40 overflow-x-hidden bg-white/75 py-3 backdrop-blur dark:bg-dark/75">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-3 xl:max-w-5xl xl:px-0">
+    <header className="sticky top-0 z-40 py-3 overflow-x-hidden supports-backdrop-blur:bg-white/95 bg-white/75 backdrop-blur dark:bg-dark/75">
+      <div className="flex items-center justify-between max-w-3xl px-3 mx-auto xl:max-w-5xl xl:px-0">
         <div>
-          <Link href="/" aria-label="Leo's Blog">
+          <Link href="/" aria-label="Ke's Blog">
             <div className="flex items-center justify-between" data-umami-event="logo">
-              <div className="mr-3 flex items-center justify-center">
+              <div className="flex items-center justify-center mr-3">
                 <NextImage
                   src="/static/images/logo.jpg"
-                  alt="Leo's Blog logo"
+                  alt="Ke's Blog logo"
                   width={45}
                   height={45}
                   className="rounded-full"
@@ -49,7 +49,7 @@ export function Header({ onToggleNav }: { onToggleNav: () => void }) {
           {/* <AnalyticsLink /> */}
           <ThemeSwitcher />
           <button
-            className="ml-2 mr-1 h-8 w-8 rounded sm:hidden"
+            className="w-8 h-8 ml-2 mr-1 rounded sm:hidden"
             type="button"
             aria-label="Toggle Menu"
             onClick={onToggleNav}

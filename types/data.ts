@@ -7,3 +7,11 @@ export interface Project {
   repo?: string
   builtWith: string[]
 }
+
+export interface Friend {
+  type: 'friend' | 'techStar'
+  name: string
+  slogan?: string
+  imgSrc: string
+  url: string
+}

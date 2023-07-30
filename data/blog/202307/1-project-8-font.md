@@ -143,10 +143,3 @@ authors: ['default']
 Figma 中的代码可以直接复制粘贴，无需任何修改即可根据语言和自宽自动使用相应字体包。
 
 参考资料：[https://www.zhangxinxu.com/wordpress/2016/11/css-unicode-range-character-font-face/](https://www.zhangxinxu.com/wordpress/2016/11/css-unicode-range-character-font-face/)
-
-
-```js
-
-const aaa = 123;
-
-```

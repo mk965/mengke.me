@@ -4,7 +4,8 @@ export let siteMetadata = {
   fullName: 'Mengke',
   headerTitle: "Ke's blog - Ke's coding journey",
   footerTitle: "Ke's blog - Ke's coding journey",
-  description: "Ke's coding journey - work and life stories through the keyboard of an open-minded Software Engineer",
+  description:
+    "Ke's coding journey - work and life stories through the keyboard of an open-minded Software Engineer",
   language: 'en-us',
   siteUrl: 'https://www.mengke.me',
   siteRepo: 'https://github.com/mk965/mengke.me',

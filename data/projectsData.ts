@@ -3,7 +3,7 @@ import type { Project } from '~/types'
 export let projectsData: Project[] = [
   {
     type: 'work',
-    title: 'MoonFox Data - Aurora\'s Big Data Brand',
+    title: "MoonFox Data - Aurora's Big Data Brand",
     description: `The MoonFox Data brand portal includes iAPP, iBrand, iMarkting, Alternative Data and other parts, and users can obtain the Moon Fox big data service on the website.`,
     imgSrc: '/static/images/projects/moonfox.jpg',
     url: 'https://moonfox.cn/en?ref=mengke.me',
