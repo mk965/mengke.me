@@ -8,4 +8,11 @@ export let friendsData: Friend[] = [
     imgSrc: '/static/images/friends/kong.jpg',
     url: 'https://kongf.github.io/',
   },
+  {
+    type: 'friend',
+    name: 'UoCat',
+    slogan: '橘子糖的博客',
+    imgSrc: '/static/images/friends/uocat.png',
+    url: 'https://uocat.com/',
+  },
 ]

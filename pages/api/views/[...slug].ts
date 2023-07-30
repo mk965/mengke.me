@@ -3,7 +3,10 @@ import { __db } from '~/libs/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    let slug = req.query.slug.toString()
+    let slug =
+      typeof req.query.slug === 'string'
+        ? req.query.slug.toString()
+        : req.query.slug.pop().toString()
     if (req.method === 'POST') {
       let newOrUpdatedViews = await __db.views.upsert({
         where: { slug },
