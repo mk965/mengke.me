@@ -10,17 +10,20 @@ export function FriendCard({ friend }: FriendCardProps) {
   return (
     <div className="w-1/2 p-2 mt-2 md md:w-1/4 sm:w-1/3" style={{ maxWidth: '544px' }}>
       <div className="flex flex-col items-center justify-center h-full p-6 space-y-6 overflow-hidden text-center border border-gray-400 rounded-md border-opacity-60 hover:border-gray-500 dark:border-gray-600 dark:hover:border-gray-400">
-        <Image
-          alt={name}
-          src={imgSrc}
-          className="object-cover object-center w-16 h-16 rounded-full md:h-20 md:w-20 lg:h-28 lg:w-28"
-          width={1088}
-          height={612}
-        />
-        {/* <img
-          src={imgSrc}
-          className="object-cover object-center w-16 h-16 rounded-full md:h-20 md:w-20 lg:h-28 lg:w-28"
-        /> */}
+        {imgSrc.startsWith('/static') ?
+          <Image
+            alt={name}
+            src={imgSrc}
+            className="object-cover object-center w-16 h-16 rounded-full md:h-20 md:w-20 lg:h-28 lg:w-28"
+            width={112}
+            height={112}
+          /> :
+          <img
+            alt={name}
+            src={imgSrc}
+            className="object-cover object-center w-16 h-16 rounded-full md:h-20 md:w-20 lg:h-28 lg:w-28"
+          />
+        }
         <div className="flex flex-col justify-between space-y-6 grow">
           <div className="space-y-3">
             <h2 className="font-bold leading-8 tracking-tight text-md">
