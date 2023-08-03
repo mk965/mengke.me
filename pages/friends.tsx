@@ -41,8 +41,12 @@ export default function Friends() {
           </div>
         )}
         <div>
-          <p className='mt-4 space-y-2 text-gray-500 max-w-none dark:text-gray-400'>
-            Want to join the list? Welcome to <a className="px-2 hover:underline" href={`mailto:${siteMetadata.email}`}>email me</a>.
+          <p className="mt-4 space-y-2 text-gray-500 max-w-none dark:text-gray-400">
+            Want to join the list? Welcome to{' '}
+            <a className="px-2 hover:underline" href={`mailto:${siteMetadata.email}`}>
+              email me
+            </a>
+            .
           </p>
         </div>
       </div>
