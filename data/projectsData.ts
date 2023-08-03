@@ -35,6 +35,14 @@ export let projectsData: Project[] = [
   },
   {
     type: 'self',
+    title: 'qiankun-demo - Quick Start Qiankun Micro Frontend',
+    description: `Qiankun Micro frontend integrates various frameworks, including Vue2, Vue3, React, Nuxt, Angular, etc..`,
+    imgSrc: '/static/images/projects/qiankun.png',
+    repo: '/',
+    builtWith: ['qiankun', 'Vue', 'React', 'Nuxt', 'Angular'],
+  },
+  {
+    type: 'self',
     title: 'coord-check - Geographic coordinate checking',
     description: `Quickly check a set of string coordinates for incorrect coordinates and format them.`,
     imgSrc: '/static/images/projects/coord-check.jpg',
