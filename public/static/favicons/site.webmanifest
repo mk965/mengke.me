@@ -2,7 +2,7 @@
   "name": "mengke.me",
   "short_name": "mengke.me",
   "description": "Ke's blog - Ke's coding journey",
-  "start_url": "./index.html",
+  "start_url": "/",
   "icons": [
     {
       "src": "/static/favicons/favicon-16x16.png",

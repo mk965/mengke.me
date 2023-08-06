@@ -20,7 +20,8 @@ export let siteMetadata = {
   juejin: 'https://juejin.cn/user/4037062430299912',
   linkedin: 'https://www.linkedin.com/in/zhangmk/',
   locale: 'en-US',
-  analyticsURL: 'https://analytics.mengke.me/share/jkwRskv0/mengke.me',
+  // analyticsURL: 'https://analytics.mengke.me/share/jkwRskv0/mengke.me',
+  analyticsURL: 'https://analytics.umami.is/share/tHBVaroWrcZ3XbEe/mengke.me',
   analytics: {
     plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
     simpleAnalytics: false, // true or false

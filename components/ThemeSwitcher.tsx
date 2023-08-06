@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+/* eslint-disable jsx-a11y/media-has-caption */
+import { useEffect, useRef, useState, type ReactNode, type ReactElement } from 'react'
 import { useTheme } from 'next-themes'
 
 export function ThemeSwitcher() {
@@ -9,19 +10,31 @@ export function ThemeSwitcher() {
   useEffect(() => setMounted(true), [])
   let isDark = theme === 'dark' || resolvedTheme === 'dark'
 
+  const audioRef = useRef<any>()
+  const changeTheme = () => {
+    if (audioRef?.current) {
+      audioRef.current.src = `/static/sound/switch-${isDark ? 'on' : 'off'}.mp3`
+      audioRef.current.play()
+    }
+    setTheme(isDark ? 'light' : 'dark')
+  }
+
   return (
     <button
       aria-label="Toggle Dark Mode"
       type="button"
       className="ml-1 rounded p-1.5 hover:bg-gray-200 dark:hover:bg-gray-700 sm:ml-2"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+      onClick={changeTheme}
       data-umami-event="nav-theme-switcher"
     >
+      <audio ref={audioRef} className="w-0 h-0 opacity-0">
+        <source src="/static/sound/switch-on.mp3" type="video/mp4"></source>
+      </audio>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
-        className="h-6 w-6 text-gray-900 dark:text-gray-100"
+        className="w-6 h-6 text-gray-900 dark:text-gray-100"
       >
         {mounted && isDark ? (
           <path
