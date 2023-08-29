@@ -43,4 +43,11 @@ export let friendsData: Friend[] = [
     imgSrc: '/static/images/friends/bestxtools.png',
     url: 'https://discuss-cn.bestxtools.com/?ref=mengke.me',
   },
+  {
+    type: 'friend',
+    name: "RE1IFE's Blog",
+    slogan: '一个淹死在时代浪潮里的 coder',
+    imgSrc: '/static/images/friends/re1ife.jpg',
+    url: 'http://www.re1ife.top/?ref=mengke.me',
+  },
 ]
