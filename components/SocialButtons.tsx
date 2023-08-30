@@ -12,7 +12,7 @@ export function SocialButtons({ postUrl, title, fileName }: SocialButtonsProps) 
     `https://twitter.com/search?q=${encodeURIComponent(postUrl)}`
 
   return (
-    <div className="items-center justify-between pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300 md:flex">
+    <div className="items-center justify-between pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300 md:flex">
       <div className="mb-6 md:mb-0">
         <Link href={createDiscussonTwitterUrl(postUrl)} rel="nofollow" className="hover:underline">
           {'Discuss on Twitter'}
@@ -29,7 +29,7 @@ export function SocialButtons({ postUrl, title, fileName }: SocialButtonsProps) 
           via={siteMetadata.socialAccounts.twitter}
           className="mr-2 flex items-center overflow-hidden rounded !bg-twitter !p-1.5 hover:opacity-90"
         >
-          <TwitterIcon className="h-5 w-5" fill="#fff" />
+          <TwitterIcon className="w-5 h-5" fill="#fff" />
           <span className="ml-2.5 mr-1.5 font-extrabold text-white">Tweet</span>
         </TwitterShareButton>
         <FacebookShareButton
@@ -37,7 +37,7 @@ export function SocialButtons({ postUrl, title, fileName }: SocialButtonsProps) 
           quote={title}
           className="mr-2 flex items-center overflow-hidden rounded !bg-facebook !p-1.5 hover:opacity-90"
         >
-          <FacebookIcon className="h-5 w-5" fill="#fff" />
+          <FacebookIcon className="w-5 h-5" fill="#fff" />
           <span className="ml-2.5 mr-1.5 font-extrabold text-white">Share</span>
         </FacebookShareButton>
       </div>
