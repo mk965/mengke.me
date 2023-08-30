@@ -75,7 +75,7 @@ export default function SocialAccounts() {
         </a>
         <a
           href={siteMetadata.juejin}
-          target="_blankyarn"
+          target="_blank"
           className="text-sm text-gray-500 transition hover:text-gray-600"
           data-umami-event="contact-mail"
           rel="noopener noreferrer"
