@@ -1,5 +1,5 @@
 {
-  "include": ["next-env.d.ts", "./**/*.ts", "./**/*.tsx"],
+  "include": ["next-env.d.ts", "./**/*.ts", "./**/*.tsx", "components/avpDemo/lion.es.js"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "esnext",

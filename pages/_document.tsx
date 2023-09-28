@@ -5,7 +5,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/favicon-150x150.png" />
-          <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+          <meta name="apple-mobile-web-app-capable" content="yes" />
           <link
             rel="icon"
             type="image/png"

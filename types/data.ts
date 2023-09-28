@@ -1,3 +1,4 @@
+import React from 'react'
 export interface Project {
   type: 'work' | 'self'
   title: string
@@ -5,6 +6,7 @@ export interface Project {
   imgSrc: string
   url?: string
   repo?: string
+  demo?: React.JSX.Element
   builtWith: string[]
 }
 
