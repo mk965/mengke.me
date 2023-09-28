@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 var P = Object.defineProperty;
 var L = (n, e, t) => e in n ? P(n, e, { enumerable: !0, configurable: !0, writable: !0, value: t }) : n[e] = t;
 var a = (n, e, t) => (L(n, typeof e != "symbol" ? e + "" : e, t), t);
