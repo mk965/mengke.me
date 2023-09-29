@@ -7,7 +7,7 @@ import { Image } from './Image'
 import { Link } from './Link'
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  let { title, description, imgSrc, url, repo, builtWith } = project
+  let { title, description, imgSrc, url, repo, builtWith, demo } = project
   let { data } = useSWR(`/api/github?repo=${repo}`, fetcher)
   let repository: GithubRepository = data?.repository
   let href = repository?.url || url
@@ -46,6 +46,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
                   )
                 })}
               </div>
+              {demo && (
+                <div className="flex flex-wrap space-x-1.5">
+                  <span className="shrink-0">Demo:</span>
+                  <span className="font-semibold text-gray-600 dark:text-gray-300">{demo}</span>
+                </div>
+              )}
             </div>
           </div>
           {repository ? (
