@@ -1,19 +1,20 @@
 import useSWR from 'swr'
-import type { GithubRepository, ProjectCardProps } from '~/types'
+import type { ProjectCardProps } from '~/types/components'
+import type { GithubRepository } from '~/types/server'
 import { fetcher } from '~/utils/fetcher'
 import { GithubRepo } from './GithubRepo'
 import { Image } from './Image'
 import { Link } from './Link'
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  let { title, description, imgSrc, url, repo, builtWith, demo } = project
+  let { title, description, imgSrc, url, repo, builtWith } = project
   let { data } = useSWR(`/api/github?repo=${repo}`, fetcher)
   let repository: GithubRepository = data?.repository
   let href = repository?.url || url
 
   return (
     <div className="p-4 md md:w-1/2" style={{ maxWidth: '544px' }}>
-      <div className="flex flex-col h-full overflow-hidden border border-gray-400 rounded-md border-opacity-60 hover:border-gray-500 dark:border-gray-600 dark:hover:border-gray-400">
+      <div className="flex flex-col h-full overflow-hidden border border-transparent rounded-lg shadow-nextjs dark:shadow-nextjs-dark">
         <Image
           alt={title}
           src={imgSrc}
@@ -21,7 +22,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           width={1088}
           height={612}
         />
-        <div className="flex flex-col justify-between p-6 space-y-6 grow">
+        <div className="flex flex-col justify-between p-4 space-y-6 grow md:p-6">
           <div className="space-y-3">
             <h2 className="text-2xl font-bold leading-8 tracking-tight">
               {href ? (
@@ -38,7 +39,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 <span className="shrink-0">Built with:</span>
                 {builtWith?.map((tool, index) => {
                   return (
-                    <span key={index} className="font-semibold text-gray-500 dark:text-gray-400">
+                    <span key={index} className="font-semibold text-gray-600 dark:text-gray-300">
                       {tool}
                       {index !== builtWith.length - 1 && ','}
                     </span>
@@ -47,11 +48,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </div>
             </div>
           </div>
-          {demo && (
-            <div>
-              <span className="shrink-0">Demo:</span> {demo}
-            </div>
-          )}
           {repository ? (
             <GithubRepo repo={repository} />
           ) : (
