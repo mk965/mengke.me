@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { Lion, Player } from '~/libs/lion.es'
 
+let lion: Player | null
 export default function AvpDemo() {
   const containerRef = useRef()
-  let lion: Player | null
   const [playing, setPlaying] = useState(false)
   const play = async () => {
     if (lion) {
