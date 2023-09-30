@@ -9,16 +9,16 @@ export function SnippetCard({ snippet }: { snippet: SnippetFrontMatter }) {
     <Link href={`/snippets/${slug}`} title={title}>
       <div
         data-umami-event="view-snippet"
-        className="mb-4 flex cursor-pointer rounded border border-gray-300 hover:border-gray-500 dark:border-gray-600 dark:hover:border-gray-400 lg:mb-0"
+        className="flex gap-6 p-3 mb-4 border border-transparent rounded-lg cursor-pointer lg:p-4 shadow-intense hover:shadow-nextjs dark:shadow-intense-dark dark:hover:shadow-nextjs-dark lg:mb-0"
       >
-        <div className="p-3 lg:p-4">
+        <div className="flex items-center justify-center">
           <DevIcon type={type} />
         </div>
-        <div className="overflow-hidden p-3 md:p-4 lg:p-4">
-          <h3 className="overflow-hidden overflow-ellipsis whitespace-nowrap text-lg font-bold leading-8 tracking-tight lg:text-2xl">
+        <div className="space-y-2 overflow-hidden">
+          <h3 className="overflow-hidden text-lg font-bold leading-8 tracking-tight overflow-ellipsis whitespace-nowrap lg:text-xl">
             {heading}
           </h3>
-          <p className="text-md mt-2 text-gray-700 dark:text-gray-400 lg:text-base">{summary}</p>
+          <p className="text-gray-700 dark:text-gray-400 lg:text-base">{summary}</p>
         </div>
       </div>
     </Link>
