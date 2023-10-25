@@ -21,8 +21,7 @@ export let siteMetadata = {
   linkedin: 'https://www.linkedin.com/in/zhangmk/',
   instagram: 'https://www.instagram.com/_mk965/',
   locale: 'en-US',
-  // analyticsURL: 'https://analytics.mengke.me/share/jkwRskv0/mengke.me',
-  analyticsURL: 'https://analytics.umami.is/share/tHBVaroWrcZ3XbEe/mengke.me',
+  analyticsURL: 'https://analytics.eu.umami.is/share/EqvpZYPABxaQA3mr/mengke.me',
   analytics: {
     plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
     simpleAnalytics: false, // true or false
