@@ -3,7 +3,7 @@ import { Link } from '~/components/Link'
 import { Twemoji } from '~/components/Twemoji'
 import { siteMetadata } from '~/data/siteMetadata'
 
-export default function FourZeroFour() {
+export default function Resume() {
   return (
     <div className="flex flex-col items-center justify-center pt-4 md:pt-10 xl:pt-20">
       <div>

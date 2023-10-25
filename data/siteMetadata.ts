@@ -19,6 +19,7 @@ export let siteMetadata = {
   youtube: 'https://www.youtube.com/@mengkee',
   juejin: 'https://juejin.cn/user/4037062430299912',
   linkedin: 'https://www.linkedin.com/in/zhangmk/',
+  instagram: 'https://www.instagram.com/_mk965/',
   locale: 'en-US',
   // analyticsURL: 'https://analytics.mengke.me/share/jkwRskv0/mengke.me',
   analyticsURL: 'https://analytics.umami.is/share/tHBVaroWrcZ3XbEe/mengke.me',
@@ -33,6 +34,7 @@ export let siteMetadata = {
     twitter: 'ZoengMaangngo',
     juejin: 'Mengke',
     linkedin: 'mengke',
+    instagram: '_mk965',
   },
 }
 

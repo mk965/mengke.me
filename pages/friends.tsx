@@ -22,7 +22,7 @@ export default function Friends() {
           <h3 className="mb-4 text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100">
             My Friends
           </h3>
-          <div className="flex flex-wrap -m-4">
+          <div className="flex flex-wrap">
             {friends.map((friend) => (
               <FriendCard key={friend.name} friend={friend} />
             ))}
