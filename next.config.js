@@ -13,6 +13,10 @@ module.exports = withBundleAnalyzer({
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: '*.unsplash.com',
+      },
+      {
+        protocol: 'https',
         hostname: '*.cdninstagram.com',
       },
     ],
