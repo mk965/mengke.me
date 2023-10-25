@@ -14,6 +14,7 @@ import TailwindCSS from '~/icons/tailwind.svg'
 import Typescript from '~/icons/typescript.svg'
 import Umami from '~/icons/umami.svg'
 import Vercel from '~/icons/vercel.svg'
+import Instagram from '~/icons/instagram.svg'
 
 export let DevIconsMap = {
   React,
@@ -32,6 +33,7 @@ export let DevIconsMap = {
   Vercel,
   Railway,
   Spotify,
+  Instagram,
 }
 
 export function DevIcon(props: { type: keyof typeof DevIconsMap; className?: string }) {

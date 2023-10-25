@@ -1,5 +1,6 @@
 export let headerNavLinks = [
   { href: '/blog', title: 'Blog' },
+  { href: '/gallery', title: 'Gallery' },
   { href: '/snippets', title: 'Snippets' },
   { href: '/projects', title: 'Projects' },
   { href: '/about', title: 'About' },

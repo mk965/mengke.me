@@ -13,8 +13,6 @@ import UnsplashPhotoInfo from './UnsplashPhotoInfo.tsx'
 ![thumbnail-image](/static/images/blog/202304/Pinia_Started_Guide/server.jpg)
 
 
-[新一代状态管理工具，Pinia.js 上手指南 - 掘金](https://juejin.cn/post/7049196967770980389)
-
 ## 优势
 
 - vue 2、3 都支持。

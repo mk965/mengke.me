@@ -6,11 +6,11 @@ export function ProfileCardInfo() {
     <div className="hidden py-4 xl:block xl:px-6">
       <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Mengke</h3>
       <h5 className="py-2 text-gray-700 dark:text-gray-400">Learner | Builder</h5>
-      <div className="mb-2 mt-4 space-y-4">
+      <div className="mt-4 mb-2 space-y-4">
         <div className="flex items-center text-gray-700 dark:text-gray-200">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="w-6 h-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -38,7 +38,7 @@ export function ProfileCardInfo() {
         <div className="flex items-center text-gray-700 dark:text-gray-200">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="w-6 h-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -60,7 +60,7 @@ export function ProfileCardInfo() {
           <p className="px-2">
             {/* [::1]:443 - Ha Noi, */}
             Peking, China
-            {/* <span className="absolute ml-1 inline-flex pt-px">
+            {/* <span className="absolute inline-flex pt-px ml-1">
               <Twemoji emoji="flag-china" />
             </span> */}
           </p>
@@ -68,7 +68,7 @@ export function ProfileCardInfo() {
         <div className="flex items-center text-gray-700 dark:text-gray-200">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="w-6 h-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -87,7 +87,7 @@ export function ProfileCardInfo() {
         <div className="flex items-center text-gray-700 dark:text-gray-200">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className="w-6 h-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

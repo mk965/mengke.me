@@ -10,6 +10,12 @@ module.exports = withBundleAnalyzer({
   },
   images: {
     domains: ['i.scdn.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.cdninstagram.com',
+      },
+    ],
   },
   typescript: { tsconfigPath: './tsconfig.json' },
   webpack: (config, { dev, isServer }) => {
