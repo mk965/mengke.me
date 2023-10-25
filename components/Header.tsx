@@ -46,7 +46,7 @@ export function Header({ onToggleNav }: { onToggleNav: () => void }) {
               )
             })}
           </div>
-          {/* <AnalyticsLink /> */}
+          <AnalyticsLink />
           <ThemeSwitcher />
           <button
             className="w-8 h-8 ml-2 mr-1 rounded sm:hidden"
