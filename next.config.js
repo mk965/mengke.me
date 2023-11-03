@@ -21,6 +21,15 @@ module.exports = withBundleAnalyzer({
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/gh/:path*',
+        destination: 'https://raw.githubusercontent.com/:path*',
+        locale: false,
+      },
+    ]
+  },
   typescript: { tsconfigPath: './tsconfig.json' },
   webpack: (config, { dev, isServer }) => {
     config.module.rules.push({
