@@ -9,7 +9,7 @@ module.exports = withBundleAnalyzer({
     dirs: ['components', 'constant', 'layouts', 'libs', 'pages', 'scripts', 'utils'],
   },
   images: {
-    domains: ['i.scdn.co'],
+    domains: ['i.scdn.co', 'raw.githubusercontent.com'],
     remotePatterns: [
       {
         protocol: 'https',
