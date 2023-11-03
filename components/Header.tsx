@@ -21,6 +21,7 @@ export function Header({ onToggleNav }: { onToggleNav: () => void }) {
                   width={45}
                   height={45}
                   className="rounded-full"
+                  priority
                 />
               </div>
             </div>

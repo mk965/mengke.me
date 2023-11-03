@@ -59,7 +59,7 @@ export function ProfileCardInfo() {
 
           <p className="px-2">
             {/* [::1]:443 - Ha Noi, */}
-            Peking, China
+            Peiping, China
             {/* <span className="absolute inline-flex pt-px ml-1">
               <Twemoji emoji="flag-china" />
             </span> */}

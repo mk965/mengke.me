@@ -52,13 +52,14 @@ export function ProfileCard() {
     >
       <div
         style={style}
-        className="flex flex-col overflow-hidden bg-white shadow-cyan-100/50 transition-all duration-200 ease-out dark:bg-dark dark:shadow-cyan-700/50 xl:rounded-lg xl:shadow-lg"
+        className="flex flex-col overflow-hidden transition-all duration-200 ease-out bg-white shadow-cyan-100/50 dark:bg-dark dark:shadow-cyan-700/50 xl:rounded-lg xl:shadow-lg"
       >
         <Image
           src={'/static/images/logo.jpg'}
           alt="avatar"
           width={550}
           height={350}
+          priority
           style={{
             objectPosition: '50% 16%',
             objectFit: 'cover',

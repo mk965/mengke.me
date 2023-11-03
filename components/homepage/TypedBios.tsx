@@ -25,7 +25,7 @@ export function TypedBios() {
         </li>
         <li>I'm a learner, builder, and freedom seeker.</li>
         <li>
-          I live in <b className="font-medium">Peking, China</b>.
+          I live in <b className="font-medium">Peiping, China</b>.
         </li>
         <li>
           I was born in the beautiful <b className="font-medium">Mount Tai</b>.

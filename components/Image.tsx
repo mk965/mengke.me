@@ -11,14 +11,14 @@ export function Image({ shouldOpenLightbox = true, ...rest }: ImageProps) {
     blurDataURL = BLUR_IMAGE_DATA_URL
   }
 
-  let [openLightbox, setOpenLightbox] = useState(false)
-  let handleOpenLightbox = () => {
+  const [openLightbox, setOpenLightbox] = useState(false)
+  const handleOpenLightbox = () => {
     if (!shouldOpenLightbox) return
     document.documentElement.classList.add('lightbox-loading')
     setOpenLightbox(true)
   }
-  let isThumb = rest.id === 'thumbnail-image'
-  let className = clsx(
+  const isThumb = rest.id === 'thumbnail-image'
+  const className = clsx(
     `flex justify-center`,
     shouldOpenLightbox && 'cursor-zoom-in',
     isThumb && 'thumbnail-image'
