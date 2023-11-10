@@ -26,14 +26,14 @@ export let friendsData: Friend[] = [
     type: 'friend',
     name: 'Ike の Blog',
     slogan: "Ike's Blog,Memo someting interesting",
-    imgSrc: '/static/images/friends/ike.jpg',
+    imgSrc: '/static/images/friends/ike.jpeg',
     url: 'https://blog.ikeno.top/?ref=mengke.me',
   },
   {
     type: 'friend',
     name: 'kkjz',
     slogan: 'こうよう',
-    imgSrc: '/static/images/friends/kkjz.jpg',
+    imgSrc: '/static/images/friends/kkjz.jpeg',
     url: 'https://kkjz.xyz/?ref=mengke.me',
   },
   {
@@ -56,5 +56,12 @@ export let friendsData: Friend[] = [
     slogan: '一个淹死在时代浪潮里的 coder',
     imgSrc: '/static/images/friends/re1ife.jpg',
     url: 'http://www.re1ife.top/?ref=mengke.me',
+  },
+  {
+    type: 'friend',
+    name: '鄢云峰的个人网站',
+    slogan: 'Enjoy Life, Enjoy Coding',
+    imgSrc: '/static/images/friends/yanyunfeng.jpeg',
+    url: 'https://yanyunfeng.com/?ref=mengke.me',
   },
 ]
