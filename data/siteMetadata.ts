@@ -12,7 +12,7 @@ export let siteMetadata = {
   siteLogo: '/static/images/logo.jpg',
   image: '/static/images/logo.jpg',
   socialBanner: '/static/images/logo.jpg',
-  email: 'z9mk65@gmail.com',
+  email: 'me@mengke.me',
   github: 'https://github.com/mk965',
   twitter: 'https://twitter.com/ZoengMaangngo',
   facebook: 'https://facebook.com/maangngo',
