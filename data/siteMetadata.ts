@@ -27,6 +27,7 @@ export let siteMetadata = {
     simpleAnalytics: false, // true or false
     umamiWebsiteId: '3d411e30-9376-4df4-9858-f54c8358d0d1', // e.g. 123e4567-e89b-12d3-a456-426614174000
     googleAnalyticsId: 'G-N8GYBZ8V57', // e.g. UA-000000-2 or G-XXXXXXX
+    microsoftClarity: 'jteok7o6yj',
   },
   socialAccounts: {
     github: 'mk965',
