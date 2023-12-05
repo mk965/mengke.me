@@ -2,7 +2,7 @@ import type { UnsplashPhotoProps } from '~/types'
 
 export function UnsplashPhotoInfo({ photoURL, author }: UnsplashPhotoProps) {
   return (
-    <div className="-mt-6 mb-12 text-right text-sm italic">
+    <div className="mb-12 -mt-6 text-sm italic text-right">
       Photo by{' '}
       <a className="!no-underline" href={photoURL} target="_blank" rel="noreferrer">
         {author}
