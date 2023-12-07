@@ -1,5 +1,5 @@
 ---
-title: '安卓<video>标签去除默认海报图'
+title: 'Android Webview <video> 标签去除默认播放按钮图'
 date: '2023-12-05'
 tags: ['Video', 'Android', 'WebView']
 draft: false

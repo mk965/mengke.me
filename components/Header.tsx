@@ -12,12 +12,12 @@ export function Header({ onToggleNav }: { onToggleNav: () => void }) {
     <header className="sticky top-0 z-40 py-3 overflow-x-hidden supports-backdrop-blur:bg-white/95 bg-white/75 backdrop-blur dark:bg-dark/75">
       <div className="flex items-center justify-between max-w-3xl px-3 mx-auto xl:max-w-5xl xl:px-0">
         <div>
-          <Link href="/" aria-label="Ke's Blog">
+          <Link href="/" aria-label="Mengke's Blog">
             <div className="flex items-center justify-between" data-umami-event="logo">
               <div className="flex items-center justify-center mr-3">
                 <NextImage
                   src="/static/images/logo.jpg"
-                  alt="Ke's Blog logo"
+                  alt="Mengke's Blog logo"
                   width={45}
                   height={45}
                   className="rounded-full"
