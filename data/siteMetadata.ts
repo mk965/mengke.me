@@ -1,11 +1,11 @@
 export let siteMetadata = {
-  title: "Ke's blog - Ke's coding journey",
+  title: "Mengke's blog - Mengke's coding journey",
   author: 'Mengke',
   fullName: 'Mengke',
-  headerTitle: "Ke's blog - Ke's coding journey",
-  footerTitle: "Ke's blog - Ke's coding journey",
+  headerTitle: "Mengke's blog - Mengke's coding journey",
+  footerTitle: "Mengke's blog - Mengke's coding journey",
   description:
-    "Ke's coding journey - work and life stories through the keyboard of an open-minded Software Engineer",
+    "Mengke's coding journey - work and life stories through the keyboard of an open-minded Software Engineer",
   language: 'en-us',
   siteUrl: 'https://www.mengke.me',
   siteRepo: 'https://github.com/mk965/mengke.me',
