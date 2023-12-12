@@ -8,11 +8,7 @@ export function ViewCounter({ slug, className }: ViewCounterProps) {
   let views = Number(data?.total)
 
   useEffect(() => {
-    let registerView = () =>
-      fetch(`/api/views/${slug}`, {
-        method: 'POST',
-      })
-
+    let registerView = () => fetch(`/api/views/${slug}`, { method: 'POST' })
     registerView()
   }, [slug])
 
