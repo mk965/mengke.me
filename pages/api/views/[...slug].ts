@@ -3,32 +3,23 @@ import { __db } from '~/libs/prisma'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    let slug =
+    const slug =
       typeof req.query.slug === 'string'
         ? req.query.slug.toString()
         : req.query.slug.pop().toString()
     if (req.method === 'POST') {
-      let newOrUpdatedViews = await __db.views.upsert({
+      if (process.env.NODE_ENV === 'development') {
+        return res.status(200).json({ total: '0' })
+      }
+      const newOrUpdatedViews = await __db.views.upsert({
         where: { slug },
-        create: {
-          slug,
-        },
-        update: {
-          count: {
-            increment: 1,
-          },
-        },
+        create: { slug },
+        update: { count: { increment: 1 } },
       })
-      return res.status(200).json({
-        total: newOrUpdatedViews.count.toString(),
-      })
+      return res.status(200).json({ total: newOrUpdatedViews.count.toString() })
     }
     if (req.method === 'GET') {
-      let views = await __db.views.findUnique({
-        where: {
-          slug,
-        },
-      })
+      const views = await __db.views.findUnique({ where: { slug } })
       return res.status(200).json({ total: views?.count?.toString?.() || 0 })
     }
   } catch (e) {
