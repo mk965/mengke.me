@@ -4,12 +4,12 @@ import { SimpleAnalyticsScript } from './SimpleAnalytics'
 import { UmamiScript } from './Umami'
 import { ClarityScript } from './ClarityScript'
 
-let isProduction = process.env.NODE_ENV === 'production'
+const isProduction = process.env.NODE_ENV === 'production'
 
 export function Analytics() {
   if (isProduction) {
-    let { analytics } = siteMetadata
-    let { simpleAnalytics, umamiWebsiteId, googleAnalyticsId, microsoftClarity } = analytics
+    const { analytics } = siteMetadata
+    const { simpleAnalytics, umamiWebsiteId, googleAnalyticsId, microsoftClarity } = analytics
     return (
       <>
         {simpleAnalytics && <SimpleAnalyticsScript />}
