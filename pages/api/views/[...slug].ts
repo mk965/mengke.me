@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { __db } from '~/libs/prisma'
 
+const isProduction = process.env.NODE_ENV === 'production'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const slug =
@@ -8,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         ? req.query.slug.toString()
         : req.query.slug.pop().toString()
     if (req.method === 'POST') {
-      if (process.env.NODE_ENV === 'development') {
+      if (!isProduction) {
         return res.status(200).json({ total: '0' })
       }
       const newOrUpdatedViews = await __db.views.upsert({

@@ -13,6 +13,7 @@ import type { PostLayoutProps } from '~/types'
 export function PostLayout(props: PostLayoutProps) {
   let { frontMatter, authorDetails, page, children, commentConfig } = props
   let { slug, fileName, date, title, tags, readingTime } = frontMatter
+  console.log('=====', readingTime)
   let postUrl = `${siteMetadata.siteUrl}/blog/${slug}`
 
   return (
@@ -23,14 +24,14 @@ export function PostLayout(props: PostLayoutProps) {
         <div>
           <BlogHeader title={title} date={date} readingTime={readingTime} />
           <div
-            className="divide-y divide-gray-200 pb-8 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
+            className="pb-8 divide-y divide-gray-200 dark:divide-gray-700 xl:grid xl:grid-cols-4 xl:gap-x-6 xl:divide-y-0"
             style={{ gridTemplateRows: 'auto 1fr' }}
           >
             <div>
-              <div className="hidden border-b border-gray-200 py-4 dark:border-gray-700 xl:block xl:py-8">
+              <div className="hidden py-4 border-b border-gray-200 dark:border-gray-700 xl:block xl:py-8">
                 <BackToPosts page={page} />
               </div>
-              <dl className="pb-10 pt-6 xl:pt-11">
+              <dl className="pt-6 pb-10 xl:pt-11">
                 <dt className="sr-only">Authors</dt>
                 <dd>
                   <AuthorDetails authorDetails={authorDetails} />
@@ -38,7 +39,7 @@ export function PostLayout(props: PostLayoutProps) {
               </dl>
             </div>
             <div className="divide-y divide-gray-200 !border-t-0 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose prose-lg max-w-none pb-8 pt-10 dark:prose-dark">{children}</div>
+              <div className="pt-10 pb-8 prose prose-lg max-w-none dark:prose-dark">{children}</div>
               <SocialButtons postUrl={postUrl} title={title} fileName={fileName} />
               <Comments frontMatter={frontMatter} config={commentConfig} />
             </div>
