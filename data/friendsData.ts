@@ -64,4 +64,26 @@ export let friendsData: Friend[] = [
     imgSrc: '/static/images/friends/yanyunfeng.jpeg',
     url: 'https://yanyunfeng.com/?ref=mengke.me',
   },
+
+  {
+    type: 'techStar',
+    name: 'Anthony Fu',
+    slogan: "Anthony Fu's Portfolio",
+    imgSrc: '/static/images/friends/antfu.png',
+    url: 'https://antfu.me/?ref=mengke.me',
+  },
+  {
+    type: 'techStar',
+    name: 'Surmon',
+    slogan: '本是浪蝶游蜂，自留半亩石池，但求直抒胸臆，挥墨九云之中',
+    imgSrc: '/static/images/friends/surmon.jpeg',
+    url: 'https://surmon.me/?ref=mengke.me',
+  },
+  {
+    type: 'techStar',
+    name: 'Tech Philosopher',
+    slogan: 'To Explore, Feel, Think, and Practice.',
+    imgSrc: '/static/images/friends/bktus.jpg',
+    url: 'https://blog.bktus.com/en/?ref=mengke.me',
+  },
 ]
