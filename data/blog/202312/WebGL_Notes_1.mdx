@@ -1,0 +1,246 @@
+---
+title: 'WebGL 学习笔记（一）'
+date: '2023-12-20'
+tags: ['WebGL', 'visualization']
+draft: false
+summary: '稍纵即逝的一年即将结束。今年我也顺应潮流，记录年终总结。过去，我对「年终总结」不屑一顾，认为人生就是不断前行，有欢笑有泪水，一切都将过去。年纪稍长，渐渐明白，一些事情漫不经心就可能被遗忘，需要人为地留下痕迹...'
+authors: ['default']
+---
+
+import CodePenSnippet from './CodePenSnippet.tsx'
+import UnsplashPhotoInfo from './UnsplashPhotoInfo.tsx'
+
+![thumbnail-image](https://images.unsplash.com/photo-1454372182658-c712e4c5a1db?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
+<UnsplashPhotoInfo photoURL="https://unsplash.com/photos/gray-wooden-sea-dock-near-green-pine-trees-under-white-sky-at-daytime-1EYMue_AwDw" author="Tj Holowaychuk" />
+
+
+## 基础概念
+
+我们常说 WebGL 可以用来在 Web 端做炫酷的 3D 功能，实际上 WebGL 只是一个光栅化引擎。它只是根据代码去绘制点、线、三角形。
+
+WebGL 在 GPU 上运行。所以，需要提供可在 GPU 上运行的代码。需要提供两个函数：**Vertex shader**（顶点着色器）和 **Fragment shader**（片段着色器）。它们是以严格类型的 C/C++ 语言编写的。
+
+- Vertex shader：就像建筑蓝图一样，它定义了3D物体的几何形状。它接收每个顶点的位置和其他属性作为输入，然后计算它们的最终位置和一些额外的信息，最后输出这些信息。
+- Fragment shader：就像调色板一样，它决定每个像素的颜色。它接收来自 vertex shader 的信息，然后根据这些信息计算每个像素的最终颜色。
+
+几乎所有的 WebGL 的 API 都是关于设置这一对函数的运行状态。对于要绘制的每一个松子，都要设置一系列状态值，然后通过调用 `gl.drawArrays` 或 `gl.drawElements` 运行一个着色方法对，使着色器能在 GPU 上运行。
+
+所有「你希望让这些函数可以有权限访问的数据」都必须提供给 GPU，有四种方法可以让着色器获取到这些数据：
+
+1. Attributes and Buffers （属性和缓冲区）
+
+   Buffers 是上传到 GPU 的二进制数组。通常 Buffers 包含位置（positions）、法线（normals）、纹理坐标（texture coordinates）、顶点颜色（vertex colors）等信息，当然你也可以自由的放任何数据到 Buffers 中。
+
+   Attributes 用来指定如何从 Buffers 获取数据并加入到你的片段着色器中（vertex shader）。例如可以将位置放入缓冲区中，每个位置三个 32 位浮点数。你需要告诉特定属性从哪个缓冲区中提取位置、应该提取什么类型的数据（三个 32 位浮点数）、位置在缓冲区中的偏移量以及从其中获取多少字节到下一个位置。
+
+   Buffers 是不能随机访问的。相反，顶点着色器被执行指定的次数。每次执行时，都会从每个指定的缓冲区中提取下一个值并将其分配给属性。
+
+2. Uniforms（全局变量）
+
+   Uniforms 实际上是在执行着色器程序之前设置的全局变量。
+
+3. Textures（纹理）
+
+   纹理是一个数据序列，可以在着色程序运行中随意读取其中的数据。 大多数情况存放的是图像数据，但是纹理仅仅是数据序列， 你也可以随意存放除了颜色数据以外的其它数据。
+
+4. Varyings（变量）
+
+   可变量是一种顶点着色器给片段着色器传值的方式，依照渲染的图元是点， 线还是三角形，顶点着色器中设置的可变量会在片段着色器运行中获取不同的插值。
+
+## Hello World
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <canvas id="c" width="400" height="300"></canvas>
+    <script id="vertex-shader-2d" type="notjs">
+      // an attribute will receive data from a buffer
+      attribute vec4 a_position;
+
+      // all shaders have a main function
+      void main() {
+          // gl_Position is a special variable a vertex shader
+          // is responsible for setting
+          gl_Position = a_position;
+      }
+    </script>
+    <script id="fragment-shader-2d" type="notjs">
+      // fragment shaders don't have a default precision so we need
+      // to pick one. mediump is a good default
+      precision mediump float;
+
+      void main() {
+          // gl_FragColor is a special variable a fragment shader
+          // is responsible for setting
+          gl_FragColor = vec4(1, 0, 0.5, 1); // return reddish-purple
+      }
+    </script>
+    <script src="index.js"></script>
+  </body>
+</html>
+```
+
+```js
+/**
+ * 创建着色器
+ * @param {WebGLRenderingContext} gl
+ * @param {GLenum} type
+ * @param {string} source
+ * @returns {WebGLShader | null}
+ */
+function createShader(gl, type, source) {
+  // 创建着色器对象
+  var shader = gl.createShader(type)
+  // 指定着色器源代码
+  gl.shaderSource(shader, source)
+  // 编译着色器
+  gl.compileShader(shader)
+  // 检查编译是否成功
+  var success = gl.getShaderParameter(shader, gl.COMPILE_STATUS)
+  if (success) {
+    // 如果编译成功，返回着色器对象
+    return shader
+  } else {
+    // 如果编译失败，打印编译错误信息
+    console.log(gl.getShaderInfoLog(shader))
+    // 删除失败的着色器对象
+    gl.deleteShader(shader)
+    // 返回null
+    return null
+  }
+}
+
+/**
+ * 创建着色器程序
+ * @param {WebGLRenderingContext} gl
+ * @param {WebGLShader} vertexShader
+ * @param {WebGLShader} fragmentShader
+ * @returns {WebGLProgram}
+ */
+function createProgram(gl, vertexShader, fragmentShader) {
+  // 创建一个程序对象
+  const program = gl.createProgram()
+  // 将顶点着色器附加到程序对象上
+  gl.attachShader(program, vertexShader)
+  // 将片元着色器附加到程序对象上
+  gl.attachShader(program, fragmentShader)
+  // 链接程序对象
+  gl.linkProgram(program)
+  // 检查链接是否成功
+  const success = gl.getProgramParameter(program, gl.LINK_STATUS)
+  if (success) {
+    // 如果链接成功，则打印链接信息并返回程序对象
+    console.log('链接成功：', gl.getProgramInfoLog(program))
+    return program
+  } else {
+    // 如果链接失败，则打印链接信息并删除程序对象
+    console.log(gl.getProgramInfoLog(program))
+    gl.deleteProgram(program)
+    return null
+  }
+}
+
+;(() => {
+  // 获取canvas元素
+  const canvas = document.querySelector('#c')
+  // 获取webgl上下文
+  const gl = canvas.getContext('webgl')
+
+  // 获取顶点着色器源代码
+  const vertexShaderSource = document.querySelector('#vertex-shader-2d').textContent
+  // 获取片元着色器源代码
+  const fragmentShaderSource = document.querySelector('#fragment-shader-2d').textContent
+
+  // 创建顶点着色器
+  const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource)
+  // 创建片元着色器
+  const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource)
+
+  // 创建程序
+  const program = createProgram(gl, vertexShader, fragmentShader)
+
+  // 获取顶点属性位置
+  const positionAttributeLocation = gl.getAttribLocation(program, 'a_position')
+  console.table({ positionAttributeLocation: positionAttributeLocation })
+
+  // 创建一个用于存储位置信息的缓冲区对象
+  const positionBuffer = gl.createBuffer()
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
+
+  /**
+   * 1. 第一件事我们有一个 position 的 js 数组。
+   * 2. WebGL 需要强类型，所以这里我们用 new Float32Array() 创建一个 32 位浮点数数组。
+   * 3. gl.bufferData 拷贝数据到 GPU positionBuffer 中。
+   * 4. 它使用位置缓冲区，因为我们将其绑定到上面的 ARRAY_BUFFER 绑定点。
+   * 5. 最后一个参数事 gl.STATIC_DRAW，告诉 WebGL，我们不太可能对这个数据进行太大的改变。
+   */
+
+  // 通过绑定点引用数据，将数据放入该缓冲区中
+  const position = [0, 0, 0, 0.5, 0.7, 0]
+  // 将顶点位置数据绑定到数组缓冲区
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(position), gl.STATIC_DRAW)
+
+  /**
+   * 渲染
+   */
+
+  // 我们需要告诉 WebGL 如何将我们将要设置 gl_Position 的剪辑空间值转换回像素，通常称为屏幕空间。为此，我们调用 gl.viewport 并传递画布的当前大小。
+  // 设置画布显示范围为整个窗口
+  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
+  // 清除画布的颜色为透明
+  gl.clearColor(0, 0, 0, 0)
+  // 清除画布的颜色缓冲区
+  gl.clear(gl.COLOR_BUFFER_BIT)
+
+  // 告诉 WebGL 我们将要使用哪个程序
+  gl.useProgram(program)
+
+  // 告诉 WebGL 如何从上面设置的缓冲区中获取数据，并将其提供给着色器中的属性
+  // 1. 首先打开属性
+  gl.enableVertexAttribArray(positionAttributeLocation)
+  // 2. 然后指定如何提取数据
+  // 绑定 position buffer
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
+  // 告诉属性如何从positionBuffer（ARRAY_BUFFER）中获取数据
+  const size = 2 // 每次迭代 2 个组件
+  const type = gl.FLOAT // 数据时 32 位浮点型
+  const normalize = false // 不归一化数据
+  // 表示相邻顶点数据之间的字节间隔，这里是 0，表示顶点数据是紧密排列的。
+  const stride = 0 // 0 = 每次迭代向前移动 size * sizeof(type) 以获得下一个位置
+  const offset = 0 // 表示顶点数据的起始偏移，从 buffer 的开头开始读取
+  // 通过调用 gl.vertexAttribPointer 方法，可以将这些属性配置应用到指定的顶点属性位置上，从而告诉 WebGL 如何解释顶点数据。
+  // 隐藏的 gl.vertexAttribPointer 部分是它将电流 ARRAY_BUFFER 绑定到属性。换言之，现在此属性绑定到 positionBuffer 。这意味着我们可以自由地将其他东西绑定到 ARRAY_BUFFER 绑定点。该属性将继续使用 positionBuffer .
+  gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset)
+
+  const primitiveType = gl.TRIANGLES
+  const offset2 = 0 // 偏移量。如果是 3 ，就是从第二个三角形开始绘制
+  const count = 3 // 点总数。如果是两个三角形就要6次
+  gl.drawArrays(primitiveType, offset2, count)
+  // 因为 count 是 3 ，所以将执行顶点着色器 3 次。
+  // 第一次，定点着色器属性中的 a_position.x 和 a_position.y 将被设置为 positionBuffer 中的前两个值。
+  // 第二次，a_position.x 和 a_position.y 将设置为第二个2个值（也就是3-4）。
+  // 第三次，将被设置为最后两个值。
+
+  // 将 primitiveType 设置为 gl.TRIANGLES，所以每次定点着色器运行 3 次，WebGL 都会根据我们设置的 gl_Position 的 3 个值绘制一个三角形。无论我们的画布大小如何，这些值都在剪辑空间坐标中，每个方向从 -1 到 1。
+  // 因为我们的顶点着色器只是将 positionBuffer 值复制到 gl_Position ，因此三角形将在剪辑空间坐标处绘制。
+  // 如果画布大小恰好是 400x300，则从剪辑空间转换为屏幕空间，我们会得到这样的结果
+  /**
+   *  clip space      screen space
+   *  0, 0         ->   200, 150
+   *  0, 0.5       ->   200, 225
+   *  0.7, 0       ->   340, 150
+   */
+})()
+```
+
+## 效果
+
+<CodePenSnippet snippetId="rNRBgoP" />
