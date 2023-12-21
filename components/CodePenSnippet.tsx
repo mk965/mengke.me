@@ -5,13 +5,14 @@ export default function CodePenSnippet(props: { snippetId: string }) {
       <div className="w-full overflow-hidden rounded-lg shadow-nextjs dark:shadow-nextjs-dark">
         <iframe
           title="Codepen"
-          src={`https://codepen.io/mk965/full/${snippetId}`}
+          src={`https://codepen.io/mk965/embed/${snippetId}?default-tab=result`}
           style={{
             width: '100%',
             height: '500px',
             border: '0',
             overflow: 'hidden',
           }}
+          loading="lazy"
           allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
           sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
         />
