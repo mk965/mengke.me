@@ -17,7 +17,7 @@ export let siteMetadata = {
   twitter: 'https://twitter.com/ZoengMaangngo',
   facebook: 'https://facebook.com/maangngo',
   youtube: 'https://www.youtube.com/@mengkee',
-  juejin: 'https://juejin.cn/user/4037062430299912',
+  juejin: 'https://juejin.cn/user/4037062430299912/posts',
   linkedin: 'https://www.linkedin.com/in/zhangmk/',
   instagram: 'https://www.instagram.com/_mk965/',
   locale: 'en-US',
