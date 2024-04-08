@@ -44,6 +44,13 @@ export let friendsData: Friend[] = [
     url: 'https://www.shenmezhidedu.com/?ref=mengke.me',
   },
   {
+    type: 'friend',
+    name: 'web秘籍',
+    slogan: 'web-miji，一个致力于生产前端开发秘籍的网站',
+    imgSrc: '/static/images/friends/miji.ico',
+    url: 'https://web-miji.com/?ref=mengke.me',
+  },
+  {
     type: 'techStar',
     name: 'Anthony Fu',
     slogan: "Anthony Fu's Portfolio",
