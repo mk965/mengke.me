@@ -21,7 +21,9 @@ export function Image({ shouldOpenLightbox = true, ...rest }: ImageProps) {
   const className = clsx(
     `flex justify-center`,
     shouldOpenLightbox && 'cursor-zoom-in',
-    isThumb && 'thumbnail-image'
+    isThumb && 'thumbnail-image',
+    rest.alt.endsWith('_M') && `w-1/2 m-auto`,
+    rest.alt.endsWith('_S') && `w-1/4 m-auto`
   )
 
   return (
