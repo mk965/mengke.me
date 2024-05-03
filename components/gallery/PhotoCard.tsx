@@ -42,7 +42,7 @@ export function PhotoCard(props: any) {
             className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
             aria-label={`Link to ${item.caption}`}
           >
-            <span data-umami-event="project-learn-more">View post &rarr;</span>
+            <span data-umami-event="go-ins">View post &rarr;</span>
           </Link>
         </div>
       </div>
