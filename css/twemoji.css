@@ -1,3 +1,8 @@
+/**
+ * Twemoji
+ * You can find all Twemoji from this website: https://twemoji-cheatsheet.vercel.app
+ */
+
 .twa {
   display: inline-block;
   height: 1em;
@@ -309,4 +314,7 @@
 }
 .twa-bar-chart {
   background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f4ca.svg');
+}
+.twa-cup-with-straw {
+  background-image: url('https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/svg/1f964.svg');
 }
