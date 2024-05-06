@@ -52,7 +52,7 @@ export function ProfileCard() {
     >
       <div
         style={style}
-        className="flex flex-col overflow-hidden transition-all duration-200 ease-out bg-white shadow-cyan-100/50 dark:bg-dark dark:shadow-cyan-700/50 xl:rounded-lg xl:shadow-lg"
+        className="flex flex-col overflow-hidden transition-all duration-200 ease-out bg-white xl:rounded-lg shadow-demure dark:bg-dark dark:shadow-mondegreen outline outline-1 outline-gray-100 dark:outline-gray-600"
       >
         <Image
           src={'/static/images/logo.jpg'}
