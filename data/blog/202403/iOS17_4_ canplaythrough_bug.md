@@ -2,7 +2,7 @@
 title: ' iOS 17.4 HTMLAudioElement 中 canplaythrough、loadeddata 等事件不触发的 bug'
 date: '2024-03-19'
 tags: ['FE', 'iOS']
-draft: false
+draft: true
 summary: '更新到 iOS 17.4 后，HTMLAudioElement 事件中 canplaythrough、loadeddata 等事件不会被触发 ...'
 authors: ['default']
 ---
