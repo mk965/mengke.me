@@ -51,6 +51,13 @@ export let friendsData: Friend[] = [
     url: 'https://web-miji.com/?ref=mengke.me',
   },
   {
+    type: 'friend',
+    name: '沉舟侧畔 Blog',
+    slogan: '⛵️ 新生的力量，生机勃勃 ⛵️',
+    imgSrc: '/static/images/friends/springwood.jpeg',
+    url: 'https://springwood.me/?ref=mengke.me',
+  },
+  {
     type: 'techStar',
     name: 'Anthony Fu',
     slogan: "Anthony Fu's Portfolio",
