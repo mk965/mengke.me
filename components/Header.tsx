@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { AnalyticsLink } from './AnalyticsLink'
 import { Link } from './Link'
 import { ThemeSwitcher } from './ThemeSwitcher'
+import { siteMetadata } from '~/data/siteMetadata'
 
 export function Header({ onToggleNav }: { onToggleNav: () => void }) {
   let router = useRouter()
@@ -16,7 +17,7 @@ export function Header({ onToggleNav }: { onToggleNav: () => void }) {
             <div className="flex items-center justify-between" data-umami-event="logo">
               <div className="flex items-center justify-center mr-3">
                 <NextImage
-                  src="/static/images/logo.jpg"
+                  src={siteMetadata.siteLogo}
                   alt="Mengke's Blog logo"
                   width={45}
                   height={45}
