@@ -2,6 +2,7 @@ import Image from 'next/image'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { ProfileCardInfo } from './ProfileInfo'
 import { SpotifyNowPlaying } from './SpotifyNowPlaying'
+import { siteMetadata } from '~/data/siteMetadata'
 
 export function ProfileCard() {
   let ref = useRef(null)
@@ -55,7 +56,7 @@ export function ProfileCard() {
         className="flex flex-col overflow-hidden transition-all duration-200 ease-out bg-white xl:rounded-lg shadow-demure dark:bg-dark dark:shadow-mondegreen outline outline-1 outline-gray-100 dark:outline-gray-600"
       >
         <Image
-          src={'/static/images/logo.jpg'}
+          src={siteMetadata.socialBanner}
           alt="avatar"
           width={550}
           height={350}
