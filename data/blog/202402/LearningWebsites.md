@@ -1,5 +1,5 @@
 ---
-title: 'Some Websites'
+title: 'A collection of some useful websites'
 date: '2024-02-18'
 tags: ['Websites', 'Collect']
 draft: false

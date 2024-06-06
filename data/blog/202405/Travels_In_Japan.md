@@ -1,7 +1,7 @@
 ---
 title: '🗼 五月底去了一趟日本，记录一下我的游记和攻略'
 date: '2024-05-31'
-tags: ['Travel', 'Japan']
+tags: ['Life', 'Travel', 'Japan']
 draft: false
 summary: '年初制定的目标中有一项是「带老婆出国旅行」，现在已经完成了。五月底我们去了一趟日本。我在这里记录一下我们的游记，也分享一些攻略 …'
 authors: ['default']
