@@ -18,10 +18,10 @@ import { remarkImgToJsx } from './remark-img-to-jsx'
 import { remarkTocHeading } from './remark-toc-heading'
 
 export async function getFileBySlug(type: string, slug: string): Promise<MdxFileData> {
-  let root = process.cwd()
-  let mdxPath = path.join(root, 'data', type, `${slug}.mdx`)
-  let mdPath = path.join(root, 'data', type, `${slug}.md`)
-  let source = fs.existsSync(mdxPath)
+  const root = process.cwd()
+  const mdxPath = path.join(root, 'data', type, `${slug}.mdx`)
+  const mdPath = path.join(root, 'data', type, `${slug}.md`)
+  const source = fs.existsSync(mdxPath)
     ? fs.readFileSync(mdxPath, 'utf8')
     : fs.readFileSync(mdPath, 'utf8')
 
@@ -46,8 +46,8 @@ export async function getFileBySlug(type: string, slug: string): Promise<MdxFile
     )
   }
 
-  let toc: TOC[] = []
-  let { frontmatter, code } = await bundleMDX<MdxFrontMatter>({
+  const toc: TOC[] = []
+  const { frontmatter, code } = await bundleMDX<MdxFrontMatter>({
     source,
     cwd: path.join(process.cwd(), 'components'),
     esbuildOptions: (options) => {
@@ -79,7 +79,7 @@ export async function getFileBySlug(type: string, slug: string): Promise<MdxFile
         () => {
           return (tree) => {
             visit(tree, 'element', (node: UnistNodeType) => {
-              let [token, type] = node.properties.className || []
+              const [token, type] = node.properties.className || []
               if (token === 'token') {
                 node.properties.className = [TOKEN_CLASSNAME_MAP[type]]
               }
@@ -95,7 +95,7 @@ export async function getFileBySlug(type: string, slug: string): Promise<MdxFile
     toc,
     mdxSource: code,
     frontMatter: {
-      readingTime: readingTime(code),
+      readingTime: readingTime(source),
       slug: slug || null,
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
       ...frontmatter,
@@ -104,20 +104,20 @@ export async function getFileBySlug(type: string, slug: string): Promise<MdxFile
 }
 
 export function getAllFilesFrontMatter(folder: string) {
-  let root = process.cwd()
-  let prefixPaths = path.join(root, 'data', folder)
-  let files = getAllFilesRecursively(prefixPaths)
-  let allFrontMatter: BlogFrontMatter[] = []
+  const root = process.cwd()
+  const prefixPaths = path.join(root, 'data', folder)
+  const files = getAllFilesRecursively(prefixPaths)
+  const allFrontMatter: BlogFrontMatter[] = []
   files.forEach((file) => {
     // Replace is needed to work on Windows
-    let fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
+    const fileName = file.slice(prefixPaths.length + 1).replace(/\\/g, '/')
     // Remove Unexpected File
     if (path.extname(fileName) !== '.md' && path.extname(fileName) !== '.mdx') {
       return
     }
-    let source = fs.readFileSync(file, 'utf8')
-    let grayMatterData = matter(source)
-    let data = grayMatterData.data as BlogFrontMatter
+    const source = fs.readFileSync(file, 'utf8')
+    const grayMatterData = matter(source)
+    const data = grayMatterData.data as BlogFrontMatter
     if (data.draft !== true) {
       allFrontMatter.push({ ...data, slug: formatSlug(fileName) })
     }

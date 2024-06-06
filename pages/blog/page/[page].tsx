@@ -6,9 +6,9 @@ import { getAllFilesFrontMatter } from '~/libs/mdx'
 import type { BlogListProps } from '~/types'
 
 export async function getStaticPaths() {
-  let totalPosts = getAllFilesFrontMatter('blog')
-  let totalPages = Math.ceil(totalPosts.length / POSTS_PER_PAGE)
-  let paths = Array.from({ length: totalPages }, (_, i) => ({
+  const totalPosts = getAllFilesFrontMatter('blog')
+  const totalPages = Math.ceil(totalPosts.length / POSTS_PER_PAGE)
+  const paths = Array.from({ length: totalPages }, (_, i) => ({
     params: { page: (i + 1).toString() },
   }))
 
@@ -19,14 +19,14 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: { params: { page: string } }) {
-  let { page } = params
-  let posts = getAllFilesFrontMatter('blog')
-  let pageNumber = parseInt(page)
-  let initialDisplayPosts = posts.slice(
+  const { page } = params
+  const posts = getAllFilesFrontMatter('blog')
+  const pageNumber = parseInt(page)
+  const initialDisplayPosts = posts.slice(
     POSTS_PER_PAGE * (pageNumber - 1),
     POSTS_PER_PAGE * pageNumber
   )
-  let pagination = {
+  const pagination = {
     currentPage: pageNumber,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
   }
@@ -41,7 +41,7 @@ export async function getStaticProps({ params }: { params: { page: string } }) {
 }
 
 export default function PostPage(props: BlogListProps) {
-  let { posts, initialDisplayPosts, pagination } = props
+  const { posts, initialDisplayPosts, pagination } = props
   return (
     <>
       <PageSeo title={siteMetadata.title} description={siteMetadata.description} />
