@@ -10,9 +10,9 @@ import { siteMetadata } from '~/data/siteMetadata'
 import type { PostSimpleLayoutProps } from '~/types'
 
 export function PostSimple(props: PostSimpleLayoutProps) {
-  let { frontMatter, type, children, authorDetails, commentConfig } = props
-  let { date, title, slug, fileName, tags, readingTime } = frontMatter
-  let postUrl = `${siteMetadata.siteUrl}/${type}/${slug}`
+  const { frontMatter, type, children, authorDetails, commentConfig } = props
+  const { date, title, slug, fileName, tags, readingTime } = frontMatter
+  const postUrl = `${siteMetadata.siteUrl}/${type}/${slug}`
 
   return (
     <SectionContainer>
@@ -38,7 +38,7 @@ export function PostSimple(props: PostSimpleLayoutProps) {
           </header>
           <div className="pb-8" style={{ gridTemplateRows: 'auto 1fr' }}>
             <div className="xl:col-span-3 xl:row-span-2 xl:pb-0">
-              <div className="prose prose-lg max-w-none pb-8 dark:prose-dark md:prose-xl">
+              <div className="pb-8 prose prose-lg max-w-none dark:prose-dark md:prose-xl">
                 {children}
               </div>
               <div className="border-t border-gray-200 dark:border-gray-700">

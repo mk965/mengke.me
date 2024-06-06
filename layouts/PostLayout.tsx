@@ -13,7 +13,6 @@ import type { PostLayoutProps } from '~/types'
 export function PostLayout(props: PostLayoutProps) {
   let { frontMatter, authorDetails, page, children, commentConfig } = props
   let { slug, fileName, date, title, tags, readingTime } = frontMatter
-  console.log('=====', readingTime)
   let postUrl = `${siteMetadata.siteUrl}/blog/${slug}`
 
   return (
