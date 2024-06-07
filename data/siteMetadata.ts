@@ -1,40 +1,32 @@
 export let siteMetadata = {
-  title: "Mengke's blog - Mengke's coding journey",
-  author: 'Mengke',
-  fullName: 'Mengke',
-  headerTitle: "Mengke's blog - Mengke's coding journey",
-  footerTitle: "Mengke's blog - Mengke's coding journey",
+  title: "Wuqibor's blog - A ordinary boy's journey",
+  author: 'Wuqibor',
+  fullName: 'Wuqibor Paper',
+  headerTitle: "Wuqibor's blog - A ordinary boy's journey",
+  footerTitle: "Wuqibor's blog - Wish everyone everyone be treated with gentleness",
   description:
-    "Mengke's coding journey - work and life stories through the keyboard of an open-minded Software Engineer",
+    "Wuqibor's walking journey - A high school student with a dream to be an ordinary man",
   language: 'en-us',
-  siteUrl: 'https://www.mengke.me',
-  siteRepo: 'https://github.com/mk965/mengke.me',
-  siteLogo: '/static/images/logo.jpg',
-  image: '/static/images/logo.jpg',
-  socialBanner: '/static/images/logo.jpg',
-  email: 'me@mengke.me',
-  github: 'https://github.com/mk965',
-  twitter: 'https://twitter.com/ZoengMaangngo',
-  facebook: 'https://facebook.com/maangngo',
-  youtube: 'https://www.youtube.com/@mengkee',
-  juejin: 'https://juejin.cn/user/4037062430299912/posts',
-  linkedin: 'https://www.linkedin.com/in/zhangmk/',
-  instagram: 'https://www.instagram.com/_mk965/',
+  siteUrl: 'https://blog.57777777.xyz',
+  siteRepo: 'https://github.com/Sunakier/blog',
+  siteLogo: '/static/images/logo.png',
+  image: '/static/images/logo.png',
+  socialBanner: '/static/images/logo.png',
+  email: 'lazyerpaper@qq.com',
+  github: 'https://github.com/Sunakier',
+  telegram: 'https://t.me/Wuqibor',
   locale: 'en-US',
-  analyticsURL: 'https://analytics.eu.umami.is/share/EqvpZYPABxaQA3mr/mengke.me',
+  analyticsURL: 'https://us.umami.is/websites/1e7fed50-448b-42cb-af8e-06fe1df68c83',
   analytics: {
     plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
     simpleAnalytics: false, // true or false
-    umamiWebsiteId: '3d411e30-9376-4df4-9858-f54c8358d0d1', // e.g. 123e4567-e89b-12d3-a456-426614174000
-    googleAnalyticsId: 'G-N8GYBZ8V57', // e.g. UA-000000-2 or G-XXXXXXX
-    microsoftClarity: 'jteok7o6yj',
+    umamiWebsiteId: '1e7fed50-448b-42cb-af8e-06fe1df68c83', // e.g. 123e4567-e89b-12d3-a456-426614174000
+    googleAnalyticsId: 'G-PK8B95RZ5T', // e.g. UA-000000-2 or G-XXXXXXX
+    microsoftClarity: 'mmz5d97tbm',
   },
   socialAccounts: {
-    github: 'mk965',
-    twitter: 'ZoengMaangngo',
-    juejin: 'Mengke',
-    linkedin: 'mengke',
-    instagram: '_mk965',
+    github: 'Sunakier',
+    telegram: 'Wuqibor',
   },
 }
 
@@ -53,7 +45,7 @@ export let commentConfig = {
     repositoryId: '', // process.env.GISCUS_REPOSITORY_ID
     category: '', // process.env.GISCUS_CATEGORY
     categoryId: '', // process.env.GISCUS_CATEGORY_ID
-    mapping: 'title',
+    mapping: 'pathname',
     reactions: '1',
     metadata: '0',
     lightTheme: 'light',

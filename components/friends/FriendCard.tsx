@@ -1,5 +1,4 @@
 import type { FriendCardProps } from '~/types'
-import { GithubRepo } from '../GithubRepo'
 import { Image } from '../Image'
 import { Link } from '../Link'
 

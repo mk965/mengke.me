@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { AnalyticsLink } from './AnalyticsLink'
 import { Link } from './Link'
 import { ThemeSwitcher } from './ThemeSwitcher'
+import { siteMetadata } from '~/data/siteMetadata'
 
 export function Header({ onToggleNav }: { onToggleNav: () => void }) {
   let router = useRouter()
@@ -12,12 +13,12 @@ export function Header({ onToggleNav }: { onToggleNav: () => void }) {
     <header className="sticky top-0 z-40 py-3 overflow-x-hidden supports-backdrop-blur:bg-white/95 bg-white/75 backdrop-blur dark:bg-dark/75">
       <div className="flex items-center justify-between max-w-3xl px-3 mx-auto xl:max-w-5xl xl:px-0">
         <div>
-          <Link href="/" aria-label="Mengke's Blog">
+          <Link href="/" aria-label="Wuqibor's Blog">
             <div className="flex items-center justify-between" data-umami-event="logo">
               <div className="flex items-center justify-center mr-3">
                 <NextImage
-                  src="/static/images/logo.jpg"
-                  alt="Mengke's Blog logo"
+                  src={siteMetadata.siteLogo}
+                  alt="Wuqibor's Blog logo"
                   width={45}
                   height={45}
                   className="rounded-full"

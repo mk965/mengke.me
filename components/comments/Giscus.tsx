@@ -19,9 +19,13 @@ function Giscus({ config }: GiscusProps) {
     script.setAttribute('data-category', config.category)
     script.setAttribute('data-category-id', config.categoryId)
     script.setAttribute('data-mapping', config.mapping)
+    script.setAttribute('data-strict', '1')
     script.setAttribute('data-reactions-enabled', config.reactions)
     script.setAttribute('data-emit-metadata', config.metadata)
+    script.setAttribute('data-input-position', 'top')
     script.setAttribute('data-theme', giscusTheme)
+    script.setAttribute('data-lang', 'zh-CN')
+    script.setAttribute('data-loading', 'lazy')
     script.setAttribute('crossOrigin', 'anonymous')
     script.async = true
 
