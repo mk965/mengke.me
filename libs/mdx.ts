@@ -115,9 +115,9 @@ export function getAllFilesFrontMatter(folder: string) {
     if (path.extname(fileName) !== '.md' && path.extname(fileName) !== '.mdx') {
       return
     }
-    let source = fs.readFileSync(file, 'utf8')
-    let grayMatterData = matter(source)
-    let data = grayMatterData.data as BlogFrontMatter
+    const source = fs.readFileSync(file, 'utf8')
+    const grayMatterData = matter(source)
+    const data = grayMatterData.data as BlogFrontMatter
     if (data.draft !== true) {
       allFrontMatter.push({ ...data, slug: formatSlug(fileName) })
     }
