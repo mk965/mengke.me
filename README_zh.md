@@ -41,18 +41,12 @@
 
 ### 3. 部署到 Vercel
 
-1. 注册并登录 Vercel，并关联你的 GitHub 账号。
-
-2. 创建一个新项目，直接导入你的博客仓库。
-
-3. 在项目设置中，选择 **Environment Variables**，添加 `.env` 中的变量（为了安全，不要将 `.env` 文件推送到 GitHub）。
-
-4. 每当有 commit 推送到 `main` 分支时，Vercel 会自动部署。
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmk965%2Fmengke.me&env=GISCUS_REPO,GISCUS_REPOSITORY_ID,GISCUS_CATEGORY,GISCUS_CATEGORY_ID,DATABASE_URL&project-name=mengke-blog&repository-name=mengke-blog&demo-title=mengke.me&demo-description=Mengke's%20blog%20-%20Mengke's%20coding%20journey&demo-url=https%3A%2F%2Fmengke.me&demo-image=https%3A%2F%2Fgithub.com%2Fmk965%2Fmengke.me%2Fraw%2Fmain%2Fpublic%2Fstatic%2Fimages%2Fhome_page.jpg)
 
 ### 4. 博文的访问量也可以免费存储在 Vercel 中
 
 1. 在 Vercel 中创建一个 `Postgres Database`。
 
-2. 你会得到一个类似于：`postgres://default:xxxxx@xx-xx-xx-xxxx.us-xx-x.postgres.vercel-storage.com:xxx/verceldb` 的字符串，将其添加到 `.env` 文件中的 `DATABASE_URL` 变量。
+2. 你会得到一个类似于：`postgres://default:xxxxx@xx-xx-xx-xxxx.us-xx-x.postgres.vercel-storage.com:xxx/verceldb` 的字符串，将其添加到 `DATABASE_URL` 变量中。
 
 3. 每篇博文的阅读量会被自动统计到这个数据库中。
