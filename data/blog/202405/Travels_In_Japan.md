@@ -19,7 +19,11 @@ import UnsplashPhotoInfo from './UnsplashPhotoInfo.tsx'
 
 ### 我去的地点
 
+> 如果你的网络环境无法加载 Google Map，我还准备了 Bing Map。
+
 <iframe src="https://www.google.com/maps/d/embed?mid=1neLkcFdkrSTFACV6cZ6pyib_-wLtRWw&ehbc=2E312F" width="100%" height="480"></iframe>
+
+<iframe src="https://www.bing.com/maps?osid=75acd505-e142-41fe-8d72-22cce9f9c632&cp=35.045433~137.522127&lvl=8.086973&pi=0&v=2&sV=2&form=S00027" width="100%" height="480"></iframe>
 
 ### 1. 引言
 
