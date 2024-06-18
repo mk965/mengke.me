@@ -38,13 +38,6 @@ export let friendsData: Friend[] = [
   },
   {
     type: 'friend',
-    name: 'web秘籍',
-    slogan: 'web-miji，一个致力于生产前端开发秘籍的网站',
-    imgSrc: '/static/images/friends/miji.ico',
-    url: 'https://web-miji.com/?ref=mengke.me',
-  },
-  {
-    type: 'friend',
     name: '沉舟侧畔 Blog',
     slogan: '⛵️ 新生的力量，生机勃勃 ⛵️',
     imgSrc: '/static/images/friends/springwood.jpeg',
