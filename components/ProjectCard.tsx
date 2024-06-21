@@ -7,10 +7,10 @@ import { Image } from './Image'
 import { Link } from './Link'
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  let { title, description, imgSrc, url, repo, builtWith, demo } = project
-  let { data } = useSWR(`/api/github?repo=${repo}`, fetcher)
-  let repository: GithubRepository = data?.repository
-  let href = repository?.url || url
+  const { title, description, imgSrc, url, repo, builtWith, demo } = project
+  const { data } = useSWR(`/api/github?repo=${repo}`, fetcher)
+  const repository: GithubRepository = data?.repository
+  const href = repository?.url || url
 
   return (
     <div className="p-4 md md:w-1/2" style={{ maxWidth: '544px' }}>

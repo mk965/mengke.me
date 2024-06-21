@@ -45,10 +45,18 @@ export let projectsData: Project[] = [
   },
   {
     type: 'self',
+    title: "mengke.me - Mengke's coding journey",
+    description: '',
+    imgSrc: '/static/images/home_page.jpg',
+    repo: 'mk965/mengke.me',
+    url: 'https://mengke.me',
+    builtWith: ['Next.js v13', 'React', 'Tailwind CSS'],
+  },
+  {
+    type: 'self',
     title: 'qiankun-demo - Quick Start Qiankun Micro Frontend',
     description: `Qiankun Micro frontend integrates various frameworks, including Vue2, Vue3, React, Nuxt, Angular, etc..`,
     imgSrc: '/static/images/projects/qiankun.png',
-    repo: '/',
     builtWith: ['qiankun', 'Vue', 'React', 'Nuxt', 'Angular'],
   },
   {
@@ -56,7 +64,8 @@ export let projectsData: Project[] = [
     title: 'coord-check - Geographic coordinate checking',
     description: `Quickly check a set of string coordinates for incorrect coordinates and format them.`,
     imgSrc: '/static/images/projects/coord-check.jpg',
-    repo: '/',
+    repo: 'mk965/check-coord',
+    url: 'https://www.npmjs.com/package/check-coord',
     builtWith: ['JavaScript'],
   },
   {
@@ -64,7 +73,8 @@ export let projectsData: Project[] = [
     title: '年龄计算器 - WeChat Mini-Program',
     description: `More than 2,800,000+ users. Calculate various age data of users by birthday.`,
     imgSrc: '/static/images/projects/AgeCalculator.jpg',
-    repo: 'https://github.com/mk965/AgeCalculator',
+    repo: 'mk965/AgeCalculator',
+    url: 'https://github.com/mk965/AgeCalculator',
     builtWith: ['Mini-Program Vanilla'],
   },
   {
@@ -72,7 +82,8 @@ export let projectsData: Project[] = [
     title: '恋爱匹配度 - TikTok Mini-Program',
     description: `More than 14,000,000+ users. Love theme app for teens.`,
     imgSrc: '/static/images/projects/LoveMatching.jpg',
-    repo: 'https://github.com/mk965/AgeCalculator',
+    repo: 'mk965/AgeCalculator',
+    url: 'https://github.com/mk965/AgeCalculator',
     builtWith: ['Mini-Program Vanilla'],
   },
 ]
