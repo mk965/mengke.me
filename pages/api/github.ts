@@ -15,7 +15,7 @@ export default async function fetchGithubRepo(req: NextApiRequest, res: NextApiR
     ;[owner, repo] = repo.split('/')
   }
   try {
-    let { repository }: GraphQlQueryResponseData = await graphql(
+    const { repository }: GraphQlQueryResponseData = await graphql(
       `
         query repository($owner: String!, $repo: String!) {
           repository(owner: $owner, name: $repo) {

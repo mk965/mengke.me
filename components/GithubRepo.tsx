@@ -1,22 +1,22 @@
 import type { GithubRepository } from '~/types'
 
 export function GithubRepo({ repo }: { repo: GithubRepository }) {
-  let mainLanguage = repo.languages[0]
+  const mainLanguage = repo.languages[0]
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <div className="flex items-center space-x-1.5">
           <span
             className="inline-block h-4.5 w-4.5 rounded-full"
-            style={{ backgroundColor: mainLanguage.color }}
+            style={{ backgroundColor: mainLanguage?.color || 'black' }}
           />
-          <span>{mainLanguage.name}</span>
+          <span>{mainLanguage?.name}</span>
         </div>
         <div className="flex items-center space-x-1.5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className="h-4 w-4"
+            className="w-4 h-4"
             fill="currentColor"
           >
             <path d="M12 .25a.75.75 0 0 1 .673.418l3.058 6.197 6.839.994a.75.75 0 0 1 .415 1.279l-4.948 4.823 1.168 6.811a.751.751 0 0 1-1.088.791L12 18.347l-6.117 3.216a.75.75 0 0 1-1.088-.79l1.168-6.812-4.948-4.823a.75.75 0 0 1 .416-1.28l6.838-.993L11.328.668A.75.75 0 0 1 12 .25Zm0 2.445L9.44 7.882a.75.75 0 0 1-.565.41l-5.725.832 4.143 4.038a.748.748 0 0 1 .215.664l-.978 5.702 5.121-2.692a.75.75 0 0 1 .698 0l5.12 2.692-.977-5.702a.748.748 0 0 1 .215-.664l4.143-4.038-5.725-.831a.75.75 0 0 1-.565-.41L12 2.694Z"></path>
@@ -27,7 +27,7 @@ export function GithubRepo({ repo }: { repo: GithubRepository }) {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className="h-4 w-4"
+            className="w-4 h-4"
             fill="currentColor"
           >
             <path d="M8.75 19.25a3.25 3.25 0 1 1 6.5 0 3.25 3.25 0 0 1-6.5 0ZM15 4.75a3.25 3.25 0 1 1 6.5 0 3.25 3.25 0 0 1-6.5 0Zm-12.5 0a3.25 3.25 0 1 1 6.5 0 3.25 3.25 0 0 1-6.5 0ZM5.75 6.5a1.75 1.75 0 1 0-.001-3.501A1.75 1.75 0 0 0 5.75 6.5ZM12 21a1.75 1.75 0 1 0-.001-3.501A1.75 1.75 0 0 0 12 21Zm6.25-14.5a1.75 1.75 0 1 0-.001-3.501A1.75 1.75 0 0 0 18.25 6.5Z"></path>
@@ -52,7 +52,7 @@ export function GithubRepo({ repo }: { repo: GithubRepository }) {
                 viewBox="0 0 16 16"
                 width="16"
                 height="16"
-                className="h-4 w-4"
+                className="w-4 h-4"
                 fill="currentColor"
               >
                 <path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1Z"></path>
