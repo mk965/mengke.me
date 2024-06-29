@@ -4,6 +4,7 @@ import { Footer } from './Footer'
 import { Header } from './Header'
 import { MobileNav } from './MobileNav'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Kofi from './Ko-fi'
 
 export function LayoutWrapper({ children }) {
   let [navShow, setNavShow] = useState(false)
@@ -20,6 +21,7 @@ export function LayoutWrapper({ children }) {
         </div>
       </div>
       <SpeedInsights />
+      <Kofi />
     </>
   )
 }

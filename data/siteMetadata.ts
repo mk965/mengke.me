@@ -35,6 +35,7 @@ export let siteMetadata = {
     linkedin: 'mengke',
     instagram: '_mk965',
   },
+  kofiName: 'mengke',
 }
 
 /**
