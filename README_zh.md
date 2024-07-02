@@ -50,3 +50,7 @@
 2. 你会得到一个类似于：`postgres://default:xxxxx@xx-xx-xx-xxxx.us-xx-x.postgres.vercel-storage.com:xxx/verceldb` 的字符串，将其添加到 `DATABASE_URL` 变量中。
 
 3. 每篇博文的阅读量会被自动统计到这个数据库中。
+
+## ☕️ 支持 Mengke
+
+<a href='https://ko-fi.com/P5P2ZV7NP' target='_blank'><img height='50' style='border:0px;height:50px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
