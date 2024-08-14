@@ -23,17 +23,7 @@ export function ProfileCardInfo() {
             />
           </svg>
 
-          <p className="px-2">
-            FE Engineer @{' '}
-            <a
-              target="_blank"
-              href="https://www.micoworld.com/en"
-              rel="noreferrer"
-              className="hover:underline"
-            >
-              MICO WORLD
-            </a>
-          </p>
+          <p className="px-2">Front-End Engineer</p>
         </div>
         <div className="flex items-center text-gray-700 dark:text-gray-200">
           <svg
@@ -58,11 +48,10 @@ export function ProfileCardInfo() {
           </svg>
 
           <p className="px-2">
-            {/* [::1]:443 - Ha Noi, */}
             Peiping, China
-            {/* <span className="absolute inline-flex pt-px ml-1">
+            <span className="absolute inline-flex pt-px ml-1">
               <Twemoji emoji="flag-china" />
-            </span> */}
+            </span>
           </p>
         </div>
         <div className="flex items-center text-gray-700 dark:text-gray-200">

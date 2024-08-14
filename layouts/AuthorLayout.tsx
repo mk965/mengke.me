@@ -21,11 +21,10 @@ export function AuthorLayout({ children }: AuthorLayoutProps) {
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{description}</p>
         </div>
-        <div className="items-start pt-8 space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0">
-          <ProfileCard />
-          <div className="pb-8 prose prose-lg max-w-none dark:prose-dark xl:col-span-2 xl:pl-10">
-            {children}
-          </div>
+        {/* <div className="items-start pt-8 space-y-2 xl:grid xl:grid-cols-3 xl:space-y-0"> */}
+        <div className="items-start pt-8 space-y-2">
+          {/* <ProfileCard /> */}
+          <div className="pb-8 prose prose-lg max-w-none dark:prose-dark xl:pl-10">{children}</div>
         </div>
       </div>
     </>
