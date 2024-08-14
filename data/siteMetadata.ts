@@ -30,7 +30,6 @@ export let siteMetadata = {
   },
   socialAccounts: {
     github: 'mk965',
-    twitter: 'ZoengMaangngo',
     juejin: 'Mengke',
     linkedin: 'mengke',
     instagram: '_mk965',

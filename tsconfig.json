@@ -1,5 +1,5 @@
 {
-  "include": ["next-env.d.ts", "./**/*.ts", "./**/*.tsx"],
+  "include": ["next-env.d.ts", "./**/*.ts", "./**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "esnext",
@@ -20,6 +20,12 @@
       "~/*": ["./*"]
     },
     "isolatedModules": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   }
 }
