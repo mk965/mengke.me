@@ -3,7 +3,7 @@ import { Lion, Player } from '~/libs/lion.es'
 
 let lion: Player | null
 export default function AvpDemo() {
-  const containerRef = useRef()
+  const containerRef = useRef<HTMLDivElement>(null)
   const [playing, setPlaying] = useState(false)
   const play = async () => {
     if (lion) {
@@ -22,7 +22,7 @@ export default function AvpDemo() {
         setPlaying(true)
       },
       onEnded: () => {
-        lion.destroy()
+        lion?.destroy()
         lion = null
         setPlaying(false)
       },
