@@ -79,8 +79,8 @@ export async function getFileBySlug(type: string, slug: string): Promise<MdxFile
         () => {
           return (tree) => {
             visit(tree, 'element', (node: UnistNodeType) => {
-              const [token, type] = node.properties.className || []
-              if (token === 'token') {
+              const [token, type] = node.properties?.className || []
+              if (token === 'token' && node.properties) {
                 node.properties.className = [TOKEN_CLASSNAME_MAP[type]]
               }
             })
@@ -96,6 +96,7 @@ export async function getFileBySlug(type: string, slug: string): Promise<MdxFile
     mdxSource: code,
     frontMatter: {
       readingTime: readingTime(source),
+      // @ts-ignore
       slug: slug || null,
       fileName: fs.existsSync(mdxPath) ? `${slug}.mdx` : `${slug}.md`,
       ...frontmatter,

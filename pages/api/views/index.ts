@@ -8,7 +8,7 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
         count: true,
       },
     })
-    return res.status(200).json({ total: totalViews._sum.count.toString() })
+    return res.status(200).json({ total: totalViews._sum.count?.toString() })
   } catch (e) {
     return res.status(500).json({ message: e.message })
   }

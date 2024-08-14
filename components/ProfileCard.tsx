@@ -5,21 +5,21 @@ import { SpotifyNowPlaying } from './SpotifyNowPlaying'
 import { siteMetadata } from '~/data/siteMetadata'
 
 export function ProfileCard() {
-  let ref = useRef(null)
-  let [style, setStyle] = useState<React.CSSProperties>({})
+  const ref = useRef<HTMLDivElement>(null)
+  const [style, setStyle] = useState<React.CSSProperties>({})
 
-  let onMouseMove = useCallback((e: MouseEvent) => {
+  const onMouseMove = useCallback((e: MouseEvent) => {
     if (!ref.current || window.innerWidth < 1280) return
 
-    let { clientX, clientY } = e
-    let { width, height, x, y } = ref.current.getBoundingClientRect()
-    let mouseX = Math.abs(clientX - x)
-    let mouseY = Math.abs(clientY - y)
-    let rotateMin = -15
-    let rotateMax = 15
-    let rotateRange = rotateMax - rotateMin
+    const { clientX, clientY } = e
+    const { width, height, x, y } = ref.current.getBoundingClientRect()
+    const mouseX = Math.abs(clientX - x)
+    const mouseY = Math.abs(clientY - y)
+    const rotateMin = -15
+    const rotateMax = 15
+    const rotateRange = rotateMax - rotateMin
 
-    let rotate = {
+    const rotate = {
       x: rotateMax - (mouseY / height) * rotateRange,
       y: rotateMin + (mouseX / width) * rotateRange,
     }
@@ -29,12 +29,12 @@ export function ProfileCard() {
     })
   }, [])
 
-  let onMouseLeave = useCallback(() => {
+  const onMouseLeave = useCallback(() => {
     setStyle({ transform: 'rotateX(0deg) rotateY(0deg)' })
   }, [])
 
   useEffect(() => {
-    let { current } = ref
+    const { current } = ref
     if (!current) return
     current.addEventListener('mousemove', onMouseMove)
     current.addEventListener('mouseleave', onMouseLeave)

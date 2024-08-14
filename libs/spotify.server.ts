@@ -8,7 +8,6 @@ const {
 } = process.env
 
 const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64')
-console.log(basic)
 async function getAccessToken() {
   const response = await fetch(SPOTIFY_TOKEN_API, {
     method: 'POST',
@@ -18,7 +17,7 @@ async function getAccessToken() {
     },
     body: new URLSearchParams({
       grant_type: 'refresh_token',
-      refresh_token,
+      refresh_token: refresh_token as string,
     }),
   })
   console.log(refresh_token)

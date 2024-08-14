@@ -10,7 +10,7 @@ export function remarkTocHeading(options: RemarkTocHeadingOptions) {
       options.exportRef.push({
         value: textContent,
         url: '#' + slug(textContent),
-        depth: node.depth,
+        depth: node.depth as number,
       })
     })
 }

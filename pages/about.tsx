@@ -11,10 +11,12 @@ export default function About({ authorData }: { authorData: MdxFileData }) {
   let { mdxSource, frontMatter } = authorData
 
   return (
-    <MDXLayoutRenderer
-      layout={frontMatter.layout}
-      mdxSource={mdxSource}
-      frontMatter={frontMatter}
-    />
+    frontMatter.layout && (
+      <MDXLayoutRenderer
+        layout={frontMatter.layout}
+        mdxSource={mdxSource}
+        frontMatter={frontMatter}
+      />
+    )
   )
 }
