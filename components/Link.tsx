@@ -7,7 +7,7 @@ export function Link({ href, ...rest }: AnchorHTMLAttributes<HTMLAnchorElement>)
   let isAnchorLink = href && href.startsWith('#')
 
   if (isInternalLink) {
-    return <NextLink href={href} {...rest} />
+    return href && <NextLink href={href} {...rest} />
   }
 
   if (isAnchorLink) {
