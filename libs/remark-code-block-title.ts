@@ -3,8 +3,8 @@ import type { UnistNodeType, UnistTreeType } from '~/types'
 
 export function remarkCodeBlockTitle() {
   return (tree: UnistTreeType) => {
-    return visit(tree, 'code', (node: UnistNodeType, index) => {
-      let nodeLang = node.lang || ''
+    return visit(tree, 'code', (node: UnistNodeType, index: number) => {
+      const nodeLang = node.lang || ''
       let language = ''
       let title = ''
 
@@ -14,8 +14,8 @@ export function remarkCodeBlockTitle() {
       }
       if (!title) return
 
-      let className = 'remark-code-title'
-      let titleNode = {
+      const className = 'remark-code-title'
+      const titleNode = {
         type: 'mdxJsxFlowElement',
         name: 'div',
         attributes: [{ type: 'mdxJsxAttribute', name: 'className', value: className }],

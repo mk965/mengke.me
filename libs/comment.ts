@@ -8,17 +8,17 @@ export function getCommentConfigs(): CommentConfigType {
     ...DefaultCommentConfig,
     giscusConfig: {
       ...DefaultCommentConfig.giscusConfig,
-      repo: process.env.GISCUS_REPO || null,
-      repositoryId: process.env.GISCUS_REPOSITORY_ID || null,
-      category: process.env.GISCUS_CATEGORY || null,
-      categoryId: process.env.GISCUS_CATEGORY_ID || null,
+      repo: process.env.GISCUS_REPO as string,
+      repositoryId: process.env.GISCUS_REPOSITORY_ID as string,
+      category: process.env.GISCUS_CATEGORY as string,
+      categoryId: process.env.GISCUS_CATEGORY_ID as string,
     },
     utterancesConfig: {
       ...DefaultCommentConfig.utterancesConfig,
-      repo: process.env.UTTERANCES_REPO || null,
+      repo: process.env.UTTERANCES_REPO as string,
     },
     disqus: {
-      shortname: process.env.DISQUS_SHORTNAME || null,
+      shortname: process.env.DISQUS_SHORTNAME as string,
     },
   }
 }

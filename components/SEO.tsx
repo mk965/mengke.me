@@ -4,7 +4,7 @@ import { siteMetadata } from '~/data/siteMetadata'
 import type { AuthorSEO, BlogSeoProps, PageSeoProps } from '~/types'
 
 export function PageSeo({ title, description }: PageSeoProps) {
-  let router = useRouter()
+  const router = useRouter()
   return (
     <Head>
       <title>{title}</title>
@@ -26,19 +26,19 @@ export function PageSeo({ title, description }: PageSeoProps) {
 }
 
 export function BlogSeo(props: BlogSeoProps) {
-  let router = useRouter()
+  const router = useRouter()
 
-  let { authorDetails, title, summary, date, lastmod, url, images = [] } = props
-  let publishedAt = new Date(date).toISOString()
-  let modifiedAt = new Date(lastmod || date).toISOString()
-  let imagesArr =
+  const { authorDetails, title, summary, date, lastmod, url, images = [] } = props
+  const publishedAt = new Date(date).toISOString()
+  const modifiedAt = new Date(lastmod || date).toISOString()
+  const imagesArr =
     images.length === 0
       ? [siteMetadata.socialBanner]
       : typeof images === 'string'
       ? [images]
       : images
 
-  let featuredImages = imagesArr.map((img) => {
+  const featuredImages = imagesArr.map((img) => {
     return {
       '@type': 'ImageObject',
       url: `${siteMetadata.siteUrl}${img}`,
@@ -52,7 +52,7 @@ export function BlogSeo(props: BlogSeoProps) {
         '@type': 'Person',
         name: author.name,
       }
-    })
+    }) as AuthorSEO[]
   } else {
     authorList = {
       '@type': 'Person',
@@ -60,7 +60,7 @@ export function BlogSeo(props: BlogSeoProps) {
     }
   }
 
-  let structuredData = {
+  const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     mainEntityOfPage: {

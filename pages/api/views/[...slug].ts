@@ -4,10 +4,11 @@ import { __db } from '~/libs/prisma'
 const isProduction = process.env.NODE_ENV === 'production'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const slug =
+    const slug = (
       typeof req.query.slug === 'string'
         ? req.query.slug.toString()
-        : req.query.slug.pop().toString()
+        : req.query.slug?.pop()?.toString()
+    ) as string
     if (req.method === 'POST') {
       if (!isProduction) {
         return res.status(200).json({ total: '0' })

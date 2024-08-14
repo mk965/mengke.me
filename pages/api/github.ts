@@ -66,7 +66,7 @@ export default async function fetchGithubRepo(req: NextApiRequest, res: NextApiR
     return res.status(200).json({ message: 'ok', repository })
   } catch (error) {
     if (error instanceof GraphqlResponseError) {
-      return res.status(500).json({ message: error.errors[0].message })
+      return res.status(500).json({ message: error.errors?.[0].message })
     } else {
       return res.status(500).json({ message: 'Unable to fetch repo data' + error?.toString() })
     }
