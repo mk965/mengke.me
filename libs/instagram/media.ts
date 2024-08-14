@@ -35,29 +35,31 @@ export interface InstagramMediaGetterOptions {
 
 // https://developers.facebook.com/docs/instagram-basic-display-api/reference/user/media#reading
 export const getInstagramMedias = async (options?: InstagramMediaGetterOptions) => {
-  const defaultFields = `id,username,permalink,caption,media_type,media_url,thumbnail_url,timestamp`
+  try {
+    const defaultFields = `id,username,permalink,caption,media_type,media_url,thumbnail_url,timestamp`
 
-  const params: Record<string, any> = {
-    access_token: INSTAGRAM_TOKEN,
-    fields: options?.fields ?? defaultFields,
-    // MARK: max 100
-    limit: options?.limit ?? 24,
+    const params: Record<string, any> = {
+      access_token: INSTAGRAM_TOKEN,
+      fields: options?.fields ?? defaultFields,
+      // MARK: max 100
+      limit: options?.limit ?? 24,
+    }
+    // MARK: unix timestamp
+    if (options?.since) {
+      params.since = options.since
+    }
+    // MARK: cursor
+    if (options?.after) {
+      params.after = options.after
+    }
+    const response = await fetch(
+      'https://graph.instagram.com/me/media?' + new URLSearchParams(params)
+    )
+    const data = await response.json()
+    return data
+  } catch (error) {
+    return []
   }
-  // MARK: unix timestamp
-  if (options?.since) {
-    params.since = options.since
-  }
-  // MARK: cursor
-  if (options?.after) {
-    params.after = options.after
-  }
-
-  const response = await fetch(
-    'https://graph.instagram.com/me/media?' + new URLSearchParams(params)
-  )
-  const data = await response.json()
-
-  return data
 }
 
 // https://developers.facebook.com/docs/instagram-basic-display-api/reference/media/children

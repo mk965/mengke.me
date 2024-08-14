@@ -6,9 +6,9 @@ import { getAllFilesFrontMatter } from '~/libs/mdx'
 import type { BlogListProps } from '~/types'
 
 export function getStaticProps() {
-  let posts = getAllFilesFrontMatter('blog')
-  let initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
-  let pagination = {
+  const posts = getAllFilesFrontMatter('blog')
+  const initialDisplayPosts = posts.slice(0, POSTS_PER_PAGE)
+  const pagination = {
     currentPage: 1,
     totalPages: Math.ceil(posts.length / POSTS_PER_PAGE),
   }
