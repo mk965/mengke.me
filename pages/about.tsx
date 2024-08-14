@@ -1,22 +1,21 @@
 import { MDXLayoutRenderer } from '~/components/MDXComponents'
 import { getFileBySlug } from '~/libs/mdx'
-import type { MdxFileData } from '~/types'
+import type { MdxFileData, MdxPageLayout } from '~/types'
 
 export async function getStaticProps() {
   let authorData = await getFileBySlug('authors', 'default')
   return { props: { authorData } }
 }
 
+const DEFAULT_LAYOUT: MdxPageLayout = 'PostSimple'
 export default function About({ authorData }: { authorData: MdxFileData }) {
   let { mdxSource, frontMatter } = authorData
 
   return (
-    frontMatter.layout && (
-      <MDXLayoutRenderer
-        layout={frontMatter.layout}
-        mdxSource={mdxSource}
-        frontMatter={frontMatter}
-      />
-    )
+    <MDXLayoutRenderer
+      layout={frontMatter.layout || DEFAULT_LAYOUT}
+      mdxSource={mdxSource}
+      frontMatter={frontMatter}
+    />
   )
 }

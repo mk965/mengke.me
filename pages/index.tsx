@@ -12,7 +12,7 @@ import { getAllFilesFrontMatter } from '~/libs/mdx'
 import type { BlogFrontMatter } from '~/types'
 
 export function getStaticProps() {
-  let posts = getAllFilesFrontMatter('blog')
+  const posts = getAllFilesFrontMatter('blog')
   return { props: { posts } }
 }
 

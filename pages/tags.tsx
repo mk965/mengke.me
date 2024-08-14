@@ -7,12 +7,12 @@ import type { TagsCount } from '~/types'
 import { kebabCase } from '~/utils/kebab-case'
 
 export function getStaticProps() {
-  let tags = getAllTags('blog')
+  const tags = getAllTags('blog')
   return { props: { tags } }
 }
 
 export default function Tags({ tags }: { tags: TagsCount }) {
-  let sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a])
+  const sortedTags = Object.keys(tags).sort((a, b) => tags[b] - tags[a])
 
   return (
     <>
