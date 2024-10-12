@@ -51,6 +51,13 @@ export let friendsData: Friend[] = [
     url: 'https://chaoszhu.com/?ref=mengke.me',
   },
   {
+    type: 'friend',
+    name: 'NoOne',
+    slogan: 'Tech Lead',
+    imgSrc: '/static/images/friends/NoOne.webp',
+    url: 'https://www.ifb.me/?ref=mengke.me',
+  },
+  {
     type: 'techStar',
     name: 'Anthony Fu',
     slogan: "Anthony Fu's Portfolio",
