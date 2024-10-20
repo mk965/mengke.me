@@ -1,0 +1,32 @@
+---
+heading: 'useLocalStorageState'
+title: 'A custom hooks to use local storage state'
+date: '2024-10-18'
+icon: 'React'
+draft: false
+summary: 'Utilize a custom hook that syncs state with local storage, allowing for persistent state between sessions.'
+tags: ['react', 'hooks', 'localstorage']
+---
+
+Custom hooks to use local storage state
+
+```js
+import { useState, useEffect } from 'react'
+
+export const useLocalStorageState = (key, defaultValue = '', options = {}) => {
+  const { serialize = JSON.stringify, deserialize = JSON.parse } = options
+  const [state, setState] = useState(() => {
+    const valueInLocalStorage = window.localStorage.getItem(key)
+    if (valueInLocalStorage) {
+      return deserialize(valueInLocalStorage)
+    }
+    return defaultValue
+  })
+
+  useEffect(() => {
+    window.localStorage.setItem(key, serialize(state))
+  }, [key, state, serialize])
+
+  return [state, setState]
+}
+```
