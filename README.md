@@ -1,8 +1,12 @@
-# My 🏠 on the ☁️
+<h1 align="center">mengke.me 🧑‍💻</h1>
 
-![Home Page](./public/static/images/home_page.jpg)
+<div align="center">
 
-[简体中文](./README_zh.md)
+[简体中文](./README_zh-CN.md) | [繁体中文](./README_zh-TW.md) | [日本語](./README_ja.md)
+
+</div>
+
+<img style="border-radius: 6px" src="./public/static/images/home_page.webp">
 
 ## Motivation
 
@@ -16,10 +20,10 @@ Your comments and feedback are highly appreciated 🍻. They contribute to the g
 
 ## Tech stack
 
-- 🪤 Hosted on [Vercel](https://vercel.com/)
-- 🧱 Built with [Next.js](https://nextjs.org/)
-- 🎨 Styled using [Tailwind CSS](https://tailwindcss.com/) with the **Tailwind Nextjs Starter Blog** template.
-- 📈 Monitoring site with [Umami](https://umami.is/), [Google Analytics](https://analytics.google.com/analytics/web/) and [Microsoft Clarity](https://clarity.microsoft.com/) website analytics
+- 🪤 Hosted on [Vercel](https://vercel.com/).
+- 🧱 Built with **React 18+**, **NextJS 14+**.
+- 📊 Monitoring site with [Umami](https://umami.is/) website analytics.
+- 🎉 Adopting **Typescript**, committing with [Conventional Commits](https://www.conventionalcommits.org/).
 
 ## DEMO
 
@@ -53,4 +57,4 @@ You can see what the blog looks like here: <https://mengke.me>
 
 ## ☕️ Support Mengke
 
-<a href='https://ko-fi.com/P5P2ZV7NP' target='_blank'><img height='50' style='border:0px;height:50px;' src='https://storage.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+<a href='https://ko-fi.com/P5P2ZV7NP' target='_blank'><img height='50' style='border:0px;height:50px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>

@@ -1,12 +1,13 @@
-import Script from 'next/script'
-import { siteMetadata } from '~/data/siteMetadata'
+import Script from 'next/script.js'
 
-export function UmamiScript() {
-  return (
-    <Script
-      async
-      src="https://analytics.umami.is/script.js"
-      data-website-id={siteMetadata.analytics.umamiWebsiteId}
-    ></Script>
-  )
+interface UmamiAnalyticsProps {
+  websiteId?: string
+  src?: string
+}
+
+export function UmamiAnalytics({ websiteId, src = '/stats/script.js' }: UmamiAnalyticsProps) {
+  if (websiteId) {
+    return <Script async defer data-website-id={websiteId} src={src} />
+  }
+  return null
 }

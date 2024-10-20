@@ -1,34 +1,20 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+// @ts-check
+const { fontFamily } = require('tailwindcss/defaultTheme')
 const colors = require('tailwindcss/colors')
-/** @type {import('tailwindcss').Config} */
 
+/** @type {import("tailwindcss/types").Config } */
 module.exports = {
   content: [
-    './(components|constant|layouts|pages)/**/*.(ts|tsx)',
-    './data/(blog|snippets|authors)/*.mdx',
+    './node_modules/pliny/**/*.js',
+    './app/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,tsx}',
+    './components/**/*.{js,ts,tsx}',
+    './layouts/**/*.{js,ts,tsx}',
+    './data/**/*.mdx',
   ],
   darkMode: 'class',
   theme: {
     extend: {
-      gridTemplateColumns: {
-        main: '15em 1fr',
-      },
-      boxShadow: {
-        popover:
-          '-0.0625rem 0 1.25rem rgba(23, 24, 24, 0.05), 0 0.0625rem 0.3125rem rgba(0, 0, 0, 0.15)',
-        'popover-dark':
-          '0.0625rem 0 1.25rem rgba(242, 242, 242, 0.05), 0 -0.0625rem 0.3125rem rgba(255, 255, 255, 0.15)',
-        // intense: 'rgba(17, 17, 26, 0.1) 0px 0px 16px',
-        intense: 'rgba(17, 17, 26, 0.1) 0px 0px 16px',
-        'intense-dark': 'rgba(255, 255, 255, 0.1) 0px 0px 16px',
-        subtle: 'rgba(0, 0, 0, 0.2) 0px 20px 40px -7px',
-        'subtle-dark': 'rgba(255, 255, 255, 0.1) 0px 20px 40px -7px',
-        nextjs: '0 8px 30px rgb(0,0,0,0.12)',
-        'nextjs-dark': '0 8px 30px rgb(255,255,255,0.12)',
-        demure: 'rgba(0, 0, 0, 0.3) 0 35px 60px -15px',
-        mondegreen:
-          '5px 5px rgba(0, 98, 90, 0.4), 10px 10px rgba(0, 98, 90, 0.3), 15px 15px rgba(0, 98, 90, 0.2), 20px 20px rgba(0, 98, 90, 0.1), 25px 25px rgba(0, 98, 90, 0.05)',
-      },
       keyframes: {
         wiggle: {
           '0%': { transform: 'rotate(0deg)' },
@@ -62,8 +48,17 @@ module.exports = {
         'music-bar-3': 'music-bar-3 .8s linear infinite',
         'music-bar-4': 'music-bar-4 .8s linear infinite',
       },
-      spacing: {
-        '9/16': '56.25%',
+      boxShadow: {
+        demure: 'rgba(0, 0, 0, 0.3) 0 35px 60px -15px',
+        'book-pages': `10px 40px 40px -10px #00000030, inset -2px 0 0 gray,
+                        inset -3px 0 0 #dbdbdb, inset -4px 0 0 white, inset -5px 0 0 #dbdbdb,
+                        inset -6px 0 0 white, inset -7px 0 0 #dbdbdb, inset -8px 0 0 white,
+                        inset -9px 0 0 #dbdbdb`,
+        mondegreen: `5px 5px rgba(0, 98, 90, 0.4),
+                      10px 10px rgba(0, 98, 90, 0.3),
+                      15px 15px rgba(0, 98, 90, 0.2),
+                      20px 20px rgba(0, 98, 90, 0.1),
+                      25px 25px rgba(0, 98, 90, 0.05)`,
       },
       lineHeight: {
         11: '2.75rem',
@@ -72,23 +67,17 @@ module.exports = {
         14: '3.5rem',
       },
       fontFamily: {
-        sans: ['Outfit', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-nunito)', ...fontFamily.sans],
+        greeting: ['var(--font-playpen-sans)'],
       },
       colors: {
         primary: colors.indigo,
-        gray: colors.gray,
-        dark: '#22272e',
-        code: {
-          green: '#b5f4a5',
-          yellow: '#ffe484',
-          purple: '#d9a9ff',
-          red: '#ff8383',
-          blue: '#93ddfd',
-          white: '#fff',
-        },
+        dark: '#1f1f1f',
         spotify: '#1DB954',
-        twitter: '#1da1f2',
+        goodreads: '#372213',
         facebook: '#1877f2',
+        x: '#0f1419',
+        linkedin: '#0077B5',
       },
       width: {
         4.5: '1.125rem',
@@ -98,140 +87,87 @@ module.exports = {
         4.5: '1.125rem',
         5.5: '1.375rem',
       },
-      cursor: {
-        'zoom-in': 'zoom-in',
-        'zoom-out': 'zoom-out',
+      spacing: {
+        15: '3.75rem',
       },
-      typography: (theme) => ({
+      zIndex: {
+        60: '60',
+        70: '70',
+        80: '80',
+      },
+      typography: ({ theme }) => ({
         DEFAULT: {
           css: {
-            color: theme('colors.gray.700'),
             a: {
               color: theme('colors.primary.500'),
+              'text-underline-offset': '4px',
               '&:hover': {
-                color: theme('colors.primary.600'),
+                color: `${theme('colors.primary.600')}`,
               },
               code: { color: theme('colors.primary.400') },
             },
-            h1: {
-              fontWeight: '700',
-              letterSpacing: theme('letterSpacing.tight'),
-              color: theme('colors.gray.900'),
+            'h1,h2,h3,h4,h5,h6': {
+              scrollMarginTop: '6rem',
             },
-            h2: {
+            'h1,h2': {
               fontWeight: '700',
               letterSpacing: theme('letterSpacing.tight'),
-              color: theme('colors.gray.900'),
             },
             h3: {
               fontWeight: '600',
-              color: theme('colors.gray.900'),
             },
-            h4: {
-              fontSize: '1.166667em',
-            },
-            'h4,h5,h6': {
-              color: theme('colors.gray.900'),
+            pre: {
+              code: {
+                fontWeight: '500',
+              },
             },
             code: {
-              color: theme('colors.pink.500'),
-              backgroundColor: theme('colors.gray.100'),
-              paddingLeft: '4px',
-              paddingRight: '4px',
-              paddingTop: '2px',
-              paddingBottom: '2px',
-              borderRadius: '0.25rem',
+              color: theme('colors.indigo.500'),
+              fontWeight: '500',
             },
-            'code::before': {
-              content: 'none',
+            '.image-container': {
+              width: 'fit-content',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              borderRadius: '0.5rem',
+              img: {
+                marginTop: 0,
+                marginBottom: 0,
+              },
             },
-            'code::after': {
-              content: 'none',
-            },
-            hr: { borderColor: theme('colors.gray.200') },
-            'ol li::before': {
-              fontWeight: '600',
-              color: theme('colors.gray.500'),
-            },
-            'ul li::before': {
-              backgroundColor: theme('colors.gray.500'),
-            },
-            strong: { color: theme('colors.gray.600') },
-            blockquote: {
-              color: theme('colors.gray.900'),
-              borderLeftColor: theme('colors.gray.200'),
+            '.markdown-alert': {
+              'p.markdown-alert-title': {
+                fontSize: '1.125rem',
+                fontWeight: '700',
+                marginBottom: '0',
+                marginTop: '0.5rem',
+                svg: {
+                  width: '20px',
+                  height: '20px',
+                },
+              },
             },
           },
         },
-        lg: {
-          'ol li::marker': {
-            content: 'none',
-          },
-          'ul li::marker': {
-            content: 'none',
-          },
-          ul: {
-            paddingLeft: '0px',
-          },
-          'ul > li': {
-            paddingLeft: '0px',
-          },
-        },
-        dark: {
+        invert: {
           css: {
-            color: theme('colors.gray.300'),
             a: {
               color: theme('colors.primary.400'),
               '&:hover': {
-                color: theme('colors.primary.200'),
+                color: `${theme('colors.primary.400')}`,
               },
               code: { color: theme('colors.primary.400') },
             },
-            h1: {
-              fontWeight: '700',
-              letterSpacing: theme('letterSpacing.tight'),
+            code: {
+              color: theme('colors.primary.400'),
+            },
+            'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.100'),
-            },
-            h2: {
-              fontWeight: '700',
-              letterSpacing: theme('letterSpacing.tight'),
-              color: theme('colors.gray.100'),
-            },
-            h3: {
-              fontWeight: '600',
-              color: theme('colors.gray.100'),
-            },
-            'h4,h5,h6': {
-              color: theme('colors.gray.100'),
-            },
-            hr: { borderColor: theme('colors.gray.700') },
-            'ol li:before': {
-              fontWeight: '600',
-              color: theme('colors.gray.400'),
-            },
-            'ul li:before': {
-              backgroundColor: theme('colors.gray.400'),
-            },
-            strong: { color: theme('colors.gray.100') },
-            thead: {
-              color: theme('colors.gray.100'),
-            },
-            tbody: {
-              tr: {
-                borderBottomColor: theme('colors.gray.700'),
-              },
-            },
-            blockquote: {
-              color: theme('colors.gray.100'),
-              borderLeftColor: theme('colors.gray.700'),
             },
           },
         },
       }),
     },
-  },
-  variants: {
-    typography: ['dark'],
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 }

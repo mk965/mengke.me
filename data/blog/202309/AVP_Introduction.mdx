@@ -1,0 +1,49 @@
+---
+title: 'AVP - Web 端特效视频播放器'
+date: '2023-09-28'
+tags: ['Open Source', 'AVP', 'Effects Video', 'WebGL', 'Canvas']
+draft: false
+summary: '在 Web 端实现特效视频播放功能，使用 WebGL 和 Canvas 实现视频播放和特效渲染。'
+images: ['/static/images/projects/AVP2.svg']
+authors: ['default']
+---
+
+// import AvpDemo from './avpDemo'
+
+## 演示
+
+{/* <AvpDemo /> */}
+
+## 为什么叫 AVP？
+
+AVP 的全称是 Alpha Video Player，取其首字母为 AVP。这个命名意在强调播放器对于 Alpha Video 的支持，尤其是在礼物特效、互动动画等场景中的应用。
+
+## 什么是 Alpha Video？
+
+Alpha Video 是一种广泛用于直播礼物特效、互动视频等场景的技术。它能够在视频播放时实现透明效果，从而让视频内容能够无缝叠加在其他背景上，而不破坏整体画面。
+
+Alpha Video 的核心原理在于使用了透明通道信息。由于大多数标准的视频格式不直接支持透明度，Alpha Video 通过间接方式实现这一点。通常，一侧为正常的彩色视频内容，另一侧为黑白的 Alpha 通道。黑白视频用来表示透明度，其中黑色代表完全透明，白色代表完全不透明，灰度则用于表示半透明效果。
+
+在实际使用中，黑色背景常被用来表示透明区域。这种做法可以确保视频与其他元素的叠加不会显得突兀，尤其在实时交互的场景下，例如用户发送礼物特效时，Alpha Video 能够完美地与直播画面融为一体，提升互动体验。
+
+## Alpha Video 的应用场景
+
+- **直播礼物特效**：在直播间中，观众发送的礼物通常会以 Alpha Video 的形式呈现。礼物特效可以浮现、移动并叠加在主播或背景画面上，带来更生动的互动效果。
+
+- **游戏互动**：在某些互动游戏中，Alpha Video 能够用来增强角色的特效或动画，使其看起来更加立体和真实。
+
+- **虚拟主播和增强现实 (AR)**：Alpha Video 常用于虚拟主播的实时互动效果，或增强现实中的物体与背景的结合，创造出更具沉浸感的视觉体验。
+
+通过 AVP（Alpha Video Player），开发者可以轻松集成和处理 Alpha Video，在不同应用场景中带来更具沉浸感的视觉呈现。
+
+像这样：
+
+![demo](/static/images/blog/202309/AVP_Introduction/demo.jpeg)
+
+## 原理
+
+将同名通道信息提取出来后与原视频进行融合计算，将计算结果绘制到 Canvas 中。
+
+## 效果
+
+目前已在公司内部使用，效果还不错。活动数据有较大提升，详细数据还在统计中，后续会更新到本篇博文中。

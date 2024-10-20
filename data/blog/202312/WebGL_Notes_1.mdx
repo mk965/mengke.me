@@ -4,16 +4,11 @@ date: '2023-12-20'
 tags: ['WebGL', 'visualization']
 draft: false
 summary: 'WebGL 学习笔记（一），WebGL 的基础概念及 HelloWorld ...'
+images: ['/static/images/blog/202312/WebGL_Notes_1/tj-holowaychuk-1EYMue_AwDw-unsplash.jpg']
 authors: ['default']
 ---
 
-import CodePenSnippet from './CodePenSnippet.tsx'
-import UnsplashPhotoInfo from './UnsplashPhotoInfo.tsx'
-
-![thumbnail-image](https://images.unsplash.com/photo-1454372182658-c712e4c5a1db?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
-
-<UnsplashPhotoInfo photoURL="https://unsplash.com/photos/gray-wooden-sea-dock-near-green-pine-trees-under-white-sky-at-daytime-1EYMue_AwDw" author="Tj Holowaychuk" />
-
+import CodePenSnippet from '~/components/blog/code-pen-snippet'
 
 ## 基础概念
 
@@ -30,23 +25,23 @@ WebGL 在 GPU 上运行。所以，需要提供可在 GPU 上运行的代码。�
 
 1. Attributes and Buffers （属性和缓冲区）
 
-   Buffers 是上传到 GPU 的二进制数组。通常 Buffers 包含位置（positions）、法线（normals）、纹理坐标（texture coordinates）、顶点颜色（vertex colors）等信息，当然你也可以自由的放任何数据到 Buffers 中。
+Buffers 是上传到 GPU 的二进制数组。通常 Buffers 包含位置（positions）、法线（normals）、纹理坐标（texture coordinates）、顶点颜色（vertex colors）等信息，当然你也可以自由的放任何数据到 Buffers 中。
 
-   Attributes 用来指定如何从 Buffers 获取数据并加入到你的片段着色器中（vertex shader）。例如可以将位置放入缓冲区中，每个位置三个 32 位浮点数。你需要告诉特定属性从哪个缓冲区中提取位置、应该提取什么类型的数据（三个 32 位浮点数）、位置在缓冲区中的偏移量以及从其中获取多少字节到下一个位置。
+Attributes 用来指定如何从 Buffers 获取数据并加入到你的片段着色器中（vertex shader）。例如可以将位置放入缓冲区中，每个位置三个 32 位浮点数。你需要告诉特定属性从哪个缓冲区中提取位置、应该提取什么类型的数据（三个 32 位浮点数）、位置在缓冲区中的偏移量以及从其中获取多少字节到下一个位置。
 
-   Buffers 是不能随机访问的。相反，顶点着色器被执行指定的次数。每次执行时，都会从每个指定的缓冲区中提取下一个值并将其分配给属性。
+Buffers 是不能随机访问的。相反，顶点着色器被执行指定的次数。每次执行时，都会从每个指定的缓冲区中提取下一个值并将其分配给属性。
 
 2. Uniforms（全局变量）
 
-   Uniforms 实际上是在执行着色器程序之前设置的全局变量。
+Uniforms 实际上是在执行着色器程序之前设置的全局变量。
 
 3. Textures（纹理）
 
-   纹理是一个数据序列，可以在着色程序运行中随意读取其中的数据。 大多数情况存放的是图像数据，但是纹理仅仅是数据序列， 你也可以随意存放除了颜色数据以外的其它数据。
+纹理是一个数据序列，可以在着色程序运行中随意读取其中的数据。 大多数情况存放的是图像数据，但是纹理仅仅是数据序列， 你也可以随意存放除了颜色数据以外的其它数据。
 
 4. Varyings（变量）
 
-   可变量是一种顶点着色器给片段着色器传值的方式，依照渲染的图元是点， 线还是三角形，顶点着色器中设置的可变量会在片段着色器运行中获取不同的插值。
+可变量是一种顶点着色器给片段着色器传值的方式，依照渲染的图元是点， 线还是三角形，顶点着色器中设置的可变量会在片段着色器运行中获取不同的插值。
 
 ## Hello World
 
