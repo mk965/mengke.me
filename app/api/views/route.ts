@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { __db } from '~/libs/prisma'
+import { __db } from '~/server/prisma.server'
 
 export async function GET(req: Request) {
   const totalViews = await __db.views.aggregate({
