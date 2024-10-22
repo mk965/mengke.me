@@ -1,7 +1,7 @@
 'use client'
 
 import { clsx } from 'clsx'
-import { useState, useRef, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from '~/components/ui/link'
 
 type TocItem = {
@@ -10,15 +10,13 @@ type TocItem = {
   depth: number
 }
 
-export function TableOfContents({ toc, className }: { toc: TocItem[]; className?: string }) {
+function useActiveTocItem(ids: string[]) {
   const [inViewIds, setInViewIds] = useState<string[]>([])
   const observer = useRef<IntersectionObserver | null>(null)
-  const ids = toc.map((item) => item.url)
-  const firstActiveId = inViewIds[0]
 
   useEffect(() => {
     if (document) {
-      const headings = ids.map((id) => document.getElementById(id))
+      const headings = ids.map((id) => document.querySelector(id))
       observer.current?.disconnect()
       observer.current = new IntersectionObserver(
         (entries) => {
@@ -43,6 +41,13 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
     }
   }, [ids])
 
+  return inViewIds[0]
+}
+
+export function TableOfContents({ toc, className }: { toc: TocItem[]; className?: string }) {
+  const ids = toc.map((item) => item.url)
+  const activeId = useActiveTocItem(ids)
+
   return (
     <div className={clsx('space-y-4', className)}>
       <h3 className="text-2xl font-semibold">On this page</h3>
@@ -52,7 +57,7 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
             key={url}
             className={clsx([
               'font-medium',
-              url === `#${firstActiveId}`
+              url === `#${activeId}`
                 ? 'text-gray-700 dark:text-gray-200'
                 : 'text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200',
             ])}
