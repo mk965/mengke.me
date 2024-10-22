@@ -16,7 +16,9 @@ function useActiveTocItem(ids: string[]) {
 
   useEffect(() => {
     if (document) {
-      const headings = ids.map((id) => document.querySelector(id))
+      const headings = ids.map((id) =>
+        document.getElementById(id.startsWith('#') ? id.slice(1) : id)
+      )
       observer.current?.disconnect()
       observer.current = new IntersectionObserver(
         (entries) => {
