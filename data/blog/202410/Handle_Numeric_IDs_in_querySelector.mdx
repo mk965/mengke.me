@@ -1,0 +1,108 @@
+---
+# title: 'Handle IDs starting with numeric in querySelector'
+title: '以数字开头的 ID 在 querySelector 中的处理'
+date: '2024-10-23'
+# lastmod: '2024-10-23'
+tags: ['FE', 'JavaScript', 'CSS']
+draft: false
+summary: '虽然HTML5允许使用数字作为ID，但在使用 querySelector 时，由于CSS规范的限制，需要采取额外步骤来正确选择这些元素 ...'
+images:
+  [
+    '/static/images/blog/202410/Handle_Numeric_IDs_in_querySelector/daniel-sessler-iCPp9I-LnMU-unsplash.webp',
+  ]
+authors: ['default']
+---
+
+在HTML5中，使用数字作为ID是合法的，但这种做法在实践中可能会带来一些意想不到的问题。例如：
+
+```html
+<div id="1"></div>
+<div id="2"></div>
+```
+
+虽然你可以使用 `getElementById` 轻松访问这些ID，但如果你尝试使用 `querySelector` 来选择这些元素，将会抛出一个 `SyntaxError: DOM Exception 12` 错误。这是因为虽然数字ID在HTML5中是有效的，但在CSS中它们是无效的，而 `querySelector` 正是基于CSS选择器工作的。
+
+## 问题描述
+
+当你尝试执行以下代码时，就会遇到问题：
+
+```js
+document.querySelector('#1')
+```
+
+这是因为CSS选择器不支持以数字开头的ID选择器。
+
+## 解决方案
+
+### 1. 使用有意义的ID
+
+最佳实践是避免使用数字作为ID，而是使用更有意义的命名，比如 `message1` 或 `item2`。这样可以避免大多数与数字ID相关的问题。
+
+### 2. 使用 `getElementById`
+
+最直接的解决方案是使用 `getElementById` 方法，这是专门为ID设计的DOM方法，可以直接处理数字ID：
+
+```js
+document.getElementById('1')
+```
+
+这种方法简单且高效，不需要任何转义或额外的步骤。
+
+### 3. 使用CSS转义
+
+如果你必须使用数字ID，可以通过 CSS 转义来解决这个问题。例如，字符 1 的 Unicode 代码点是 `U+0031`，可以这样转义：
+
+```css
+#\31 {
+  background: hotpink;
+}
+```
+
+在JavaScript中，你可以这样使用：
+
+```js
+document.querySelector('#\\31')
+```
+
+### 4. 使用属性选择器
+
+另一种方法是使用属性选择器来避免直接使用ID选择器：
+
+```js
+document.querySelector("[id='1']")
+```
+
+这种方法虽然有效，但略显繁琐。
+
+### 5. 使用 `CSS.escape`
+
+对于动态生成的ID，可以使用 `CSS.escape` 方法来自动处理转义问题：
+
+```js
+const theId = '1'
+const el = document.querySelector(`#${CSS.escape(theId)}`)
+el.innerHTML = 'After'
+```
+
+这种方法可以使代码更加简洁，并且自动处理转义问题。
+
+### 6. 自定义函数
+
+如果你需要支持旧浏览器，可以创建一个自定义函数来处理转义：
+
+```js
+const cleanSelector = function (selector) {
+  ;(selector.match(/(#[0-9][^\s:,]*)/g) || []).forEach(function (n) {
+    selector = selector.replace(n, '[id="' + n.replace('#', '') + '"]')
+  })
+  return selector
+}
+
+const myselector =
+  '.dog #980sada_as div span#aside:hover div.apple#05crab:nth-of-type(2), .ginger #2_green_div, div.cupcake #darwin p#23434-346365-53453'
+
+const clean_myselector = cleanSelector(myselector)
+const elems = document.querySelectorAll(clean_myselector)
+```
+
+这个函数将数字ID自动转换为属性选择器的形式，适用于不支持 `CSS.escape` 的旧浏览器。
