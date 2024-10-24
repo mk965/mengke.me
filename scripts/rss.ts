@@ -8,6 +8,7 @@ import { allBlogs, allSnippets } from '~/.contentlayer/generated/index.mjs'
 import { AUTHOR_INFO } from '~/data/author-info'
 import { SITE_METADATA } from '~/data/site-metadata'
 import tagData from '~/json/tag-data.json' assert { type: 'json' }
+import mime from 'mime'
 
 const blogs = allBlogs as unknown as Blog[]
 const snippets = allSnippets as unknown as Snippet[]
@@ -21,10 +22,11 @@ function generateRssItem(item: Blog | Snippet) {
 			<guid>${siteUrl}/blog/${item.slug}</guid>
 			<title>${escape(item.title)}</title>
 			<link>${siteUrl}/blog/${item.slug}</link>
-			${item.summary && `<description>${escape(item.summary)}</description>`}
+			${item.summary ? `<description>${escape(item.summary)}</description>` : ''}
 			<pubDate>${new Date(item.date).toUTCString()}</pubDate>
 			<author>${email} (${author})</author>
-			${item.tags && item.tags.map((t) => `<category>${t}</category>`).join('')}
+			${item.tags?.length ? item.tags?.map((t) => `<category>${t}</category>`).join('') : ''}
+      ${item.images?.length ? item.images?.map((i) => `<enclosure url="${siteUrl}${i}" length="0" type="${mime.getType(i)}" />`).join('') : ''}
 		</item>
 	`
 }
