@@ -7,10 +7,10 @@ import {
   LinkedinShareButton,
   TwitterShareButton,
   WeiboShareButton,
-  WeiboIcon,
 } from 'react-share'
 import { AUTHOR_INFO } from '~/data/author-info'
 import XIcon from '~/icons/x.svg'
+import Weibo from '~/icons/weibo.svg'
 
 type SocialButtonsProps = {
   postUrl: string
@@ -22,6 +22,13 @@ export function SocialShare({ postUrl, title, className }: SocialButtonsProps) {
   return (
     <div className={clsx('flex items-center gap-2 text-white', className)}>
       <span className="hidden text-gray-500 lg:inline">Share:</span>
+      <WeiboShareButton
+        url={postUrl}
+        title={title}
+        className="flex items-center overflow-hidden rounded-full !bg-weibo !px-2 !py-2 text-white hover:opacity-90"
+      >
+        <Weibo className="h-4 w-4" fill="#fff" />
+      </WeiboShareButton>
       <TwitterShareButton
         url={postUrl}
         title={title}

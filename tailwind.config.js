@@ -78,6 +78,7 @@ module.exports = {
         facebook: '#1877f2',
         x: '#0f1419',
         linkedin: '#0077B5',
+        weibo: '#CD3734',
       },
       width: {
         4.5: '1.125rem',

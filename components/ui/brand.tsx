@@ -51,8 +51,9 @@ import BaiduMap from '~/icons/baidu-map.svg'
 import WechatMiniProgram from '~/icons/wechat-mini-program.svg'
 import Angular from '~/icons/angular.svg'
 import AntV from '~/icons/antv.svg'
-import I18n from '~/icons/i18n.svg'
 import Qiankun from '~/icons/qiankun.svg'
+import Weibo from '~/icons/weibo.svg'
+import I18n from '~/icons/i18n.svg'
 
 export const BrandsMap = {
   React: {
@@ -274,6 +275,10 @@ export const BrandsMap = {
   Qiankun: {
     Icon: Qiankun,
     url: 'https://qiankun.umijs.org/',
+  },
+  Weibo: {
+    Icon: Weibo,
+    url: 'https://weibo.com/',
   },
   I18n: {
     Icon: I18n,
