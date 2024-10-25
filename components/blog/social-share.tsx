@@ -2,9 +2,14 @@
 
 import { clsx } from 'clsx'
 import { Facebook, Linkedin } from 'lucide-react'
-import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share'
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  WeiboShareButton,
+  WeiboIcon,
+} from 'react-share'
 import { AUTHOR_INFO } from '~/data/author-info'
-import { SITE_METADATA } from '~/data/site-metadata'
 import XIcon from '~/icons/x.svg'
 
 type SocialButtonsProps = {
