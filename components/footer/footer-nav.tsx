@@ -34,7 +34,7 @@ export function FooterNav() {
               <li>
                 <FooterLink link={link} />
               </li>
-              {idx !== FOOTER_NAV_LINKS.length - 1 && (
+              {idx !== FOOTER_PERSONAL_STUFF.length - 1 && (
                 <span className="text-gray-400 md:hidden">/</span>
               )}
             </Fragment>
