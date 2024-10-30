@@ -11,7 +11,7 @@ export const MDX_COMPONENTS: MDXComponents = {
   Image: ({ alt, ...rest }: ImageProps) => {
     return (
       <Zoom>
-        <Image alt={alt} {...rest} />
+        <Image alt={alt} {...rest} className="my-4" />
       </Zoom>
     )
   },
