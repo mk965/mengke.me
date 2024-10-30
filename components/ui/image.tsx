@@ -34,7 +34,7 @@ export function Image(props: ImageProps) {
   return (
     <div
       className={clsx(
-        'image-container relative my-4 overflow-hidden',
+        'image-container relative overflow-hidden',
         !loaded && 'animate-pulse [animation-duration:4s]',
         className
       )}
