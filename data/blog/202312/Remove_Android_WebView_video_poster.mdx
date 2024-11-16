@@ -6,7 +6,7 @@ draft: false
 summary: '去除安卓 WebView 中视频默认的超丑的播放按钮...'
 images:
   [
-    '/static/images/blog/202312/Remove_Android_WebView_video_poster/oleksandr-kurchev-W6N7YZ3aVoo-unsplash.jpg',
+    '/static/images/blog/202312/Remove_Android_WebView_video_poster/oleksandr-kurchev-W6N7YZ3aVoo-unsplash.webp',
   ]
 authors: ['default']
 ---
@@ -19,8 +19,7 @@ authors: ['default']
 
 今天测试跑过来说安卓上会有一个「一闪而过的」播放按钮，就是下面这个，机器是 Redmi (具体型号已记不清)。而在 iOS 设备上一切正常。
 
-![Default Poster](/static/images/blog/202312/Remove_Android_WebView_video_poster/default_poster.png)
-![aaa](/static/images/blog/202312/Remove_Android_WebView_video_poster/default_poster.png)
+![Default Poster](/static/images/blog/202312/Remove_Android_WebView_video_poster/default_poster.webp)
 
 简单排查过后即确认了是安卓 WebView 默认的 `poster`，以往会添加一个静态头图作为 `poster`，也可以防止视频加载失败是一片空白。这一次视频和静态图给的尺寸不一致，直接去掉了 `poster` 在视频后方添加了一个图片。所以在以往的活动中并没有发现这个问题。
 
