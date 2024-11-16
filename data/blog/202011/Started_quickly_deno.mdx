@@ -103,7 +103,7 @@ scoop reset deno
 
 新建一个 `demo.ts` 并输入 `console.log('Hello Wrold!')`；
 打开 git 或 cmd，输入`deno run ./demo.ts`，就可以看到打印的结果了：
-![](/static/images/blog/202011/Started_quickly_deno/img1.png)
+![](/static/images/blog/202011/Started_quickly_deno/img1.webp)
 
 ## 3. HTTP 请求
 
@@ -134,7 +134,7 @@ error: Uncaught (in promise) PermissionDenied: network access to "http://8jsj.cn
 deno run --allow-net=8jsj.cn demo.ts
 ```
 
-![](/static/images/blog/202011/Started_quickly_deno/img2.png)
+![](/static/images/blog/202011/Started_quickly_deno/img2.webp)
 
 ## 4. 读取文件
 
@@ -152,4 +152,4 @@ console.log(decoder.decode(data))
 deno run --allow-read=hello.txt demo.ts
 ```
 
-![](/static/images/blog/202011/Started_quickly_deno/img3.png)
+![](/static/images/blog/202011/Started_quickly_deno/img3.webp)

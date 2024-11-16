@@ -122,7 +122,7 @@ import { Redirect } from 'react-router-dom'
 
 - match：主要使用其中的 params 获取动态路由的信息。
 
-![](/static/images/blog/202007/react-router-dom_basic/img1.png)
+![](/static/images/blog/202007/react-router-dom_basic/img1.webp)
 
 跳转到某个路由：
 
@@ -138,7 +138,7 @@ this.props.history.push('/...')
 
 可以在 `props/history/location/search` 中拿到完整的 `query` 字符串。
 
-![](/static/images/blog/202007/react-router-dom_basic/img2.png)
+![](/static/images/blog/202007/react-router-dom_basic/img2.webp)
 
 ### 2、动态路由传参：
 
@@ -148,7 +148,7 @@ this.props.history.push('/...')
 <Route path="/movie/:id" component={Movie} />
 ```
 
-![](/static/images/blog/202007/react-router-dom_basic/img3.png)
+![](/static/images/blog/202007/react-router-dom_basic/img3.webp)
 
 ### 3、路由跳转时传参：
 
@@ -158,7 +158,7 @@ this.props.history.push('/...')
 this.props.history.push('/tv', { name: 'zhangsan' })
 ```
 
-![](/static/images/blog/202007/react-router-dom_basic/img4.png)
+![](/static/images/blog/202007/react-router-dom_basic/img4.webp)
 
 ## 五、子路由
 

@@ -8,7 +8,7 @@ export const SITE_METADATA = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.mengke.me',
   siteRepo: 'https://github.com/mk965/mengke.me',
-  siteLogo: `${process.env.BASE_PATH || ''}/static/images/profile.jpg`,
+  siteLogo: `${process.env.BASE_PATH || ''}/static/images/profile.webp`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.jpeg`,
 
   locale: 'en-US',

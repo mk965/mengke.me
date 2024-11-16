@@ -4,7 +4,7 @@ date: '2023-04-14'
 tags: [FE', 'Pinia', 'VUE']
 draft: false
 summary: '深入 Pinia 源码，探究底层实现方式。'
-images: ['/static/images/blog/202304/Pinia_source_code/tips.jpg']
+images: ['/static/images/blog/202304/Pinia_source_code/tips.webp']
 authors: ['default']
 ---
 
@@ -42,7 +42,7 @@ yarn create vite
 
 在 `main.ts` 中安装初始化 Pinia：
 
-![pinia](/static/images/blog/202304/Pinia_source_code/img0.png)
+![pinia](/static/images/blog/202304/Pinia_source_code/img0.webp)
 
 ## 4. 添加必要仓库依赖
 
@@ -119,7 +119,7 @@ export default defineConfig({
 
 在 `src/pinia/createPinia.ts` 中输出字符串，查看控制台是否正常打印，如正常打印则源码分析环境正常运行：
 
-![pinia](/static/images/blog/202304/Pinia_source_code/img1.png)
+![pinia](/static/images/blog/202304/Pinia_source_code/img1.webp)
 
 <aside>
 🧑🏼‍💻 本节代码：[https://github.com/mk965/read-pinia/tree/article_1](https://github.com/mk965/read-pinia/tree/article_1)
@@ -132,7 +132,7 @@ export default defineConfig({
 
 在 `defineStore`、 `createPinia`、 `useStore` 等关键函数内打印日志来确定执行顺序：
 
-![pinia](/static/images/blog/202304/Pinia_source_code/img2.png)
+![pinia](/static/images/blog/202304/Pinia_source_code/img2.webp)
 
 可以确定执行顺序为：
 
@@ -285,7 +285,7 @@ export function createPinia(): Pinia {
 
 `defineStore` 所在位置： `src/pinia/store.ts` 进入文件之后可以看到通过函数重载的方式提供给我们三种参数传递方式：
 
-![pinia](/static/images/blog/202304/Pinia_source_code/img3.png)
+![pinia](/static/images/blog/202304/Pinia_source_code/img3.webp)
 
 其中参数含义如下：
 
@@ -539,7 +539,7 @@ for (const key in setupStore) {
 
 在 Pinia 的 store 中存在很多基础 API，比如：获取 store id `$id`、增加 action 调用回调 `$onAction()`、重置 store `$reset()`、变更 store `$patch()`、订阅 `$subscribe()`、移除 store `$dispose`、获取所有 state `$state` 等。我们逐个分析。
 
-![pinia](/static/images/blog/202304/Pinia_source_code/img4.png)
+![pinia](/static/images/blog/202304/Pinia_source_code/img4.webp)
 
 基础的 API 首先被储存在 `partialStore` 中，然后创建一个 `store` 常量，并且把这些基础 API 和 store 的内容都合并到 `store` 常量中。
 
@@ -669,7 +669,7 @@ app.use(pinia)
 store.$aaa('传递的参数')
 ```
 
-![pinia](/static/images/blog/202304/Pinia_source_code/img5.png)
+![pinia](/static/images/blog/202304/Pinia_source_code/img5.webp)
 
 ## 6. createOptionsStore
 
@@ -1353,7 +1353,7 @@ export const mapGetters = mapState
 
 在使用 `$mapState` 把 state 导入 `computed` 时，如果直接去修改 state 的值是不允许的。
 
-![pinia](/static/images/blog/202304/Pinia_source_code/img6.png)
+![pinia](/static/images/blog/202304/Pinia_source_code/img6.webp)
 
 `$mapWritableState` **\*\*\*\***除了创建的计算属性的 setter，其他与 `mapState()` 相同， 所以 state 可以被修改。 与 `mapState()` 不同的是，只有 `state` 属性可以被添加。
 

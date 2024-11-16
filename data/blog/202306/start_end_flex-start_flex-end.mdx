@@ -4,7 +4,7 @@ date: '2023-06-05'
 tags: ['CSS', 'flex']
 draft: false
 summary: 'flex 布局中 start/end 和 flex-start/flex-end 的区别'
-images: ['/static/images/blog/202306/start_end_flex-start_flex-end/lock.jpg']
+images: ['/static/images/blog/202306/start_end_flex-start_flex-end/lock.webp']
 authors: ['default']
 ---
 
@@ -14,21 +14,21 @@ authors: ['default']
 
 首先祭上MDN的答案，但是好像看不出什么区别：
 
-![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled.png)
+![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled.webp)
 
 但是在使用 `post-css` 插件时会对 `start`和`end` 进行弹出警告：
 
-![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled%201.png)
+![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled%201.webp)
 
 ## W3C
 
 虽然定义上会有区别，但是实际使用中并没有什么区别。并且在最新的[W3C规范[TR]](https://link.segmentfault.com/?enc=PgXJu949Pr71%2FPeaI7T0yw%3D%3D.wMYAD1Jm3Nbjf18Ihn4i4%2FRnWrjGBujjMNGaiuODA%2BJLzckoIq5NEF5eMEhDtWA4g%2BTpzf6%2B1sN72Sxei4xXkg%3D%3D)当中 `start` 和 `end` 并没有出现在 `justify-content` 的可选值内。所以 `post-css` 会出现告警。
 
-![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled%202.png)
+![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled%202.webp)
 
 在早期版本的草案([1])当中有这俩值，后续被废弃了([2])，并且属性名从`flex-pack` 变更为了 `justify-content`，但浏览器还是会因为历史原因保留这两个属性的支持。
 
-![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled%203.png)
+![Untitled](/static/images/blog/202306/start_end_flex-start_flex-end/Untitled%203.webp)
 
 ## 参考资源
 

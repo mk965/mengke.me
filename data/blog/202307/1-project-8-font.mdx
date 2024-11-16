@@ -4,7 +4,7 @@ date: '2023-07-04'
 tags: ['FE', 'CSS', 'font-family']
 draft: false
 summary: '了解如何使用 font-family 样式的各种属性来组合需要的字体包。可以按照字体粗细、unicode 等信息来自动选择相应的字体包。'
-images: ['/static/images/blog/202307/1-project-8-font/responsive-image.jpg']
+images: ['/static/images/blog/202307/1-project-8-font/responsive-image.webp']
 authors: ['default']
 ---
 
@@ -54,7 +54,7 @@ authors: ['default']
 }
 ```
 
-![Untitled](/static/images/blog/202307/1-project-8-font/Untitled.png)
+![Untitled](/static/images/blog/202307/1-project-8-font/Untitled.webp)
 
 ## 🤲🏼 如何根据粗细程度自动选择对应字体包
 
@@ -64,7 +64,7 @@ authors: ['default']
 
 对的，很多**字体不支持** `font-weight` 所以我们需要用不同粗细的字体包。
 
-![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%201.png)
+![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%201.webp)
 
 所以，我们可以通过 `@font-face` 中的 `font-weight` 属性来设置字体的宽度：
 
@@ -93,11 +93,11 @@ authors: ['default']
 
 注意，这里我们把字体名字都设为相同的，如下图所示，这样我们就成功的解决了第一个问题：不同粗细也要使用不同的字体包；
 
-![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%202.png)
+![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%202.webp)
 
 并且，如果我们只是定义而未真正使用时，不会去下载未使用的字体包，再加上字体包的缓存策略，就可以最大程度节省带宽：
 
-![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%203.png)
+![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%203.webp)
 
 ## 🔤 如何根据不同语言自动选择字体包？
 
@@ -121,7 +121,7 @@ authors: ['default']
 
 通过查表得知阿拉伯语的 unicode 的范围为：`U+06??, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF, U+10A60-10A7F, U+10A80-10A9F` 这么几个区间。所以我们设置字体如下，因为设计以 A 字体为准，所以在 Figma 中给出的样式代码字体名均为 A，所以我们把 B 字体的字体名也设置为 A：
 
-![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%204.png)
+![Untitled](/static/images/blog/202307/1-project-8-font/Untitled%204.webp)
 
 当使用字体的字符中命中 `unicode-rang` 的范围时，自动下载相应的字体包。
 
