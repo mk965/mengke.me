@@ -1,0 +1,121 @@
+---
+heading: 'iOS Fullscreen WebView'
+title: 'Quickly Create a Fullscreen WebView with Autoplay Support for Testing'
+date: '2024-11-29'
+icon: 'Apple'
+draft: false
+summary: 'Learn how to create a fullscreen WebView in iOS that allows autoplay videos, perfect for debugging and testing web pages.'
+tags: [iOS, WebView, SwiftUI]
+---
+
+The company's business is growing, and the mobile phones available for testing are always in short supply. So, I have to find a way to test the web pages I develop.
+
+In a recent project, I encountered a styling issue that only occurred on the fullscreen WebView of iPhone Pro devices. To debug and resolve the issue, I needed to simulate a fullscreen WebView environment.
+
+This article explains how to quickly set up an iOS fullscreen WebView that supports autoplay videos, making it an ideal testing tool.
+
+## Create Swift Project
+
+1. Create a new project in Xcode and name it `FullScreen`.
+
+   The directory structure should look like this:
+
+   ```plaintext {6}
+    FullScreen
+    ├── FullScreen
+    │   ├── Preview Content
+    │   │   └── Preview Assets
+    │   ├── Assets
+    │   ├── ContentView.swift
+    │   └── FullScreenApp.swift
+    ├── FullScreenTests
+    │   └── FullScreenTests.swift
+    └── FullScreenUITests
+        └── FullScreenUITestsLaunchTests.swift
+   ```
+
+2. Add the following code to `FullScreen/FullScreen/ContentView.swift`:
+
+   ```swift showLineNumbers
+   //
+   //  ContentView.swift
+   //  FullScreen
+   //
+   //  Created by Xiaoke on 11/28/24.
+   //
+
+   import SwiftUI
+   import WebKit
+
+   // Create a WebView component to load web pages
+   struct WebView: UIViewRepresentable {
+       let url: URL  // Used to store the web page address
+
+       // This method is used to create a WebView
+       func makeUIView(context: Context) -> WKWebView {
+           // Create a WebView configuration object
+           let webConfiguration = WKWebViewConfiguration()
+
+           // Enable developer tools for easier debugging
+           webConfiguration.preferences.setValue(true, forKey: "developerExtrasEnabled")
+
+           // Allow media playback (such as video or audio) within the WebView
+           webConfiguration.allowsInlineMediaPlayback = true
+
+           // Set the media playback policy to allow all media to play without user interaction (e.g., autoplay videos)
+           webConfiguration.mediaTypesRequiringUserActionForPlayback = []  // An empty array means media can play without user interaction
+
+           // Enable AirPlay and Picture-in-Picture functionality
+           webConfiguration.allowsAirPlayForMediaPlayback = true
+           webConfiguration.allowsPictureInPictureMediaPlayback = true
+
+           // Create a WebView instance and apply the configuration
+           let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+
+           // Disable auto layout constraints to allow custom layouts for the WebView
+           webView.translatesAutoresizingMaskIntoConstraints = false
+
+           // Make the WebView inspectable (debuggable during development)
+           webView.isInspectable = true
+
+           return webView
+       }
+
+       // This method is called when the WebView is updated, loading the web page content
+       func updateUIView(_ uiView: WKWebView, context: Context) {
+           // Create a URL request object to load the web page
+           let request = URLRequest(url: url)
+
+           // Use the WebView to load the requested web page
+           uiView.load(request)
+       }
+   }
+
+   // ContentView view to display the WebView
+   struct ContentView: View {
+       var body: some View {
+           // Use the WebView component to load the specified web page URL
+           WebView(url: URL(string: "http://example.com")!)
+               .edgesIgnoringSafeArea(.all)  // Make the WebView fill the entire screen, ignoring safe area insets
+       }
+   }
+
+   #Preview {
+       ContentView()  // Preview the ContentView
+   }
+
+   ```
+
+## Allow Requests for Non-Secure Resources
+
+Because I need to debug a local page, and I don't have an HTTPS environment locally, I need to allow it to load non-HTTPS resources.
+
+1. Open your project's `info.plist` file.
+
+2. Add an `App Transport Security Settings` entry of type `Dictionary`.
+
+3. Under `App Transport Security Settings`, add an `Allow Arbitrary Loads` entry of type `Boolean` and set its value to `YES`.
+
+If you don't find the `info.plist` file in the project directory, please follow the steps below.
+
+![Set Allow Arbitrary Loads](/static/images/snippets/iOS-fullscreen-WebView/SetAllowArbitraryLoads.webp)
