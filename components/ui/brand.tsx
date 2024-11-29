@@ -54,6 +54,7 @@ import AntV from '~/icons/antv.svg'
 import Qiankun from '~/icons/qiankun.svg'
 import Weibo from '~/icons/weibo.svg'
 import I18n from '~/icons/i18n.svg'
+import Apple from '~/icons/apple.svg'
 
 export const BrandsMap = {
   React: {
@@ -283,6 +284,10 @@ export const BrandsMap = {
   I18n: {
     Icon: I18n,
     url: '/',
+  },
+  Apple: {
+    Icon: Apple,
+    url: 'https://www.apple.com/ios',
   },
 }
 
