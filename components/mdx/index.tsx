@@ -8,10 +8,10 @@ import { Twemoji } from '~/components/ui/twemoji'
 import { TableWrapper } from './table-wrapper'
 
 export const MDX_COMPONENTS: MDXComponents = {
-  Image: ({ alt, ...rest }: ImageProps) => {
+  Image: ({ alt, src, ...rest }: ImageProps) => {
     return (
-      <Zoom>
-        <Image alt={alt} {...rest} className="my-4" />
+      <Zoom zoomImg={{ src, alt }} canSwipeToUnzoom={false} zoomMargin={20}>
+        <Image alt={alt} src={src} {...rest} className="my-4" />
       </Zoom>
     )
   },
