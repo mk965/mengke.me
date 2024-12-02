@@ -6,11 +6,6 @@ import { Image, Zoom } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
 import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
 import type { ImdbFriends } from '~/types/data'
-// import { Ratings } from './ratings'
-
-function getLargePoster(poster: string, size = 1000) {
-  return poster.replace('._V1_SX300', `._V1_SX${size}`)
-}
 
 export function FriendCard({ friend }: { friend: ImdbFriends }) {
   const { name, slogan, imgSrc, url } = friend
@@ -21,7 +16,7 @@ export function FriendCard({ friend }: { friend: ImdbFriends }) {
       <div className="flex gap-5 md:gap-5">
         <div className="m-4 flex shrink-0 items-end">
           <Zoom
-            zoomImg={{ src: getLargePoster(imgSrc), alt: name }}
+            zoomImg={{ src: imgSrc, alt: name }}
             canSwipeToUnzoom={false} // Not working
             zoomMargin={20}
           >
