@@ -55,7 +55,9 @@
 
 2. 你会得到一个类似于：`postgres://default:xxxxx@xx-xx-xx-xxxx.us-xx-x.postgres.vercel-storage.com:xxx/verceldb` 的字符串，将其添加到 `DATABASE_URL` 变量中。
 
-3. 每篇博文的阅读量会被自动统计到这个数据库中。
+3. 运行 `npx prisma db push` 来创建 `views` 表。
+
+4. 每篇博文的阅读量会被自动统计到这个数据库中。
 
 ## ☕️ 支持 Mengke
 
