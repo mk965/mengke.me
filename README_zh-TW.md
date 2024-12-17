@@ -55,7 +55,9 @@
 
 2. 你會得到一個類似於：`postgres://default:xxxxx@xx-xx-xx-xxxx.us-xx-x.postgres.vercel-storage.com:xxx/verceldb` 的字符串，將其添加到 `DATABASE_URL` 變量中。
 
-3. 每篇博文的閱讀量會被自動統計到這個數據庫中。
+3. 運行 `npx prisma db push` 來創建 `views` 表。
+
+4. 每篇博文的閱讀量會被自動統計到這個數據庫中。
 
 ## ☕️ 支持 Mengke
 

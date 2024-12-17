@@ -55,7 +55,9 @@
 
 2. 以下のような文字列を取得できます：`postgres://default:xxxxx@xx-xx-xx-xxxx.us-xx-x.postgres.vercel-storage.com:xxx/verceldb`。これを `DATABASE_URL` 環境変数に追加します。
 
-3. 各ブログ記事の閲覧数は自動的にこのデータベースに保存されます。
+3. `npx prisma db push` を実行して `views` テーブルを作成します。
+
+4. 各ブログ記事の閲覧数は自動的にこのデータベースに保存されます。
 
 ## ☕️ Mengkeを応援
 
