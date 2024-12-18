@@ -53,7 +53,9 @@ You can see what the blog looks like here: <https://mengke.me>
 
 2. You will get a string similar to: `postgres://default:xxxxx@xx-xx-xx-xxxx.us-xx-x.postgres.vercel-storage.com:xxx/verceldb`, add it to the `DATABASE_URL` variable.
 
-3. The number of views of each blog post will be automatically counted in this database.
+3. Run `npx prisma db push` to create the `views` table.
+
+4. The number of views of each blog post will be automatically counted in this database.
 
 ## ☕️ Support Mengke
 
