@@ -15,20 +15,6 @@
   },
   {
     "type": "friend",
-    "name": "UoCat",
-    "slogan": "橘子糖的博客",
-    "imgSrc": "/static/images/friends/uocat.png",
-    "url": "https://uocat.com/?ref=mengke.me"
-  },
-  {
-    "type": "friend",
-    "name": "Ike の Blog",
-    "slogan": "Ike's Blog,Memo someting interesting",
-    "imgSrc": "/static/images/friends/ike.jpeg",
-    "url": "https://blog.ikeno.top/?ref=mengke.me"
-  },
-  {
-    "type": "friend",
     "name": "kkjz",
     "slogan": "因为不想随波逐流，所以总是在人生中迷失方向",
     "imgSrc": "/static/images/friends/kkjz.jpeg",
@@ -54,6 +40,13 @@
     "slogan": "NoOne，一位对技术充满热情的软件架构师",
     "imgSrc": "/static/images/friends/NoOne.webp",
     "url": "https://www.ifb.me/?ref=mengke.me"
+  },
+  {
+    "type": "friend",
+    "name": "搬砖日记",
+    "slogan": "我的生活记录",
+    "imgSrc": "/static/images/friends/banzhuanriji.svg",
+    "url": "https://banzhuanriji.com/?ref=mengke.me"
   },
   {
     "type": "techStar",
