@@ -1,0 +1,84 @@
+---
+heading: 'TypeScript optional property types'
+title: 'An elegant solution for implementing optional property types using TypeScript'
+date: '2025-02-09'
+icon: 'Typescript'
+draft: false
+summary: 'How to use TypeScript type tools to implement interface definitions with some optional properties to improve code maintainability and flexibility.'
+tags: ['javascript', 'typescript', 'utilities']
+---
+
+When developing a TypeScript project, defining types and interfaces is a basic and important task. However, we often encounter such scenarios:
+
+For some data object attributes, not all fields need to be passed. This leads to a common type annotation problem.
+
+Suppose we have an interface that represents a user:
+
+```typescript
+interface User {
+  username: string
+  email: string
+  phone: string
+  address: string
+  age: number
+}
+```
+
+When creating a user, you may not need all attributes to be created. We generally need to define a separate interface for this case:
+
+```typescript
+interface CreateUserOptions {
+  username: string
+  email: string
+  phone?: string
+  address?: string
+  age?: number
+}
+
+function createUser(options: CreateUserOptions): User {
+  // TODO
+}
+```
+
+It is obvious that there is a relationship between the two types, so I hope that the `CreateUserOptions` type can be automatically generated according to the `Article` type. Some properties in `CreateUserOptions` are optional.
+
+But unfortunately Typescript does not provide such syntax, so we have to implement this function manually.
+
+```typescript
+type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+```
+
+So we can use it like this:
+
+```typescript
+type CreateUserOptions = Optional<Article, 'author' | 'date' | 'readCount'>
+```
+
+Explain the principle of this type:
+
+- `Omit<T, K>`: exclude the `K` property from `T`.
+
+  ```typescript
+  Omit<UserProfile, 'phone' | 'address' | 'age'>
+  // Result: { username: string; email: string; }
+  ```
+
+- `Pick<T, K>`: Pick `K` attributes from `T`.
+
+  ```typescript
+  Pick<UserProfile, 'phone' | 'address' | 'age'>
+  // Result: { phone: string; address: string; age: number; }
+  ```
+
+- `Partial<T>`: Make all properties in `T` optional.
+
+  ```typescript
+  Partial<Pick<UserProfile, 'phone' | 'address' | 'age'>>
+  // Result: { phone?: string; address?: string; age?: number; }
+  ```
+
+- Type merging: Use the intersection type `&` to merge `Omit<T, K>` and `Partial<Pick<T, K>>` to form the final Result:
+
+  ```typescript
+  type CreateUserOptions = Optional<User, 'phone' | 'address' | 'age'>
+  ```
