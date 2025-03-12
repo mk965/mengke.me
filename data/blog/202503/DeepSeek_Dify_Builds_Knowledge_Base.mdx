@@ -4,7 +4,7 @@ date: '2025-03-12'
 tags: ['AI', 'DeepSeek', 'LLM', 'Ollama', 'Dify']
 draft: false
 summary: '详细介绍如何在本地部署 DeepSeek 模型，包括 Ollama 安装、模型部署、UI 界面配置以及使用 Dify 搭建知识库的完整教程...'
-images: ['/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/penglaige.webp']
+images: ['/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/penglaige.webp']
 authors: ['default']
 ---
 
@@ -14,7 +14,7 @@ authors: ['default']
 
 我用的电脑是 `MacBook Pro 2021` 版，芯片：`M1 Pro`，内存 `16GB` 。
 
-![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/device_info.webp)
+![device info](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/device_info.webp)
 
 ## 1. Ollama 安装
 
@@ -28,7 +28,7 @@ ollama version is 0.5.7
 ➜  ~
 ```
 
-![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/ollama_version.webp)
+![device info](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/ollama_version.webp)
 
 
 也可打开 [http://localhost:11434](http://localhost:11434) 查看是否启动成功。
@@ -64,11 +64,11 @@ success
 >>> Send a message (/? for help)
 ```
 
-![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/ollama_install_success.webp)
+![device info](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/ollama_install_success.webp)
 
 ## 3. 测试
 
-![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/deepseek_test.webp)
+![device info](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/deepseek_test.webp)
 
 
 ## 4. 使用 Dify 搭建知识库
@@ -98,14 +98,14 @@ docker compose up -d
 
 > 注：使用 `host.docker.internal` 是为了从容器内访问宿主机的 Ollama 服务。
 
-![dify test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/dift_deepseek.webp)
+![dify test](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/dift_deepseek.webp)
 
 
 ### 4. 创建知识库
 
 知识库 ➜ 创建知识库 ➜ 上传知识 ➜ 等待处理完成
 
-![dify test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/dify_import.webp)
+![dify test](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/dify_import.webp)
 
 ### 5. 将机器人和 AI 关联
 
@@ -113,7 +113,7 @@ docker compose up -d
 2. 知识库中选择我们创建的知识库。
 3. 发布。
 
-![dify test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/dify_test.webp)
+![dify test](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/dify_test.webp)
 
 3. 优化提示词：
 
@@ -140,8 +140,8 @@ docker compose up -d
 2. API 域名：`http://127.0.0.1:11434`
 3. 模型：`deepseek-r1:latest`
 
-![chatbox setting](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/chatbox_setting.webp)
+![chatbox setting](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/chatbox_setting.webp)
 
 Chatbox AI 支持联网搜索，也可以正确显示思考过程。
 
-![chatbox test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/chatbox_test.webp)
+![chatbox test](/static/images/blog/202503/DeepSeek_Dify_Builds_Knowledge_Base/chatbox_test.webp)
