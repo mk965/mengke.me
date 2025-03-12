@@ -1,0 +1,147 @@
+---
+title: 'DeepSeek + Dify 搭建本地知识库'
+date: '2025-03-12'
+tags: ['AI', 'DeepSeek', 'LLM', 'Ollama', 'Dify']
+draft: false
+summary: '详细介绍如何在本地部署 DeepSeek 模型，包括 Ollama 安装、模型部署、UI 界面配置以及使用 Dify 搭建知识库的完整教程...'
+images: ['/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/penglaige.webp']
+authors: ['default']
+---
+
+本文将介绍如何在本地部署 DeepSeek 模型，并通过 Chatbox AI 和 Dify 搭建完整的知识库应用。
+
+## 设备
+
+我用的电脑是 `MacBook Pro 2021` 版，芯片：`M1 Pro`，内存 `16GB` 。
+
+![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/device_info.webp)
+
+## 1. Ollama 安装
+
+Ollama 官方下载地址：https://ollama.com/download
+
+安装完成后验证：
+
+```bash
+➜  ~ ollama -v
+ollama version is 0.5.7
+➜  ~
+```
+
+![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/ollama_version.webp)
+
+
+也可打开 [http://localhost:11434](http://localhost:11434) 查看是否启动成功。
+
+## 2. DeepSeek 模型部署
+
+DeepSeek 提供了多个版本的模型：
+- 7B：适合入门级硬件（16GB+）
+- 14B：性能和资源消耗均衡（32GB+）
+- 33B：更强大的性能（64GB+）
+
+### 下载与安装
+
+以 deepseek r1 模型为例：
+
+1. 访问 [https://ollama.com/library/deepseek-r1](https://ollama.com/library/deepseek-r1) ，默认为 `7b` 模型，如需其他模型，可以在当前页搜索。
+2. 所需模型模型详情页复制安装命令 `ollama run deepseek-r1`。
+3. 安装完成后在终端执行：`ollama run deepseek-r1`。
+
+> 性能提示：如果硬件条件允许，建议选择 14b 或更高参数量的模型，以获得更好的推理效果。
+
+```bash
+➜  ~ ollama run deepseek-r1
+pulling manifest
+pulling 96c415656d37... 100% ▕██████████████▏ 4.7 GB
+pulling 369ca498f347... 100% ▕██████████████▏ 387 B
+pulling 6e4c38e1172f... 100% ▕██████████████▏ 1.1 KB
+pulling f4d24e9138dd... 100% ▕██████████████▏ 148 B
+pulling 40fb844194b2... 100% ▕██████████████▏ 487 B
+verifying sha256 digest
+writing manifest
+success
+>>> Send a message (/? for help)
+```
+
+![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/ollama_install_success.webp)
+
+## 3. 测试
+
+![device info](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/deepseek_test.webp)
+
+
+## 4. 使用 Dify 搭建知识库
+
+Dify 是一个强大的 AI 应用开发平台，支持多种文档格式、自动向量化，并提供完整的对话管理界面。
+
+### 1. 部署 Dify
+
+```bash
+git clone https://github.com/langgenius/dify.git
+cd dify/docker
+cp .env.example .env
+docker compose up -d
+```
+
+### 2. 配置 DeepSeek 模型
+
+初次进入，需要设置邮箱、用户名、密码。
+
+### 3. 添加模型
+
+1. 点击 Dify 平台右上角头像 ➜ 设置 ➜ 模型供应商 ➜ Ollama ➜ 添加模型。
+2. 配置信息：
+   - 模型类型：`LLM`
+   - 模型名称：`deepseek-r1`
+   - 基础URL：`http://host.docker.internal:11434`
+
+> 注：使用 `host.docker.internal` 是为了从容器内访问宿主机的 Ollama 服务。
+
+![dify test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/dift_deepseek.webp)
+
+
+### 4. 创建知识库
+
+知识库 ➜ 创建知识库 ➜ 上传知识 ➜ 等待处理完成
+
+![dify test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/dify_import.webp)
+
+### 5. 将机器人和 AI 关联
+
+1. 打开机器人页面。
+2. 知识库中选择我们创建的知识库。
+3. 发布。
+
+![dify test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/dify_test.webp)
+
+3. 优化提示词：
+
+```markdown
+你是一位严谨且专业的 AI 助手，你的所有答案必须严格基于我的知识库内容。  
+
+- 如果问题的答案在知识库中，请基于知识库内容准确回答，不做任何超出知识库的信息补充或推测。  
+- 如果知识库中找不到相关内容，请直接回答："抱歉，我的知识库中没有相关信息。" 不要编造、不推测、不参考外部信息。  
+- 你的回答必须清晰、简洁、专业，确保内容准确无误。  
+- 如果问题涉及多个知识点，请尽可能整合完整的知识库内容进行支持。  
+- 如果用户的问题模糊或可能涉及知识库外的内容，可以建议用户提供更具体的查询，以提高回答的准确性。  
+
+请始终严格遵守以上规则，现在开始回答问题。 
+```
+
+> 建议：为不同主题创建独立的知识库，可以提高回答的精确度。
+
+## 5. 安装交互 UI —— Chatbox AI
+
+官网地址：[https://chatboxai.app/](https://chatboxai.app/)
+
+配置步骤：
+1. 设置 ➜ 模型提供方选择「Ollama」
+2. API 域名：`http://127.0.0.1:11434`
+3. 模型：`deepseek-r1:latest`
+
+![chatbox setting](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/chatbox_setting.webp)
+
+Chatbox AI 支持联网搜索，也可以正确显示思考过程。
+
+![chatbox test](/static/images/blog/202503/DeepSeek_Local_Deployment_Guide/chatbox_test.webp)
