@@ -1,0 +1,258 @@
+---
+title: 'Model Context Protocol (MCP) 快速开始'
+date: '2025-03-22'
+tags: ['AI', 'MCP', 'LLM']
+draft: false
+summary: '探索 MCP 协议如何让 AI 从"回答问题"进化为"执行任务"。本文详细介绍了 MCP 的概念、架构和实现原理，并通过 Github MCP 的实例，展示了 AI 直接操作代码仓库的强大能力...'
+images: ['/static/images/blog/202503/MCP_Quickstart/mcp.webp']
+authors: ['default']
+---
+
+自 2022 年以来，大语言模型逐步进入大众视野，并迅速成为 AI 领域最热门的话题。
+
+我们习惯了在对话框中输入问题，等待模型生成一段看似智能的回复。但你是否发现，当你想让 AI 帮你预订机票时，它只会教你"打开某 App 搜索航班"，而不是直接帮你完成操作，这种"纸上谈兵"的尴尬，暴露了当前 LLM 的致命短板——它缺乏与现实世界的交互能力。
+
+而这一切，正在被一个名为 MCP 的协议改变。
+
+## 1. 什么是 MCP？
+
+MCP 最早出现在 2024 年 11 月 25 日 Anthropic 发布的文章：[Introducing the Model Context Protocol](https://www.anthropic.com/news/model-context-protocol)。
+
+MCP 全称是 Model Context Protocol（模型上下文协议），它定义了应用程序和 AI LLM 之间的交换上下文信息的标准，使得开发者可以以一致的方式将各种数据、工具提供给 AI 去使用， 你可以将它理解为 AI 的 "USB-C 接口"。
+
+就像 USB-C 接口能连接手机、电脑、耳机等设备一样，MCP 提供了一种标准化方式，MCP 让 LLM（如 Claude、GPT）能够安全、灵活地调用外部工具和数据源，从"回答问题"进化为"执行任务"。
+
+![mcp like usb-c](/static/images/blog/202503/MCP_Quickstart/mcp.webp)
+
+## 2. 为什么需要 MCP？
+
+在没有 MCP 的时候，我们使用 AI 往往需要将所有信息集中发送给 AI，然后等待 AI 给出答案。
+
+这个过程可能需要人工查询数据库或搜索网页，然后将信息复制给 AI。
+
+但随着需求日益复杂，要求不断提高，这样的方式无法满足我们所有的要求。我们在书写 prompt 时可能会想要提供更加具体的信息给到 AI，比如：文件、数据库、实时信息等，这样 AI 才能更好地为我们解决问题。
+
+为了突破这个限制，很多 LLM 平台引入了 `Function Calling` 的方式，让 AI 可以调用外部工具。`Function Calling` 允许 AI 在需要获取数据或者执行操作时来调用预定义的函数，显著提升了自动化的水平。
+
+但 `Function Calling` 本身也有局限性，虽然都叫 `Function Calling`，但是每个 LLM 平台对于 `Function Calling` 的实现方式都不一样。
+
+比如，OpenAI 的 `Function Calling` 和 Google 的不能相互兼容，开发者需要对不同平台分别开发和适配，成本很高。
+
+MCP 正是基于这个痛点诞生的。MCP 统一了 AI 和外部工具之间的标准，充当了 AI 模型的万能插头，让 AI 可以灵活地调用外部工具。
+
+MCP 相比 `Function Calling` 的优势：
+
+- **标准化接口**，让开发者可以轻松地为 AI 添加新的工具。
+- **生态日益丰富**，MCP 的生态逐渐成熟，已经有非常多的第三方工具和库支持。
+- **安全可靠**，我们可以确保敏感数据不被上传。
+
+## 2. MCP 通用架构
+
+MCP 的核心遵循 **客户端-服务器架构**，其中主机应用程序可以连接到多个服务器：
+
+![add MCP success](/static/images/blog/202503/MCP_Quickstart/MCP_architecture.webp)
+- **MCP Hosts**：像 Claude Desktop、IDE 或 AI 工具等程序，它们希望通过 MCP 访问数据。
+- **MCP Clients**：与服务器保持 1:1 连接的协议客户端。
+- **MCP Servers**：通过标准化的模型上下文协议暴露特定功能的轻量级程序。
+- **Local Data Source**：计算机文件、数据库以及 MCP 服务器可以安全访问的服务。
+- **Remote Services**：MCP 服务器可以通过 API 等方式连接到的互联网外部系统。
+
+当你向 AI 提出问题时，流程是这样的：
+
+- **提问 ➜ Host ➜ LLM ➜ MCP Server ➜ MCP Client ➜ 执行操作 ➜ 返回结果 ➜ LLM生成回答 ➜ 展示答案**
+
+这样的架构设计可以让 LLM 更灵活的调用各种数据和工具，开发者只需要专注开发 MCP Server，用户也不需要额外的学习成本。
+
+## 3. MCP 的原理
+
+初次接触 MCP 时，我对 LLM 如何决定调用哪个 MCP Server 以及调用时机产生了浓厚的兴趣。
+
+在官网已经给到了[解释](https://modelcontextprotocol.io/quickstart/server#what%E2%80%99s-happening-under-the-hood)：
+
+1. AI 客户端将问题发送给 LLM
+2. LLM 分析可用的工具，并决定使用哪一个或哪几个
+3. AI 客户端通过 MCP Server 执行所选择的工具
+4. 执行结果返回给 LLM
+5. LLM 生成自然语言回答
+6. 显示答案
+
+> 也就是说，是 LLM 主动选择并调用的，那么具体是如何实现的呢？
+> 
+
+### 3.1  LLM 如何确定调用哪个 MCP Server？
+
+一起看一下官方提供的一个 [Client Demo](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/clients/simple-chatbot/mcp_simple_chatbot/main.py) ，代码做了简化。
+
+```python
+async def start(self):
+    # 初始化所有的 mcp server
+    for server in self.servers:
+        await server.initialize()
+
+    # 获取所有的 tools 命名为 all_tools
+    all_tools = []
+    for server in self.servers:
+        tools = await server.list_tools()
+        all_tools.extend(tools)
+
+    # 将所有的 tools 的功能描述格式化成字符串供 LLM 使用
+    # tool.format_for_llm() 我放到了这段代码最后，方便阅读。
+    tools_description = "\n".join(
+        [tool.format_for_llm() for tool in all_tools]
+    )
+
+    # 基于 prompt 和当前所有工具的信息，询问 LLM（Claude）应该使用哪些工具。
+    system_message = (
+        "You are a helpful assistant with access to these tools:\n\n"
+        f"{tools_description}\n"
+        "Choose the appropriate tool based on the user's question. "
+        "If no tool is needed, reply directly.\n\n"
+        "IMPORTANT: When you need to use a tool, you must ONLY respond with "
+        "the exact JSON object format below, nothing else:\n"
+        "{\n"
+        '    "tool": "tool-name",\n'
+        '    "arguments": {\n'
+        '        "argument-name": "value"\n'
+        "    }\n"
+        "}\n\n"
+        "After receiving a tool's response:\n"
+        "1. Transform the raw data into a natural, conversational response\n"
+        "2. Keep responses concise but informative\n"
+        "3. Focus on the most relevant information\n"
+        "4. Use appropriate context from the user's question\n"
+        "5. Avoid simply repeating the raw data\n\n"
+        "Please use only the tools that are explicitly defined above."
+    )
+    messages = [{"role": "system", "content": system_message}]
+
+    while True:
+        # Final... 假设这里已经处理了用户消息输入.
+        messages.append({"role": "user", "content": user_input})
+
+        # 将 system_message 和用户消息输入一起发送给 LLM
+        llm_response = self.llm_client.get_response(messages)    
+
+
+class Tool:
+    """Represents a tool with its properties and formatting."""
+
+    def __init__(
+        self, name: str, description: str, input_schema: dict[str, Any]
+    ) -> None:
+        self.name: str = name
+        self.description: str = description
+        self.input_schema: dict[str, Any] = input_schema
+
+    # 把工具的名字 / 工具的描述（description）和工具所需要的参数（args_desc）转化为文本
+    def format_for_llm(self) -> str:
+        """Format tool information for LLM.
+
+        Returns:
+            A formatted string describing the tool.
+        """
+        args_desc = []
+        if "properties" in self.input_schema:
+            for param_name, param_info in self.input_schema["properties"].items():
+                arg_desc = (
+                    f"- {param_name}: {param_info.get('description', 'No description')}"
+                )
+                if param_name in self.input_schema.get("required", []):
+                    arg_desc += " (required)"
+                args_desc.append(arg_desc)
+
+        return f"""
+Tool: {self.name}
+Description: {self.description}
+Arguments:
+{chr(10).join(args_desc)}
+"""
+```
+
+tool 的描述和代码中的 input_schema 是从哪里来的呢？再来看一段 Server Demo 的代码，这是一段注册浏览器工具的代码，可以可以发现是在开发者开发 MCP Server 时直接描述清楚这个 Tool 的作用以及每个参数的作用。
+
+```tsx
+server.registerTool(
+    "web_browser",
+    "浏览网页并获取内容。用于查询最新信息、搜索网络内容或访问特定网站。",
+    {
+        "url": {
+            "type": "string",
+            "description": "要访问的网页URL",
+            "required": true
+        },
+        "element_selector": {
+            "type": "string",
+            "description": "可选的CSS选择器，用于提取特定元素",
+            "required": false
+        }
+    },
+    (url, elementSelector) => webBrowserImplementation(url, elementSelector)
+);
+```
+
+> [!TIP]
+> 总结：LLM 通过 prompt engineering 来了解有哪些工具可以使用以及工具的具体作用的，即提供所有工具的描述和 few-shot 的 example 来确定使用哪些工具。
+
+<span style={{color: 'rgba(0, 0, 0, .2)', fontSize: '12px', lineHeight: 1.1}}>*该部分转载自: [zhuanlan.zhihu.com/p/29001189476](http://zhuanlan.zhihu.com/p/29001189476)</span>
+
+## 4. MCP Server 的使用：以 Github MCP 为例
+
+以 Cursor + Github 为例，体验让AI直接操作代码仓库：
+
+**步骤1：创建Github个人访问令牌**
+
+1. 访问 [**Github Token 设置页**](https://github.com/settings/tokens)
+2. 勾选 `repo` 和 `workflow` 权限
+3. 生成以 `ghp_` 开头的令牌字符串
+
+**步骤2：配置MCP Server**
+
+在 Cursor 按一下步骤打开 MCP 配置文件
+
+![add MCP](/static/images/blog/202503/MCP_Quickstart/add_MCP.webp)
+
+输入以下代码，并将 `<YOUR_GITHUB_PERSONAL_ACCESS_TOKEN>` 替换为你的 Github 的 Personal Access Token：
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<YOUR_GITHUB_PERSONAL_ACCESS_TOKEN>"
+      }
+    }
+  }
+}
+```
+
+**步骤3：验证连接**
+
+当状态指示灯变绿后，尝试自然语言指令：
+
+![add MCP success](/static/images/blog/202503/MCP_Quickstart/add_MCP_success.webp)
+
+![github MCP](/static/images/blog/202503/MCP_Quickstart/github_MCP.webp)
+
+## 5. 如何寻找优质 MCP Server
+
+目前推荐的 MCP Server 来源：
+
+| 平台                                                           | 特点         | 描述                                      |
+| -------------------------------------------------------------- | ------------ | ----------------------------------------- |
+| [官方仓库](https://github.com/modelcontextprotocol/servers)    | 经过安全审计 | 官方认证                                  |
+| [Awesome-MCP](https://github.com/punkpeye/awesome-mcp-servers) | 社区精选     | 精选的优秀模型上下文协议 (MCP) 服务器列表 |
+| [mcp.so](https://mcp.so/)                                      | MCP 搜索     | 号称"最大的 MCP 服务器集合"               |
+
+## Reference
+
+- [Model Context Protocol Introduction](https://modelcontextprotocol.io/introduction)
+- [Introducing the Model Context Protocol](https://www.anthropic.com/news/model-context-protocol)
+- [Model Context Protocol (MCP) Quickstart](https://glama.ai/blog/2024-11-25-model-context-protocol-quickstart)
+- [MCP 终极指南](https://guangzhengli.com/blog/zh/model-context-protocol/#top)
+
+> [!TIP]
+> 在下一篇博文，我会详细记录这个资产价格查询的 MCP 是如何实现的。
+
+![assets_price_mcp](/static/images/blog/202503/MCP_Quickstart/assets_price_mcp.webp)
