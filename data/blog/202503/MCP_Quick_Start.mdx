@@ -1,6 +1,6 @@
 ---
 title: 'Model Context Protocol (MCP) 快速开始'
-date: '2025-03-22'
+date: '2025-03-29'
 tags: ['AI', 'MCP', 'LLM']
 draft: false
 summary: '探索 MCP 协议如何让 AI 从"回答问题"进化为"执行任务"。本文详细介绍了 MCP 的概念、架构和实现原理，并通过 Github MCP 的实例，展示了 AI 直接操作代码仓库的强大能力...'
@@ -51,6 +51,7 @@ MCP 相比 `Function Calling` 的优势：
 MCP 的核心遵循 **客户端-服务器架构**，其中主机应用程序可以连接到多个服务器：
 
 ![add MCP success](/static/images/blog/202503/MCP_Quickstart/MCP_architecture.webp)
+
 - **MCP Hosts**：像 Claude Desktop、IDE 或 AI 工具等程序，它们希望通过 MCP 访问数据。
 - **MCP Clients**：与服务器保持 1:1 连接的协议客户端。
 - **MCP Servers**：通过标准化的模型上下文协议暴露特定功能的轻量级程序。
@@ -77,9 +78,8 @@ MCP 的核心遵循 **客户端-服务器架构**，其中主机应用程序可�
 6. 显示答案
 
 > 也就是说，是 LLM 主动选择并调用的，那么具体是如何实现的呢？
-> 
 
-### 3.1  LLM 如何确定调用哪个 MCP Server？
+### 3.1 LLM 如何确定调用哪个 MCP Server？
 
 一起看一下官方提供的一个 [Client Demo](https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/clients/simple-chatbot/mcp_simple_chatbot/main.py) ，代码做了简化。
 
@@ -130,7 +130,7 @@ async def start(self):
         messages.append({"role": "user", "content": user_input})
 
         # 将 system_message 和用户消息输入一起发送给 LLM
-        llm_response = self.llm_client.get_response(messages)    
+        llm_response = self.llm_client.get_response(messages)
 
 
 class Tool:
@@ -172,28 +172,30 @@ tool 的描述和代码中的 input_schema 是从哪里来的呢？再来看一�
 
 ```tsx
 server.registerTool(
-    "web_browser",
-    "浏览网页并获取内容。用于查询最新信息、搜索网络内容或访问特定网站。",
-    {
-        "url": {
-            "type": "string",
-            "description": "要访问的网页URL",
-            "required": true
-        },
-        "element_selector": {
-            "type": "string",
-            "description": "可选的CSS选择器，用于提取特定元素",
-            "required": false
-        }
+  'web_browser',
+  '浏览网页并获取内容。用于查询最新信息、搜索网络内容或访问特定网站。',
+  {
+    url: {
+      type: 'string',
+      description: '要访问的网页URL',
+      required: true,
     },
-    (url, elementSelector) => webBrowserImplementation(url, elementSelector)
-);
+    element_selector: {
+      type: 'string',
+      description: '可选的CSS选择器，用于提取特定元素',
+      required: false,
+    },
+  },
+  (url, elementSelector) => webBrowserImplementation(url, elementSelector)
+)
 ```
 
 > [!TIP]
 > 总结：LLM 通过 prompt engineering 来了解有哪些工具可以使用以及工具的具体作用的，即提供所有工具的描述和 few-shot 的 example 来确定使用哪些工具。
 
-<span style={{color: 'rgba(0, 0, 0, .2)', fontSize: '12px', lineHeight: 1.1}}>*该部分转载自: [zhuanlan.zhihu.com/p/29001189476](http://zhuanlan.zhihu.com/p/29001189476)</span>
+<span style={{ color: 'rgba(0, 0, 0, .2)', fontSize: '12px', lineHeight: 1.1 }}>
+  *该部分转载自: [zhuanlan.zhihu.com/p/29001189476](http://zhuanlan.zhihu.com/p/29001189476)
+</span>
 
 ## 4. MCP Server 的使用：以 Github MCP 为例
 
