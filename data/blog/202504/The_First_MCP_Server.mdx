@@ -1,0 +1,203 @@
+---
+title: '以「asset-price-mcp」为例，从 0 开发 MCP Server'
+date: '2025-04-04'
+tags: ['AI', 'MCP', 'LLM']
+draft: false
+summary: '从 0 构建第一个MCP服务器，包括核心功能实现、API集成和数据处理流程 ...'
+images: ['/static/images/blog/202504/The_First_MCP_Server/Beihai_Park.webp']
+authors: ['default']
+---
+
+## 简介
+
+关于 MCP 的介绍之前已经写过，可以参考 《[Model Context Protocol (MCP) 快速开始](https://www.mengke.me/blog/202503/MCP_Quick_Start)》。
+
+今天从 0 开始开发一个 MCP Server，实现一个资产价格查询的 MCP Server。
+
+---
+
+## 实现步骤
+
+### 1. 设置 MCP 服务器
+
+首先，使用 `@modelcontextprotocol/sdk` 提供的 `McpServer` 类创建一个 MCP 服务器实例：
+
+```javascript
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
+
+const server = new McpServer({
+  name: 'asset-price',
+  version: '1.0.0',
+})
+```
+
+这里，我们将服务器命名为 "asset-price"，版本号为 "1.0.0"。
+
+### 2. 定义数据结构
+
+使用 `zod` 库定义资产符号和资产价格的数据结构，以确保从 API 获取的数据符合预期格式：
+
+```javascript
+import { z } from 'zod'
+
+const AssetSymbolSchema = z.object({
+  name: z.string(),
+  symbol: z.string(),
+})
+
+const AssetPriceSchema = z.object({
+  name: z.string(),
+  price: z.number(),
+  symbol: z.string(),
+  updatedAt: z.string(),
+  updatedAtReadable: z.string(),
+})
+```
+
+这些模式用于验证从外部 API 获取的数据的结构和类型。
+
+### 3. 实现缓存机制
+
+为了提高性能并减少对外部 API 的请求次数，实现了一个简单的内存缓存：
+
+```javascript
+class SimpleCache {
+  private cache: Map<string, CacheEntry<any>> = new Map();
+
+  get<T>(key: string): T | null {
+    const entry = this.cache.get(key);
+    if (!entry) return null;
+
+    if (Date.now() - entry.timestamp > CACHE_TTL) {
+      this.cache.delete(key);
+      return null;
+    }
+
+    return entry.data as T;
+  }
+
+  set<T>(key: string, data: T): void {
+    this.cache.set(key, {
+      data,
+      timestamp: Date.now()
+    });
+  }
+
+  clear(): void {
+    this.cache.clear();
+  }
+}
+
+const apiCache = new SimpleCache();
+```
+
+该缓存会在设定的时间间隔后自动清除过期的数据。
+
+### 4. 获取资产符号和价格数据
+
+定义一个通用的函数 `fetchApiData`，用于从外部 API 获取数据并进行验证：
+
+```javascript
+async function fetchApiData<T>(url: string, schema: z.ZodSchema<T>, useCache = true): Promise<T | null> {
+  if (useCache) {
+    const cachedData = apiCache.get<T>(url);
+    if (cachedData) {
+      return cachedData;
+    }
+  }
+
+  const headers = {
+    "User-Agent": USER_AGENT,
+    "Accept": "application/json",
+  };
+
+  try {
+    const response = await fetchWithTimeout(url, { headers });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}, url: ${url}`);
+    }
+
+    const data = await response.json();
+    const parsedData = schema.parse(data);
+
+    if (useCache && parsedData) {
+      apiCache.set(url, parsedData);
+    }
+
+    return parsedData;
+  } catch (error: any) {
+    if (error instanceof z.ZodError) {
+      console.error(`Schema validation failed for ${url}:`, error.errors);
+    } else if (error.name === 'AbortError') {
+      console.error(`Request timeout for ${url}`);
+    } else {
+      console.error(`API request failed for ${url}:`, error);
+    }
+    return null;
+  }
+}
+```
+
+该函数首先检查缓存，如果缓存中没有数据，则从 API 获取数据，并使用 `zod` 模式进行验证。
+
+### 5. 定义 MCP 工具
+
+在 MCP 服务器上注册一个工具 `get_asset_price`，用于检索当前的资产价格信息：
+
+```javascript
+server.tool(
+  "get_asset_price",
+  "Retrieves current pricing information for various assets including precious metals and cryptocurrencies",
+  {
+    random_string: z.string().optional().describe("Dummy parameter for no-parameter tools")
+  },
+  async () => {
+    try {
+      const symbols = await fetchApiData(
+        `${GOLD_API_BASE}/symbols`,
+        z.array(AssetSymbolSchema)
+      );
+
+      if (!symbols?.length) {
+        return {
+          content: [{
+            type: "text",
+            text: "No available asset symbols found. Service might be temporarily unavailable.",
+          }]
+        };
+      }
+
+      const prices: AssetPrice[] = [];
+      for (const { symbol } of symbols) {
+        const priceData = await fetchApiData(`${GOLD_API_BASE}/price/${symbol}`, AssetPriceSchema);
+        if (priceData) {
+          prices.push(priceData);
+        }
+      }
+
+      return {
+        content: [{
+          type: "text",
+          text: prices.map(price => `${price.name}: ${price.price}`).join("\n"),
+        }]
+      };
+    } catch (error) {
+      console.error("Tool execution failed:", error);
+      return {
+        content: [{
+          type: "text",
+          text: "An error occurred while processing your request. Please try again later.",
+        }]
+      };
+    }
+  }
+);
+```
+
+此工具允许 LLM 通过 MCP 服务器请求资产价格数据，并以文本形式返回结果。
+
+## Link
+
+- 源码：[https://github.com/mk965/asset-price-mcp](https://github.com/mk965/asset-price-mcp)
+- npm：[https://www.npmjs.com/package/asset-price-mcp](https://www.npmjs.com/package/asset-price-mcp)
