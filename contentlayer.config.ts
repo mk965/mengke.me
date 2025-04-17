@@ -17,7 +17,7 @@ import remarkMath from 'remark-math'
 // Rehype packages
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeSlug from 'rehype-slug'
-// import rehypeKatex from 'rehype-katex'
+import rehypeKatex from 'rehype-katex'
 import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import rehypeCitation from 'rehype-citation'
 import rehypePresetMinify from 'rehype-preset-minify'
@@ -197,7 +197,7 @@ export default makeSource({
           content: icon,
         },
       ],
-      // rehypeKatex,
+      rehypeKatex,
       [rehypeCitation, { path: path.join(root, 'data') }],
       [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
       rehypePresetMinify,
