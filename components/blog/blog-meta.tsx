@@ -1,6 +1,6 @@
 import type readingTime from 'reading-time'
 import { Twemoji } from '~/components/ui/twemoji'
-import { formatDate } from '~/utils/misc'
+import { formatDate, getTimeAgo } from '~/utils/misc'
 import { ViewCounter } from './view-counter'
 
 type BlogMetaProps = {
@@ -24,7 +24,7 @@ export function BlogMeta({ date, lastmod, slug, readingTime }: BlogMetaProps) {
             <span className="text-gray-400">/</span>
             <time dateTime={date} className="flex items-center justify-center">
               <span>Updated</span>
-              <span className="ml-1.5 md:ml-2">{formatDate(lastmod)}</span>
+              <span className="ml-1.5">{getTimeAgo(lastmod)}</span>
             </time>
           </>
         )}

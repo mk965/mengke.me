@@ -17,3 +17,56 @@ export function kebabCaseToPlainText(str: string): string {
 export function capitalize(str: string): string {
   return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 }
+
+function is(interval: number, cycle: number) {
+  return cycle >= interval ? Math.floor(cycle / interval) : 0
+}
+
+export function getTimeAgo(time: string | number | Date, now = Date.now()) {
+  if (typeof time === 'string' || time instanceof Date) {
+    time = new Date(time).getTime()
+  }
+
+  const secs = (now - time) / 1000
+  const mins = is(60, secs)
+  const hours = is(60, mins)
+  const days = is(24, hours)
+  const weeks = is(7, days)
+  const months = is(30, days)
+  const years = is(12, months)
+
+  console.log(secs, mins, hours, days, weeks, months, years)
+
+  let amount = years
+  let cycle = 'year'
+
+  if (secs <= 1) {
+    return 'just now'
+  }
+  if (years > 0) {
+    amount = years
+    cycle = 'year'
+  } else if (months > 0) {
+    amount = months
+    cycle = 'month'
+  } else if (weeks > 0) {
+    amount = weeks
+    cycle = 'week'
+  } else if (days > 0) {
+    amount = days
+    cycle = 'day'
+  } else if (hours > 0) {
+    amount = hours
+    cycle = 'hour'
+  } else if (mins > 0) {
+    amount = mins
+    cycle = 'minute'
+  } else {
+    amount = secs
+    cycle = 'second'
+  }
+
+  const v = Math.floor(amount)
+
+  return `${v === 1 ? (amount === hours ? 'an' : 'a') : v} ${cycle}${v > 1 ? 's' : ''} ago`
+}
