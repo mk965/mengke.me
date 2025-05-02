@@ -110,7 +110,7 @@ scoop reset deno
 在 deno 中比较推荐使用 fetch 来发送 HTTP
 请求，
 
-```js
+```js showLineNumbers
 const res = await fetch('http://8jsj.cn')
 const body = new Uint8Array(await res.arrayBuffer())
 await Deno.stdout.write(body)
@@ -140,7 +140,7 @@ deno run --allow-net=8jsj.cn demo.ts
 
 对于文件的读取我们可以使用 Deno 的内置 API `Deno.readFile` 来进行：
 
-```js
+```js showLineNumbers
 const decoder = new TextDecoder('utf-8')
 const data = await Deno.readFile('hello.txt')
 console.log(decoder.decode(data))

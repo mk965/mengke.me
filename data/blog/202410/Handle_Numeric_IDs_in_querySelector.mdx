@@ -15,7 +15,7 @@ authors: ['default']
 
 在HTML5中，使用数字作为ID是合法的，但这种做法在实践中可能会带来一些意想不到的问题。例如：
 
-```html
+```html showLineNumbers
 <div id="1"></div>
 <div id="2"></div>
 ```
@@ -26,7 +26,7 @@ authors: ['default']
 
 当你尝试执行以下代码时，就会遇到问题：
 
-```js
+```js showLineNumbers
 document.querySelector('#1')
 ```
 
@@ -42,7 +42,7 @@ document.querySelector('#1')
 
 最直接的解决方案是使用 `getElementById` 方法，这是专门为ID设计的DOM方法，可以直接处理数字ID：
 
-```js
+```js showLineNumbers
 document.getElementById('1')
 ```
 
@@ -60,7 +60,7 @@ document.getElementById('1')
 
 在JavaScript中，你可以这样使用：
 
-```js
+```js showLineNumbers
 document.querySelector('#\\31')
 ```
 
@@ -68,7 +68,7 @@ document.querySelector('#\\31')
 
 另一种方法是使用属性选择器来避免直接使用ID选择器：
 
-```js
+```js showLineNumbers
 document.querySelector("[id='1']")
 ```
 
@@ -78,7 +78,7 @@ document.querySelector("[id='1']")
 
 对于动态生成的ID，可以使用 `CSS.escape` 方法来自动处理转义问题：
 
-```js
+```js showLineNumbers
 const theId = '1'
 const el = document.querySelector(`#${CSS.escape(theId)}`)
 el.innerHTML = 'After'
@@ -90,7 +90,7 @@ el.innerHTML = 'After'
 
 如果你需要支持旧浏览器，可以创建一个自定义函数来处理转义：
 
-```js
+```js showLineNumbers
 const cleanSelector = function (selector) {
   ;(selector.match(/(#[0-9][^\s:,]*)/g) || []).forEach(function (n) {
     selector = selector.replace(n, '[id="' + n.replace('#', '') + '"]')

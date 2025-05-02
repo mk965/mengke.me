@@ -170,7 +170,7 @@ Arguments:
 
 tool 的描述和代码中的 input_schema 是从哪里来的呢？再来看一段 Server Demo 的代码，这是一段注册浏览器工具的代码，可以可以发现是在开发者开发 MCP Server 时直接描述清楚这个 Tool 的作用以及每个参数的作用。
 
-```tsx
+```tsx showLineNumbers
 server.registerTool(
   'web_browser',
   '浏览网页并获取内容。用于查询最新信息、搜索网络内容或访问特定网站。',
@@ -215,7 +215,7 @@ server.registerTool(
 
 输入以下代码，并将 `<YOUR_GITHUB_PERSONAL_ACCESS_TOKEN>` 替换为你的 Github 的 Personal Access Token：
 
-```json
+```js showLineNumberson
 {
   "mcpServers": {
     "github": {

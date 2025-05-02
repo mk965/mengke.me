@@ -12,7 +12,7 @@ authors: ['default']
 
 以 Article 和 Tag 的关系为例：
 
-```tsx
+```tsx showLineNumbers
 @Entity()
 export class Article extends CommonEntity {
   // ...
@@ -24,7 +24,7 @@ export class Article extends CommonEntity {
 }
 ```
 
-```tsx
+```tsx showLineNumbers
 @Entity()
 export class Tag extends CommonEntity {
   // 标签名
@@ -38,7 +38,7 @@ export class Tag extends CommonEntity {
 }
 ```
 
-```tsx
+```tsx showLineNumbers
 @Module({
   imports: [TypeOrmModule.forFeature([Tag])],
   controllers: [TagController],
@@ -48,7 +48,7 @@ export class Tag extends CommonEntity {
 export class TagModule {}
 ```
 
-```tsx
+```tsx showLineNumbers
 @Module({
   imports: [TypeOrmModule.forFeature([Article]), TagModule],
   controllers: [ArticleController],
@@ -59,7 +59,7 @@ export class ArticleModule {}
 
 在 article.service.ts 中调用 Tag.Service.ts 中的方法：
 
-```tsx
+```tsx showLineNumbers
 @Injectable()
 export class ArticleService {
   list: any[]
@@ -91,7 +91,7 @@ export class ArticleService {
 - 在 article.service 中调用 tag.service 中的方法的时候要先在 article.module 中 imports 导入 TagModule 模块。
 - 还需要在 tag.module 中 exports TagService，否则报以下错。
 
-  ```tsx
+  ```tsx showLineNumbers
   Nest can't resolve dependencies of the ArticleService (ArticleRepository, ?). Please make sure that the argument TagService at index [1] is available in the ArticleModule context.
 
   Potential solutions:

@@ -18,9 +18,9 @@ yarn add react-router-dom
 
 使用 Router 组件包裹根节点来实现全局的路由访问。
 
-```tsx
-import { BrowserRouter as Router } from 'react-router-dom'
-;<Router>
+```tsx showLineNumbers
+import { BrowserRouter as Router } from 'react-router-dom';
+<Router>
   <App />
 </Router>
 ```
@@ -33,7 +33,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 使用 Route 组件来完成路由，类似于 Vue-router 的 `<router-view></router-view>` 标签。
 
-```tsx
+```tsx showLineNumbers
 import { Route } from 'react-router-dom'
 ;<Route path="/tv" component={TV} />
 ```
@@ -41,7 +41,7 @@ import { Route } from 'react-router-dom'
 匹配方式：
 **不精准匹配**：这种情况下如果地址栏输入 `/tv` 则 `/` 和 `/tv` 都会匹配：
 
-```tsx
+```tsx showLineNumbers
 <Route path='/tv' component={TV} />
 <Route path='/' component={Movie} />
 ```
@@ -50,13 +50,13 @@ import { Route } from 'react-router-dom'
 
 方法1：在标签中加上 `exact` 属性：
 
-```tsx
+```tsx showLineNumbers
 <Route path="/" exact component={Movie} />
 ```
 
 方法2：使用 Switch：
 
-```tsx
+```tsx showLineNumbers
 import { Switch } from 'react-router-dom'
 ;<Switch>
   <Route path="/tv" component={TV} />
@@ -74,7 +74,7 @@ import { Switch } from 'react-router-dom'
 
 使用 Link 标签进行跳转：
 
-```tsx
+```tsx showLineNumbers
 <Link to='/movie'>电影</Link>
 <Link to='/tv'>电视剧</Link>
 
@@ -84,7 +84,7 @@ import { Switch } from 'react-router-dom'
 
 其实就是在页面内加入了一个a标签。但是经过实验，我们直接写 a 标签的话也可以跳转，但会有延迟，不如由 Link 为我们生成的 a 标签跳转速度快。通过 devtools 可以发现，结构上写法上没有任何区别，但由 Link 生成的 a 标签不会发生页面跳转，只会DOM操作。
 
-```tsx
+```tsx showLineNumbers
 <a href="/tv">电视剧</a>
 ```
 
@@ -92,7 +92,7 @@ import { Switch } from 'react-router-dom'
 
 使用 NavLink 标签
 
-```tsx
+```tsx showLineNumbers
 import { NavLink } from 'react-router-dom'
 import './style.css'
 
@@ -103,7 +103,7 @@ import './style.css'
 
 使用 Redirect 标签，一般配合 Switch 一块使用。
 
-```tsx
+```tsx showLineNumbers
 import { Redirect } from 'react-router-dom'
 ;<Redirect from="/" to="/movie" />
 ```
@@ -144,7 +144,7 @@ this.props.history.push('/...')
 
 在路由中设置动态路由，比如动态的 `id`，在 Movie 组件实例内 `props/match/params` 中可以拿到 id。
 
-```tsx
+```tsx showLineNumbers
 <Route path="/movie/:id" component={Movie} />
 ```
 
@@ -164,13 +164,13 @@ this.props.history.push('/tv', { name: 'zhangsan' })
 
 在 `react-router-dom` 中没有很强的子路由的概念，所谓的子路由其实是由路由的嵌套来实现的，比如，我在 `/movie` 路由渲染的组件为 Movie 组件，我们继续在 Movie 组件中插入路由，并且路径设置为 `/movie/jingsong` ，就可以实现类似于子路由的效果。
 
-```tsx
+```tsx showLineNumbers
 <Route path="/movie" component={Movie} />
 ```
 
 Movie组件：
 
-```tsx
+```tsx showLineNumbers
 <Route path="/movie/jingsong" component={Jingsong}></Route>
 ```
 

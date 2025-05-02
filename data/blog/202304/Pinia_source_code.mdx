@@ -54,7 +54,7 @@ yarn create vite
 - `vue`：vue 项目。
 - `@vue/composition-api`：vue 组合式 api 插件。
 
-```tsx
+```tsx showLineNumbers
 121 ｜ const external = ['vue-demi', 'vue', '@vue/composition-api']
 ```
 
@@ -75,7 +75,7 @@ Uncaught ReferenceError: __DEV__ is not defined
 
 环境变量位于 `rollup.config.js` 第167行：
 
-```tsx
+```tsx showLineNumbers
 const replacements = {
   __COMMIT__: `"${process.env.COMMIT}"`,
   __VERSION__: `"${pkg.version}"`,
@@ -105,7 +105,7 @@ const replacements = {
 
 我们在 `vite.config.ts` 中添加缺少的环境变量：
 
-```tsx
+```tsx showLineNumbers
 export default defineConfig({
   plugins: [vue()],
   define: {
@@ -148,7 +148,7 @@ defineStore() ⇒ main.ts ⇒ createPinia() ⇒ useStore()
 
 使用 Pinia 前需要在 vue 中初始化一个注册 Pinia，注册的方法是使用 ：
 
-```tsx
+```tsx showLineNumbers
 import { createPinia } from 'pinia'
 app.use(createPinia())
 ```
@@ -159,7 +159,7 @@ app.use(createPinia())
 
 在 `src/pinia/index.ts` 目录中可以找到：
 
-```tsx
+```tsx showLineNumbers
 export { createPinia } from './createPinia'
 ```
 
@@ -180,7 +180,7 @@ export { createPinia } from './createPinia'
 
 </aside>
 
-```tsx
+```tsx showLineNumbers
 import { Pinia, PiniaPlugin, setActivePinia, piniaSymbol } from './rootStore'
 import { ref, App, markRaw, effectScope, isVue2, Ref } from 'vue-demi'
 import { registerPiniaDevtools, devtoolsPlugin } from './devtools'
@@ -302,7 +302,7 @@ export function createPinia(): Pinia {
 
 `useStore` 具体做了什么下节分析。
 
-```tsx
+```tsx showLineNumbers
 export function defineStore(
   // TODO: add proper types from above
   idOrOptions: any,
@@ -340,7 +340,7 @@ export function defineStore(
 
 虽然我们前面定义了一个 store，但在我们使用 `<script setup>` 调用 `useStore()` (或者使用 `setup()` 函数，**像所有的组件那样**) 之前，store 实例是不会被创建的。
 
-```tsx
+```tsx showLineNumbers
 <script setup>
   import {useMainStore1} from '@/stores/counter' // 可以在组件中的任意位置访问 `store` 变量 ✨ const
   store = useMainStore1();
@@ -351,7 +351,7 @@ export function defineStore(
 
 在之前我们分析了 `defineStore` 方法调用的时候返回了 `useStore` 方法，接下来看一下此方法究竟干了些什么。
 
-```tsx
+```tsx showLineNumbers
 function useStore(pinia?: Pinia | null, hot?: StoreGeneric): StoreGeneric {
   Log('useStore()')
 
@@ -456,7 +456,7 @@ function useStore(pinia?: Pinia | null, hot?: StoreGeneric): StoreGeneric {
 - **hot** 热更新相关
 - **isOptionsStore** 是否是 选项式 Store 创建
 
-```tsx
+```tsx showLineNumbers
 /**
  * 创建组合式 Store
  * @param $id Store ID
@@ -495,7 +495,7 @@ function createSetupStore<
 
 对每一项 action 进行处理，目的是为了支持 `$onAction` 方法，此方法会在执行 action 时执行回调函数，回调函数可以接收三个参数分别是：**被调用的 store**、**action 的名字**、**传递给 action 的参数**。在 store 中还会有一些基础操作的 API ，请看下节。
 
-```tsx
+```tsx showLineNumbers
 // 在当前 pinia 实例的缓存中新建一个作用域，在作用域中执行 setup 函数
 // 执行的结果为 store 。 example: { count: ObjectRefImpl, increment: Function () }
 const setupStore = pinia._e.run(() => {
@@ -543,7 +543,7 @@ for (const key in setupStore) {
 
 基础的 API 首先被储存在 `partialStore` 中，然后创建一个 `store` 常量，并且把这些基础 API 和 store 的内容都合并到 `store` 常量中。
 
-```tsx
+```tsx showLineNumbers
 /**
  * 具有 state 和 功能 的基本 store，但不能直接使用。
  */
@@ -562,7 +562,7 @@ const partialStore = {
 
 在 (2) 和 (3) 中我们创建了 store 的基本内容和基础的API，现在新建一个变量，并把它们合并到一块：
 
-```tsx
+```tsx showLineNumbers
 /**
  * 创建一个响应式的 store 对象
  * 将基础函数合并到 store 中
@@ -586,7 +586,7 @@ assign(toRaw(store), setupStore)
 
 现在，还缺少一个获取所有 state 得属性： `$state` ，我们使用 `defineProperty` 给 `store` 增加 `$state` 属性 ：
 
-```tsx
+```tsx showLineNumbers
 // 使用它而不是 computed with setter 可以在任何地方创建它，而无需将计算的生命周期链接到首次创建 store 的任何地方。
 // 给 store 定义 $state 属性，方便获取全部的 state
 Object.defineProperty(store, '$state', {
@@ -607,7 +607,7 @@ Object.defineProperty(store, '$state', {
 
 在之前的 `createPinia()` 方法中，Pinia 实例上存在一个 `use()` 方法是对自定义插件的支持，在这里我们需要对安装的插件进行处理，调用左右的插件函数，并给函数传入 `store app piain options` 四个参数。
 
-```tsx
+```tsx showLineNumbers
 // apply 全部插件
 pinia._p.forEach((extender) => {
   console.log('插件安装：', extender)
@@ -644,7 +644,7 @@ pinia._p.forEach((extender) => {
 
 我们可以这样给 Piain 安装插件：
 
-```tsx
+```tsx showLineNumbers
 const pinia = createPinia()
 
 // 给 pinia 安装插件
@@ -665,7 +665,7 @@ app.use(pinia)
 
 使用插件：
 
-```tsx
+```tsx showLineNumbers
 store.$aaa('传递的参数')
 ```
 
@@ -675,7 +675,7 @@ store.$aaa('传递的参数')
 
 `createOptionsStore` 的代码量比较少，从下面的代码可以发现，基本的逻辑就是从 `options` 中获取到 `state`、 `actions`、 `getters`，定义一个 `setup` 函数并调用 `createSetupStore` 创建 Store，还要将 `getters` 转换为 `computed`。
 
-```tsx
+```tsx showLineNumbers
 /**
  * 创建 选项式 store
  * @param id Store ID
@@ -797,7 +797,7 @@ function createOptionsStore<
 
 在 Pinia 的源码中，关于 `$onAction` 的代码是这样的：
 
-```tsx
+```tsx showLineNumbers
 const partialStore = {
   // ...
   $onAction: addSubscription.bind(null, actionSubscriptions),
@@ -807,7 +807,7 @@ const partialStore = {
 
 可以发现， `$onAction` 就是给 `addSubscription` 函数绑定了个 `null` 的 `this` 和一个参数，再来看一下这个 `addSubscription` 是何方神圣：
 
-```tsx
+```tsx showLineNumbers
 export const noop = () => {}
 
 /**
@@ -855,7 +855,7 @@ export function addSubscription<T extends _Method>(
 
 `$patch` 允许两种参数传递方式，传入一个函数，或一个 state 的补丁。
 
-```tsx
+```tsx showLineNumbers
 /**
  * $patch 函数传递方式
  * @param stateMutation
@@ -917,7 +917,7 @@ function $patch(
 
 其中 `triggerSubscriptions` 方法是发布者，执行订阅函数的回调：
 
-```tsx
+```tsx showLineNumbers
 /**
  * 触发订阅者回调
  * @param subscriptions 订阅数组
@@ -937,7 +937,7 @@ export function triggerSubscriptions<T extends _Method>(
 
 通过建立一个新的状态对象，将 store 重设为初始状态。
 
-```tsx
+```tsx showLineNumbers
 /**
  * $reset
  * 只有 选项式 构建的才可以使用此方法，
@@ -970,7 +970,7 @@ const $reset = isOptionsStore
 
 设置一个回调，当状态发生变化时被调用。它会返回一个用来移除此回调的函数。 请注意，当在组件内调用 `store.$subscribe()` 时，除非 `detached` 被设置为 true， 否则当组件被卸载时，它将被自动清理掉。
 
-```tsx
+```tsx showLineNumbers
 /**
  * 当状态发生变化时被调用
  * 它会返回一个用来移除此回调的函数
@@ -1015,7 +1015,7 @@ function $subscribe(callback, options = {}) {
 
 停止 store 的相关作用域，并从 store 注册表中删除它。 插件可以覆盖此方法来清理已添加的任何副作用函数。 例如， devtools 插件停止显示来自 devtools 的已停止的 store。
 
-```tsx
+```tsx showLineNumbers
 /**
  * $dispose
  * 停止 store 的相关作用域，并从 store 注册表中删除它。
@@ -1056,13 +1056,13 @@ Pinia 也提供了一组类似 Vuex 的 **[映射 state 的辅助函数](https:
 
 下面是 `mapActions` 的源码，主要思想就是调用 `useStore` 方法得到 Store ，然后取出需要的 action 并返回。
 
-````tsx
+````tsx showLineNumbers
 /**
  * 这个方法需要传入 useStore 和一个对象，可以在导入过程中给 action 改名，对象 key 为 action 的新名字，value 为 action 的旧名字
  * 通过生成一个传递到组件的 methods 字段的对象， 允许直接使用 store 的 action，而不需要使用组合式 API(setup())。 该对象的值是 action， 而键是产生的方法名称。
  *
  * @example
- * ```js
+ * ```js showLineNumbers
  * export default {
  *   methods: {
  *     // other methods properties
@@ -1095,7 +1095,7 @@ export function mapActions<
  * 通过生成一个传递到组件的 methods 字段的对象， 允许直接使用 store 的 action，而不需要使用组合式 API(setup())。 该对象的值是 action， 而键是产生的方法名称。
  *
  * @example
- * ```js
+ * ```js showLineNumbers
  * export default {
  *   methods: {
  *     // other methods properties
@@ -1164,12 +1164,12 @@ export function mapActions<
 
 通过生成一个对象，传递到组件的 `computed` 字段 以允许在不使用组合式 `API(setup())` 的情况下使用 store。 它接受一个 store 定义的列表参数。
 
-````tsx
+````tsx showLineNumbers
 /**
  * 通过生成一个对象，传递到组件的 computed 字段 以允许在不使用组合式 API(setup())的情况下使用 store。 它接受一个 store 定义的列表参数。
  *
  * @example
- * ```js
+ * ```js showLineNumbers
  * export default {
  *   computed: {
  *     // other computed properties
@@ -1218,12 +1218,12 @@ export function mapStores<Stores extends any[]>(
 
 通过生成一个对象，并传递至组件的 `computed` 字段， 以允许在不使用组合式 API(`setup()`)的情况下使用一个 store 的 state 和 getter。 该对象的值是 state 属性/getter， 而键是生成的计算属性名称。 你也可以选择传递一个自定义函数，该函数将接收 store 作为其第一个参数。 注意，虽然它可以通过 `this` 访问组件实例，但它没有标注类型。
 
-````tsx
+````tsx showLineNumbers
 /**
  * 通过生成一个对象，并传递至组件的 computed 字段， 以允许在不使用组合式 API(setup())的情况下使用一个 store 的 state 和 getter。 该对象的值是 state 属性/getter， 而键是生成的计算属性名称。 你也可以选择传递一个自定义函数，该函数将接收 store 作为其第一个参数。 注意，虽然它可以通过 this 访问组件实例，但它没有标注类型。
  *
  * @example
- * ```js
+ * ```js showLineNumbers
  * export default {
  *   computed: {
  *     // other computed properties
@@ -1266,7 +1266,7 @@ export function mapState<
  * of a component.
  *
  * @example
- * ```js
+ * ```js showLineNumbers
  * export default {
  *   computed: {
  *     // other computed properties
@@ -1341,7 +1341,7 @@ export function mapState<Id extends string, S extends StateTree, G extends _Gett
 
 `mapGetters` 已废弃，直接使用 `mapState` 即可。
 
-```tsx
+```tsx showLineNumbers
 /**
  * Alias for `mapState()`. You should use `mapState()` instead.
  * @deprecated use `mapState()` instead.
@@ -1357,7 +1357,7 @@ export const mapGetters = mapState
 
 `$mapWritableState` **\*\*\*\***除了创建的计算属性的 setter，其他与 `mapState()` 相同， 所以 state 可以被修改。 与 `mapState()` 不同的是，只有 `state` 属性可以被添加。
 
-```tsx
+```tsx showLineNumbers
 /**
  * 除了创建的计算属性的 setter，其他与 mapState() 相同， 所以 state 可以被修改。 与 mapState() 不同的是，只有 state 属性可以被添加。
  *

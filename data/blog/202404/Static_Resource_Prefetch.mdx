@@ -76,7 +76,7 @@ prefetch 是预获取的意思，主要用于提前加载未来可能用到的�
 
 如果要处理的是体积较大的动画资源，而且首屏加载不能受到影响，那么"rel=prefetch"无疑是最为合适的解决方案。只需要从接口获取到全部资源列表后，在 `<head>` 中插入 `<link>` 标签即可，具体的加载时机则交给浏览器来判断。
 
-```jsx
+```js showLineNumbersx
 const link = document.createElement('link')
 link.rel = 'prefetch'
 link.href = url
@@ -101,7 +101,7 @@ document.head.appendChild(link)
 
 **worker.js**
 
-```jsx
+```js showLineNumbersx
 const loadStatic = async (urls) => {
   const promiseList = []
   for (const url of urls) {
@@ -141,7 +141,7 @@ self.onmessage = (e) => {
 
 **main.js**
 
-```jsx
+```js showLineNumbersx
 const worker = new Worker('./worker.js');
 worker.onmessage = function (event) {
     console.log("收到 worker 返回的内容", event.data);
@@ -162,7 +162,7 @@ worker.postMessage(urls);
 
 然后加一个判断，当支持 prefetch 时使用 prefetch，不支持时使用 Worker：
 
-```jsx
+```js showLineNumbersx
 const supportsPrefetch = document.createElement('link').relList.supports('prefetch')
 ```
 

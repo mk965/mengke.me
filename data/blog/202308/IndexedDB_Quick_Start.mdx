@@ -20,7 +20,7 @@ IndexedDB 可以直接打开，如果指定的数据库不存在时会自动新�
 
 `open` 方法可以传入两个参数：第一个参数是数据库名称，第二个参数是数据库版本。数据库的版本不传时默认时当前版本，如果数据库不存在自动新建数据库时版本默认为 `1`。
 
-```js
+```js showLineNumbers
 const request = indexedDB.open(databaseName, version)
 ```
 
@@ -32,7 +32,7 @@ const request = indexedDB.open(databaseName, version)
 
 如果指定的版本大于当前版本，则会出发 `upgradeneeded` 事件，当数据库不存在自动创建数据库时也会触发这个事件。
 
-```js
+```js showLineNumbers
 const request = window.indexedDB.open('testDB')
 request.onsuccess = (event) => {
   const db = event.target.result
@@ -52,7 +52,7 @@ request.onupgradeneeded = (event) => {
 
 通过 `createObjectStore` 方法可以创建一个 store，也就相当于是表。
 
-```js
+```js showLineNumbers
 // version 默认为 1
 const request = indexedDB.open('testDB')
 
@@ -71,7 +71,7 @@ request.onupgradeneeded = (event) => {
 
 如果数据记录里面没有合适作为主键的属性，那么可以让 IndexedDB 自动生成主键。下面代码中，指定主键为一个递增的整数。
 
-```js
+```js showLineNumbers
 objectStore = db.createObjectStore('user', { autoIncrement: true })
 ```
 
@@ -79,7 +79,7 @@ objectStore = db.createObjectStore('user', { autoIncrement: true })
 
 可以通过 `createIndex` 方法创建表索引。
 
-```js
+```js showLineNumbers
 request.onupgradeneeded = function (event) {
   db = event.target.result
   var objectStore = db.createObjectStore('user', { keyPath: 'id' })
@@ -94,7 +94,7 @@ request.onupgradeneeded = function (event) {
 
 使用 IndexedDB，可以轻松地向数据库中添加新的数据。可以通过创建对象存储空间（Object Store）来存储数据，并使用事务来确保数据的完整性和一致性。
 
-```js
+```js showLineNumbers
 const transaction = db.transaction('user', 'readwrite')
 const objectStore = transaction.objectStore('user')
 
@@ -114,7 +114,7 @@ request.onsuccess = () => {
 
 如果需要从数据库中删除某些数据，可以使用事务来删除特定的对象或整个对象存储空间。
 
-```js
+```js showLineNumbers
 const transaction = db.transaction('user', 'readwrite')
 const objectStore = transaction.objectStore('user')
 
@@ -129,7 +129,7 @@ request.onsuccess = () => {
 
 当需要修改已有的数据时，可以使用事务来更新数据。通过指定要更新的对象存储空间和键值，可以进行数据的修改。
 
-```js
+```js showLineNumbers
 const transaction = db.transaction('user', 'readwrite')
 const objectStore = transaction.objectStore('user')
 
@@ -150,7 +150,7 @@ request.onsuccess = (event) => {
 
 一旦数据存储在数据库中，可以使用查询操作来检索所需的数据。可以根据特定的关键字或范围进行查询，并获取相应的数据结果。
 
-```js
+```js showLineNumbers
 const transaction = db.transaction('user', 'readonly')
 const objectStore = transaction.objectStore('user')
 
@@ -166,7 +166,7 @@ request.onsuccess = (event) => {
 
 IndexedDB 还提供了遍历数据的功能。可以使用游标（Cursor）来逐个迭代数据库中的数据，并进行相应的操作。
 
-```js
+```js showLineNumbers
 const transaction = db.transaction('user', 'readonly')
 const objectStore = transaction.objectStore('user')
 
@@ -185,7 +185,7 @@ request.onsuccess = (event) => {
 
 在 IndexedDB 中，可以创建索引来提升数据的查询性能。索引可以根据特定的字段对数据进行排序和过滤，加快数据检索的速度。
 
-```js
+```js showLineNumbers
 const objectStore = db.createObjectStore('user', { keyPath: 'id' })
 objectStore.createIndex('nameIndex', 'name', { unique: false })
 ```

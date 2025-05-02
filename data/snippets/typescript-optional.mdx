@@ -14,7 +14,7 @@ For some data object attributes, not all fields need to be passed. This leads to
 
 Suppose we have an interface that represents a user:
 
-```typescript
+```typescript showLineNumbers
 interface User {
   username: string
   email: string
@@ -26,7 +26,7 @@ interface User {
 
 When creating a user, you may not need all attributes to be created. We generally need to define a separate interface for this case:
 
-```typescript
+```typescript showLineNumbers
 interface CreateUserOptions {
   username: string
   email: string
@@ -44,13 +44,13 @@ It is obvious that there is a relationship between the two types, so I hope that
 
 But unfortunately Typescript does not provide such syntax, so we have to implement this function manually.
 
-```typescript
+```typescript showLineNumbers
 type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
 ```
 
 So we can use it like this:
 
-```typescript
+```typescript showLineNumbers
 type CreateUserOptions = Optional<Article, 'author' | 'date' | 'readCount'>
 ```
 
@@ -58,27 +58,27 @@ Explain the principle of this type:
 
 - `Omit<T, K>`: exclude the `K` property from `T`.
 
-  ```typescript
+  ```typescript showLineNumbers
   Omit<UserProfile, 'phone' | 'address' | 'age'>
   // Result: { username: string; email: string; }
   ```
 
 - `Pick<T, K>`: Pick `K` attributes from `T`.
 
-  ```typescript
+  ```typescript showLineNumbers
   Pick<UserProfile, 'phone' | 'address' | 'age'>
   // Result: { phone: string; address: string; age: number; }
   ```
 
 - `Partial<T>`: Make all properties in `T` optional.
 
-  ```typescript
+  ```typescript showLineNumbers
   Partial<Pick<UserProfile, 'phone' | 'address' | 'age'>>
   // Result: { phone?: string; address?: string; age?: number; }
   ```
 
 - Type merging: Use the intersection type `&` to merge `Omit<T, K>` and `Partial<Pick<T, K>>` to form the final Result:
 
-  ```typescript
+  ```typescript showLineNumbers
   type CreateUserOptions = Optional<User, 'phone' | 'address' | 'age'>
   ```

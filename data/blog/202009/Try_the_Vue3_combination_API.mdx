@@ -26,7 +26,7 @@ npm i @vue/composition-api
 
 在 `main.js` 文件中 use 组合式API：
 
-```js
+```js showLineNumbers
 import compositionApi from '@vue/composition-api'
 Vue.use(compositionApi)
 ```
@@ -96,7 +96,7 @@ export default {
 
 创建一个 `useApi` 函数，他的状态有：`data` 和 `api_status`，还有一个 `initFetch` 功能。useApi 接收 url 和 options 两个参数。我们将使用它从 `https://dog.ceo` 提供的 API 中提取随机的狗狗照片。创建一个 `Dog.vue` 组件，并添加如下代码：
 
-```js
+```js showLineNumbers
 const useApi = (url, options = {}) => {
   const state = reactive({
     data: null,
@@ -139,7 +139,7 @@ const useApi = (url, options = {}) => {
 
 接下来，我们检查 options 对象是否具有 fetchImmediately 属性。它指示在创建组件时是否应初始化API调用。最后，我们返回一个响应式 state 和 initFetch 函数的对象 。我们没有直接返回 state，而是使用 toRefs 进行包装。使用 toRefs 包装每个值，可以让他们具有响应性。
 
-```js
+```js showLineNumbers
 export default {
   setup() {
     const { data, api_status, initFetch } = useApi('https://dog.ceo/api/breeds/image/random', {
@@ -157,7 +157,7 @@ export default {
 
 如前所述，我们可以从 useApi 中解构所需的属性而不会失去响应性。此外，从 setup 返回的对象已重命名了属性。最后加上模板：
 
-```html
+```html showLineNumbers
 <template>
   <div style="margin-top: 20px;">
     <div v-if="api_status === 'FETCHING'">Fetching</div>

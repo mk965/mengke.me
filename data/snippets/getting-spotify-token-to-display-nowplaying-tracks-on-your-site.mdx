@@ -58,7 +58,7 @@ Next step is to send a POST request to the Spotify API to get the token. We'll s
 
 Run this code in the Console tab of the browser developer tools:
 
-```javascript {3,18} showLineNumbers
+```js showLineNumbers {3,18} showLineNumbers
 let data = {
   grant_type: 'authorization_code',
   code: 'AQB....GemX',
@@ -100,7 +100,7 @@ Now that we have the token, we can use it to fetch the now playing track from Sp
 
 Use this code to fetch the now playing track in your node server:
 
-```typescript
+```typescript showLineNumbers
 import fetch from 'isomorphic-unfetch'
 
 let SPOTIFY_TOKEN_API = `https://accounts.spotify.com/api/token`

@@ -24,7 +24,7 @@ authors: ['default']
 
 ## 创建 Store
 
-```jsx
+```js showLineNumbersx
 // src/store/index.ts
 
 import { createPinia } from 'pinia'
@@ -35,7 +35,7 @@ export default store
 
 在 main.ts 中引入并使用：
 
-```jsx
+```js showLineNumbersx
 // src/main.ts
 
 import { createApp } from 'vue'
@@ -50,7 +50,7 @@ app.use(store)
 
 ### 定义 state：
 
-```jsx
+```js showLineNumbersx
 import { defineStore } from 'pinia'
 
 export const useMainStore = defineStore('mainStore', {
@@ -64,7 +64,7 @@ export const useMainStore = defineStore('mainStore', {
 
 ### 获取 state：
 
-```html
+```html showLineNumbers
 <template>
   <div>{{ store.msg }}</div>
 </template>
@@ -76,7 +76,7 @@ export const useMainStore = defineStore('mainStore', {
 
 也可以结合 `computed`：
 
-```jsx
+```js showLineNumbersx
 const msg = computed(() => store.msg)
 ```
 
@@ -84,7 +84,7 @@ const msg = computed(() => store.msg)
 
 需要同时获取 Store 中的多个值时，通常会使用解构赋值的方式。但在 Pinia 中直接解构会造成数据失去响应性：
 
-```html
+```html showLineNumbers
 <template>
     <div>{{ msg }}--{{ store.msg }}</div>
 </template>
@@ -103,7 +103,7 @@ const msg = computed(() => store.msg)
 
 `storeToRefs` 结构方法：
 
-```jsx
+```js showLineNumbersx
 import { storeToRefs } from 'pinia'
 const { msg } = storeToRefs(store)
 ```
@@ -114,21 +114,21 @@ const { msg } = storeToRefs(store)
 
 直接通过 `store.属性名` 来修改。
 
-```jsx
+```js showLineNumbersx
 store.count = 100
 ```
 
 ### 多条数据修改：
 
 - 「不建议」多条数据的修改也可以直接通过 `store.属性名` 来修改：
-  ```jsx
+  ```js showLineNumbersx
   const change = () => {
     store.obj = { a: 8, b: 7, c: 9 }
   }
   ```
 - 使用 `$patch`来修改数据：
 
-  ```jsx
+  ```js showLineNumbersx
   // $patch 对象
   store.$patch({
     count: store.count + 2,
@@ -146,7 +146,7 @@ store.count = 100
 
 - 通过 `action` 修改：
 
-  ```jsx
+  ```js showLineNumbersx
   export const useMainStore = defineStore('mainStore', {
     state: () => ({
       msg: 'Hello World!',
@@ -167,7 +167,7 @@ store.count = 100
 
 等同于 store 的 state 的 **计算值** 。可以这样定义：
 
-```jsx
+```js showLineNumbersx
 export const useMainStore = defineStore("mainStore", {
     state: () => ({
         msg: "Hello World!",
@@ -200,7 +200,7 @@ console.log(store.getUserById(2));    // { id: 2, name: "bb" }
 
 向 `getter` 中传递参数的方法会让 **getter 不再被缓存** ，不过我们可以手动做一下缓存:
 
-```jsx
+```js showLineNumbersx
 export const useStore = defineStore('main', {
   getters: {
     getActiveUserById(state) {
@@ -213,7 +213,7 @@ export const useStore = defineStore('main', {
 
 ### 访问其他 store
 
-```jsx
+```js showLineNumbersx
 export const useStore1 = defineStore('store1', () => {
   const store1Count = ref(2)
   return { store1Count }
@@ -237,7 +237,7 @@ console.log(store.countTotal) // 102
 
 ### 异步 action
 
-```jsx
+```js showLineNumbersx
 export const useStore = defineStore('store', {
   actions: {
     async getData() {
@@ -254,7 +254,7 @@ console.log(data)
 
 ### action 相互调用
 
-```tsx
+```tsx showLineNumbers
 export const useUserStore = defineStore('store', {
   actions: {
     async login(account, pwd) {
@@ -285,7 +285,7 @@ npm i pinia-plugin-persist --save
 
 ### 使用
 
-```jsx
+```js showLineNumbersx
 // src/store/index.ts
 
 import { createPinia } from 'pinia'
@@ -299,7 +299,7 @@ export default store
 
 接着在对应的 store 里开启 persist 即可。
 
-```jsx
+```js showLineNumbersx
 export const useUserStore = defineStore('user', {
   state: () => ({
     name: '张三',
@@ -319,7 +319,7 @@ export const useUserStore = defineStore('user', {
 
 你也可以在 strategies 里自定义 key 值，并将存放位置由 `sessionStorage` 改为 `localStorage`。
 
-```jsx
+```js showLineNumbersx
 persist: {
 		enabled: true,
 	  strategies: [
@@ -337,7 +337,7 @@ persist: {
 
 默认所有 `state` 都会进行缓存，你可以通过 `paths` 指定要持久化的字段，其他的则不会进行持久化。
 
-```jsx
+```js showLineNumbersx
 state: () => ({
 		name: "张三",
     age: 18,

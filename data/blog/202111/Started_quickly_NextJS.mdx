@@ -25,7 +25,7 @@ NextJs 是一款 React 开发框架，主要关注两点：
 
 通过 Next.js 初始化 React 应用后，Next.Js 会自动将 `pages` 目录的每个组件渲染成一个页面，并自动设置好路由：在 `pages` 目录新建 `about.js`
 
-```tsx
+```tsx showLineNumbers
 // pages/about.js
 export default function About() {
   return <div>About: </div>
@@ -45,7 +45,7 @@ pages
 启动应用后，即可以通过 `http://localhost:3000/about` 访问到 `about` 页面了。​
 同时 Next.js 还支持页面的动态路由，比如在 `pages` 目录建立文件 `posts/[id].js` ，Next.js 就会自动将如 `/post/1`、 `/post/2` 的请求路由到这个组件上
 
-```tsx
+```tsx showLineNumbers
 // pages/posts/[id].js
 import { useRouter } from 'next/router'
 
@@ -75,7 +75,7 @@ export default function Post() {
 
 静态渲染，即在编译时，将页面渲染成 HTML 静态文件，这些静态文件可以放到 CDN 上。另外通过 Next.js 静态渲染的页面可以不使用数据，也可以使用数据。不使用情况的例子，如前文中的 `about.js` , 在 `build` 之后可以看到 `about.html` 中已经渲染的 HTML：
 
-```html
+```html showLineNumbers
 <body>
   <div id="__next"><div>About:</div></div>
   <script id="__NEXT_DATA__" type="application/json">
@@ -95,7 +95,7 @@ export default function Post() {
 
 另外，Next.js 的静态渲染是支持使用数据的这里在 `pages` 下新建 `ssg.jsNext.js` 通过函数 `getStaticProps` 来允许组件在预渲染的时候获取外部数据，比如这里我们通过通过异步请求获取当前时间，然后把时间做为 `props` 传递给组件
 
-```tsx
+```tsx showLineNumbers
 export async function getStaticProps() {
   const now = new Date().toLocaleTimeString()
   const res = await fetch(`https://postman-echo.com/get?now=${now}`)
@@ -114,7 +114,7 @@ export default function SSG({ now }) {
 
 在 build 后，可以看到，生成的 `ssg.html` 中已经包含了时间：
 
-```html
+```html showLineNumbers
 <body>
   <div id="__next">
     <div>
@@ -140,7 +140,7 @@ export default function SSG({ now }) {
 
 - `getStaticPaths` ：通过 `getStaticPaths` 返回的 paths 数组，Next.Js 可以在编译时确定动态路由的值，即这里每一个 `post` 的 `id` 就是一个路由参数 id 的值，这样，在编译的时候，Next.js 通过 `getStaticPaths` 就可以判断出 `posts/[id].js` 的所有可能的页面路由。
 
-```tsx
+```tsx showLineNumbers
 export async function getStaticPaths() {
   const res = await fetch('https://my-json-server.typicode.com/typicode/demo/posts')
   const posts = await res.json()
@@ -155,7 +155,7 @@ export async function getStaticPaths() {
 
 在具体渲染一个 `post` 页面时，还需要 `getStaticProps` 函数来来将获取的数据作为 `props` 传递给组件
 
-```tsx
+```tsx showLineNumbers
 export async function getStaticProps({ params }) {
   const res = await fetch(`https://my-json-server.typicode.com/typicode/demo/posts/${params.id}`)
   const post = await res.json()
@@ -168,7 +168,7 @@ export async function getStaticProps({ params }) {
 
 最后是组件的实现
 
-```tsx
+```tsx showLineNumbers
 export default function Post({ post }) {
   return (
     <div>
@@ -184,7 +184,7 @@ export default function Post({ post }) {
 
 Page 页面也可以选择使用 SSR 来做预渲染，通过在 `page` 组件中实现 `getServerSideProps` 即可：
 
-```tsx
+```tsx showLineNumbers
 // pages/status.js
 export async function getServerSideProps() {
   const now = new Date().toLocaleTimeString()
@@ -211,7 +211,7 @@ Next.js 支持部分 SSG 和 SSR 的混合使用，即部分页面使用 SSG、�
 
 如 Pages 功能一样，Next.js 支持服务端 API 的自动支持，在 Next.js 项目中，在 `pages/api` 目录下每一个文件会自动注册成功一个 API 访问点。
 
-```js
+```js showLineNumbers
 // pages/api/user.js
 export default function handler(req, res) {
   res.status(200).json({ name: 'John Doe' })

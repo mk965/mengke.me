@@ -22,7 +22,7 @@ ES5 提供了 `Object.defineProperty` 方法，该方法可以在一个对象上
 
 **语法：**
 
-```js
+```js showLineNumbers
 Object.defineProperty(obj, prop, descriptor)
 ```
 
@@ -32,7 +32,7 @@ Object.defineProperty(obj, prop, descriptor)
 
 **举个例子🌰：**
 
-```js
+```js showLineNumbers
 const object1 = {}
 
 Object.defineProperty(object1, 'property1', {
@@ -71,7 +71,7 @@ console.log(object1.property1)
 
 首先，我们定义一个数据对象`car`：
 
-```js
+```js showLineNumbers
 let car = {
   brand: 'BMW',
   price: 3000,
@@ -82,7 +82,7 @@ let car = {
 
 接下来，我们使用`Object.defineProperty()`改写上面的例子：
 
-```js
+```js showLineNumbers
 let car = {}
 let val = 3000
 Object.defineProperty(car, 'price', {
@@ -107,7 +107,7 @@ Object.defineProperty(car, 'price', {
 
 为了把`car`的所有属性都变得可观测，我们可以编写如下代码：
 
-```js
+```js showLineNumbers
 // 源码位置：src/core/observer/index.js
 
 /**
@@ -176,7 +176,7 @@ function defineReactive (obj,key,val) {
 
 那么现在，我们就可以这样定义`car`:
 
-```js
+```js showLineNumbers
 let car = new Observer({
   brand: 'BMW',
   price: 3000,
@@ -197,7 +197,7 @@ Proxy 可以对目标对象的读取、函数调用等操作进行拦截，然�
 
 一个 Proxy 对象由两个部分组成： `target`、`handler` 。在通过 `Proxy` 构造函数生成实例对象时，需要提供这两个参数。 `target`即目标对象，`handler`是一个对象，声明了代理`target` 的指定行为。
 
-```js
+```js showLineNumbers
 let target = {
   name: 'Tom',
   age: 24,
@@ -247,7 +247,7 @@ targetEmpty // {name: "Tom"}
 
 接下来我们通过 `Proxy` 来实现一个数据响应式
 
-```js
+```js showLineNumbers
 <!DOCTYPE>
 <html>
 <body>
@@ -298,7 +298,7 @@ targetEmpty // {name: "Tom"}
 
 源码：
 
-```js
+```js showLineNumbers
 function createReactiveObject(
   target: Target,
   isReadonly: boolean,
@@ -341,7 +341,7 @@ function createReactiveObject(
 
 ### Proxy实现简版Vue
 
-```html
+```html showLineNumbers
 <!doctype html>
 <html>
   <head>

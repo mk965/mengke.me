@@ -15,7 +15,7 @@ authors: ['default']
 
 所谓“数组扁平化”就是指将一个多维数组变为一个一维数组，比如：
 
-```js
+```js showLineNumbers
 [1, 2, [3, 4, [5, 6]]  ==>  [1, 2, 3, 4, 5, 6]
 ```
 
@@ -33,7 +33,7 @@ authors: ['default']
 
   **例子：**
 
-```js
+```js showLineNumbers
 let arr = [1, 2, [3, 4, [5, 6]]]
 let newArr = arr.flat(Infinity)
 console.log(newArr)
@@ -47,7 +47,7 @@ console.log(newArr)
 **思路：** 转换成字符串，再使用去除`[]`等符号，在使用`split(',')`进行分组。
 **例子：**
 
-```js
+```js showLineNumbers
 let arr = [1, 2, [3, 4, [5, 6]]]
 let newArr = arr.toString().replace(/\[\]/g, '').split(',')
 console.log(newArr)
@@ -66,7 +66,7 @@ console.log(newArr)
 
 **例子：**
 
-```js
+```js showLineNumbers
 let arr = [1, 2, [3, 4, [5, 6]]]
 let newArr = arr.toString().replace(/\[\]/g, '')
 newArr = '[' + newArr + ']'
@@ -83,7 +83,7 @@ console.log(newArr)
 
 **例子：**
 
-```js
+```js showLineNumbers
 let arr = [1, 2, [3, 4, [5, 6]]]
 let result = []
 let fn = function (ary) {
@@ -120,7 +120,7 @@ console.log(result)
 
 **例子：**
 
-```js
+```js showLineNumbers
 function flatten(arr) {
   return arr.reduce((result, item) => {
     return result.concat(Array.isArray(item) ? flatten(item) : item)
@@ -140,7 +140,7 @@ console.log(flatten(arr))
 
 **例子：**
 
-```js
+```js showLineNumbers
 while (arr.some(Array.isArray)) {
   arr = [].concat(...arr)
 }

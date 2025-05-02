@@ -35,7 +35,7 @@ authors: ['default']
 
 先写一个简单的页面：
 
-```html
+```html showLineNumbers
 <!doctype html>
 <html lang="en">
   <head>
@@ -81,7 +81,7 @@ authors: ['default']
 
 实现网页的截图操作，最常用的库是 `html2canvas`用，它可以将网页中的 HTML 元素转换为 Canvas 元素，并将其导出为图像文件。在浏览器中捕获整个页面或特定区域的截图，包括 CSS 样式和渲染效果。
 
-```js
+```js showLineNumbers
 const canvasFunction = () => {
   html2canvas(box).then((canvas) => {
     const imgStr = canvas.toDataURL('image/png')
@@ -107,7 +107,7 @@ const canvasFunction = () => {
 
 首先创建一个 `canvas` 元素，用来保存 `html2canvas` 的截图，然后通过 `captureStream` 方法实时截取媒体流。
 
-```js
+```js showLineNumbers
 const w = boxBoundingClientRect.width
 const h = boxBoundingClientRect.height
 const canvas = document.createElement('canvas')
@@ -125,7 +125,7 @@ const stream = canvas.captureStream(60) // 60 FPS recording   1秒60帧
 
 通过 canvas 的流来创建一个 `MediaRecorder` 实例，并在 `ondataavailable` 事件中保存视频信息：
 
-```js
+```js showLineNumbers
 const recorder = new MediaRecorder(stream, {
   mimeType: 'video/webm;codecs=vp9',
 })
@@ -137,7 +137,7 @@ recorder.ondataavailable = (e) => {
 
 最后，在停止录制时将帧信息创建 blob 并插入到页面上：
 
-```js
+```js showLineNumbers
 recorder.stop()
 const fullBlob = new Blob(allChunks)
 const videoUrl = window.URL.createObjectURL(fullBlob)
@@ -152,7 +152,7 @@ document.body.appendChild(video)
 
 或者可以将视频下载
 
-```js
+```js showLineNumbers
 recorder.stop()
 const fullBlob = new Blob(allChunks)
 const videoUrl = window.URL.createObjectURL(fullBlob)

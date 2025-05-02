@@ -17,7 +17,7 @@ authors: ['default']
    定义的数据和data定义的数据字段相同时，会被data定义的字段覆盖
 5. vue3采用 `proxy` 的方式实现数据代理，只会代理第一层数据 避免了vue2中对data的深层递归，提升了组件渲染性能。
 
-```js
+```js showLineNumbers
 // 在vue3中定义一个响应式数据
 
 const state = reactive({ data: { obj: {} } })
@@ -40,7 +40,7 @@ return 的对象如果是常量，不会变成响应式数据。
 
 `this.$emit` 用 `context.emit` 方法来替代。
 
-```js
+```js showLineNumbers
 // props - 组件接受到的属性， context - 上下文
 setup(props, context){
     return {
@@ -53,7 +53,7 @@ setup(props, context){
 
 生命周期函数，都变成了回调的形式，写在setup函数中 可以一次写多个相同的生命周期函数，按照注册顺序执行。
 
-```js
+```js showLineNumbers
 setup() {
     onMounted(() => {
       console.log('组件挂载1');
@@ -93,7 +93,7 @@ setup() {
    通过 ref 包装的值，取值和设置值的时候，需用通过 value 来进行设置
 2. 可以用 ref 来获取组件的引用，替代 `this.$refs` 的写法。
 
-```js
+```js showLineNumbers
 <template>
   <div class="mine">
     <input v-model="inputVal" />
@@ -135,7 +135,7 @@ setup() {
 
 vue3 模板：一个 templage 可以有多个平级的标签（vue2中只能在template写一个子标签）
 
-```js
+```js showLineNumbers
 <template>
   <div class="mine">
     <input v-model="inputVal" />
@@ -171,7 +171,7 @@ setup() {
 
 计算属性，变成了函数写法，当依赖的值发生改变时会重新计算 computed 包装后的值，需要用 `.value` 去取值，template 中不需要使用 `.value`。
 
-```js
+```js showLineNumbers
 async setup() {
     const data = reactive({
       a: 10,
@@ -188,7 +188,7 @@ async setup() {
 
 变成了函数写法，与vue2中用法相同。
 
-```js
+```js showLineNumbers
 // 侦听一个
 const state = reactive({ count: 0 })
 watch(
@@ -209,7 +209,7 @@ watch(count, (count, prevCount) => {
 
 响应式地跟踪函数中引用的响应式数据，当响应式数据改变时，会重新执行函数。
 
-```js
+```js showLineNumbers
 const count = ref(0)
 // 当count的值被修改时，会执行回调
 watchEffect(() => console.log(count.value))
@@ -219,7 +219,7 @@ watchEffect(() => console.log(count.value))
 
 组件中使用路由时用useRoute和useRouter。
 
-```js
+```js showLineNumbers
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute() // 相当于 vue2 中的this.$route
@@ -233,7 +233,7 @@ const router = useRouter() // 相当于 vue2 中的this.$router
 
 使用 `useStore` 来获取 `store` 对象 从 vuex 中取值时，要注意必须使用 `computed` 进行包装，这样 vuex 中状态修改后才能在页面中响应。
 
-```js
+```js showLineNumbers
 import {useStore} from 'vuex'
 
 setup(){
@@ -250,7 +250,7 @@ setup(){
 
 vue3 中支持使用 jsx 语法来定义 vue 组件。
 
-```js
+```js showLineNumbers
 export const AppMenus = defineComponent({
   setup() {
     return () => {
@@ -266,7 +266,7 @@ export const AppMenus = defineComponent({
 
 ## 12、插槽修改
 
-```html
+```html showLineNumbers
 <div class="container">
   <header>
     <slot name="header"></slot>

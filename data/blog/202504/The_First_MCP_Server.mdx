@@ -22,7 +22,7 @@ authors: ['default']
 
 首先，使用 `@modelcontextprotocol/sdk` 提供的 `McpServer` 类创建一个 MCP 服务器实例：
 
-```javascript
+```js showLineNumbers
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js'
 
 const server = new McpServer({
@@ -37,7 +37,7 @@ const server = new McpServer({
 
 使用 `zod` 库定义资产符号和资产价格的数据结构，以确保从 API 获取的数据符合预期格式：
 
-```javascript
+```js showLineNumbers
 import { z } from 'zod'
 
 const AssetSymbolSchema = z.object({
@@ -60,7 +60,7 @@ const AssetPriceSchema = z.object({
 
 为了提高性能并减少对外部 API 的请求次数，实现了一个简单的内存缓存：
 
-```javascript
+```js showLineNumbers
 class SimpleCache {
   private cache: Map<string, CacheEntry<any>> = new Map();
 
@@ -97,7 +97,7 @@ const apiCache = new SimpleCache();
 
 定义一个通用的函数 `fetchApiData`，用于从外部 API 获取数据并进行验证：
 
-```javascript
+```js showLineNumbers
 async function fetchApiData<T>(url: string, schema: z.ZodSchema<T>, useCache = true): Promise<T | null> {
   if (useCache) {
     const cachedData = apiCache.get<T>(url);
@@ -145,7 +145,7 @@ async function fetchApiData<T>(url: string, schema: z.ZodSchema<T>, useCache = t
 
 在 MCP 服务器上注册一个工具 `get_asset_price`，用于检索当前的资产价格信息：
 
-```javascript
+```js showLineNumbers
 server.tool(
   "get_asset_price",
   "Retrieves current pricing information for various assets including precious metals and cryptocurrencies",

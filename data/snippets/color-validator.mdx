@@ -12,7 +12,7 @@ tags: ['javascript', 'color', 'validator']
 
 Simple color validator function
 
-```js
+```js showLineNumbers
 const isValidColor = (color) => {
   const otpNode = new Option()
   otpNode.style.color = color
@@ -23,7 +23,7 @@ const isValidColor = (color) => {
 
 Usage
 
-```js
+```js showLineNumbers
 // Valid colors
 isValidColor('purple') // true
 isValidColor('burlywood') // true
@@ -44,7 +44,7 @@ Caveat
 
 Strings like `unset`, `initial`, `inherit`, `currentcolor`, `transparent` are also valid values, so if you want to exclude these strings, just change the function a bit:
 
-```js
+```js showLineNumbers
 const isValidColor = (color) => {
   const otpNode = new Option()
   otpNode.style.color = color
