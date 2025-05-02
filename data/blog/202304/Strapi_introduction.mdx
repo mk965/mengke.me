@@ -20,7 +20,7 @@ yarn create strapi-app my-project --quickstart
 
 新建 src/app.js，并粘贴以下内容：
 
-```bash
+```js showLineNumbers
 const config = {
     locales: ['zh'],
 };
@@ -71,7 +71,7 @@ http://localhost:1337/api/articles
 
 会发现只查到了文章列表：
 
-```js showLineNumberson
+```js showLineNumbers
 {
   "data": [
     {
@@ -103,7 +103,7 @@ http://localhost:1337/api/articles
 http://localhost:1337/api/articles?populate=*
 ```
 
-```js showLineNumberson
+```js showLineNumbers
 {
   "data": [
     {
