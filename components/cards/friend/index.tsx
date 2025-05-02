@@ -41,7 +41,7 @@ export function FriendCard({ friend }: { friend: ImdbFriends }) {
             </div>
           </div>
           <Link href={url} className="" aria-label="All posts">
-            <GrowingUnderline data-umami-event="all-posts">
+            <GrowingUnderline data-umami-event="visit-friend">
               <span className="hidden md:inline-block">Visit</span>
               <span className="md:hidden">More</span> &rarr;
             </GrowingUnderline>
