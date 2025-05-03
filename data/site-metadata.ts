@@ -25,7 +25,6 @@ export const SITE_METADATA = {
     provider: 'buttondown',
   },
   comments: {
-    provider: 'giscus', // supported providers: giscus, utterances, disqus
     giscusConfig: {
       // https://giscus.app/
       repo: process.env.NEXT_PUBLIC_GISCUS_REPO!,
