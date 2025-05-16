@@ -20,6 +20,7 @@
     "@prisma/client": "^6.7.0",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.12",
+    "@vercel/speed-insights": "^1.2.0",
     "autoprefixer": "^10.4.13",
     "body-scroll-lock": "^4.0.0-beta.0",
     "class-variance-authority": "^0.7.1",

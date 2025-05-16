@@ -14,6 +14,7 @@ import { KBarSearchProvider } from '~/components/search/kbar-provider'
 import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
 import { SITE_METADATA } from '~/data/site-metadata'
 import { ThemeProviders } from './theme-providers'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const FONT_PLAYPEN_SANS = Playpen_Sans({
   subsets: ['latin'],
@@ -132,6 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </KBarSearchProvider>
           <Footer />
         </ThemeProviders>
+        <SpeedInsights />
       </body>
     </html>
   )
