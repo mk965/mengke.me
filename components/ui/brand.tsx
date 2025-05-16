@@ -60,14 +60,18 @@ import Html from '~/icons/html5.svg'
 import Postcss from '~/icons/postcss.svg'
 import Env from '~/icons/env.svg'
 
-export const BrandsMap = {
+export let BrandsMap: Record<
+  string,
+  {
+    Icon: React.FC<React.SVGProps<SVGSVGElement>>
+    url?: string
+  }
+> = {
   Commitlint: {
     Icon: Commitlint,
-    url: 'https://commitlint.js.org/',
   },
   Html: {
     Icon: Html,
-    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
   },
   Postcss: {
     Icon: Postcss,
@@ -75,7 +79,6 @@ export const BrandsMap = {
   },
   Env: {
     Icon: Env,
-    url: '/',
   },
   React: {
     Icon: React,
@@ -303,7 +306,6 @@ export const BrandsMap = {
   },
   I18n: {
     Icon: I18n,
-    url: '/',
   },
   Apple: {
     Icon: Apple,
@@ -320,9 +322,9 @@ export function Brand(props: {
   const { name, as = 'link', className, iconClassName } = props
   const { Icon, url } = BrandsMap[name] || {}
 
-  if (!Icon) return <span>Missing brand icon for {name}</span>
+  if (!Icon) return <span className="hidden">Missing brand icon for {name}</span>
 
-  if (as === 'icon') {
+  if (as === 'icon' || !url) {
     return <Icon className={className} fill="currentColor" />
   }
 
