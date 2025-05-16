@@ -117,8 +117,10 @@ module.exports = {
               fontWeight: '600',
             },
             pre: {
+              margin: 0,
+              borderRadius: 0,
               code: {
-                fontWeight: '500',
+                fontSize: '0.95em',
               },
             },
             code: {
