@@ -22,12 +22,12 @@ export function remarkImgToJsx() {
       (node: Parent): node is Parent =>
         node.type === 'paragraph' && node.children.some((n) => n.type === 'image'),
       (node: Parent) => {
-        let imageNodeIndex = node.children.findIndex((n) => n.type === 'image')
-        let imageNode = node.children[imageNodeIndex] as ImageNode
+        const imageNodeIndex = node.children.findIndex((n) => n.type === 'image')
+        const imageNode = node.children[imageNodeIndex] as ImageNode
 
         // only local files
         if (fs.existsSync(`${process.cwd()}/public${imageNode.url}`)) {
-          let dimensions = sizeOf(fs.readFileSync(`${process.cwd()}/public${imageNode.url}`))
+          const dimensions = sizeOf(fs.readFileSync(`${process.cwd()}/public${imageNode.url}`))
 
           // Convert original node to next/image
           ;(imageNode.type = 'mdxJsxFlowElement'),

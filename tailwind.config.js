@@ -39,6 +39,11 @@ module.exports = {
           '35.7%': { height: '0%' },
           '85.7%': { height: '70%' },
         },
+        'scale-up': {
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.18)' },
+          '100%': { transform: 'scale(1)' },
+        },
       },
       animation: {
         wiggle: 'wiggle 7s linear infinite',
@@ -46,6 +51,7 @@ module.exports = {
         'music-bar-2': 'music-bar-2 .8s linear infinite',
         'music-bar-3': 'music-bar-3 .8s linear infinite',
         'music-bar-4': 'music-bar-4 .8s linear infinite',
+        'scale-up': 'scale-up 150ms ease-in-out forwards',
       },
       boxShadow: {
         demure: 'rgba(0, 0, 0, 0.3) 0 35px 60px -15px',
@@ -68,6 +74,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-nunito)', ...fontFamily.sans],
         greeting: ['var(--font-playpen-sans)'],
+        mono: ['var(--font-jetbrains-mono)', ...fontFamily.mono],
       },
       colors: {
         primary: colors.indigo,
@@ -75,9 +82,11 @@ module.exports = {
         spotify: '#1DB954',
         goodreads: '#372213',
         facebook: '#1877f2',
-        x: '#0f1419',
+        twitter: '#0f1419',
         linkedin: '#0077B5',
-        weibo: '#CD3734',
+        'solarized-light': '#fdfaf6',
+        'github-dark-dimmed': '#22272e',
+        'code-block': '#36313d',
       },
       width: {
         4.5: '1.125rem',
@@ -116,12 +125,78 @@ module.exports = {
             h3: {
               fontWeight: '600',
             },
+            '.remark-code-title': {
+              '+ figure': {
+                '> div': {
+                  borderTop: 0,
+                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
+                },
+                '.copy-code': {
+                  display: 'none',
+                },
+              },
+            },
+            figure: {
+              marginTop: 0,
+            },
             pre: {
               margin: 0,
-              borderRadius: 0,
               code: {
-                fontSize: '0.95em',
+                fontWeight: '500',
+                span: {
+                  color: 'var(--shiki-light, inherit)',
+                  fontStyle: 'var(--shiki-light-font-style, inherit)',
+                  fontWeight: 'var(--shiki-light-font-weight, inherit)',
+                  textDecoration: 'var(--shiki-light-text-decoration, inherit)',
+                },
               },
+            },
+            '[data-line]': {
+              marginLeft: '-1.5rem',
+              paddingLeft: '1rem',
+            },
+            '[data-line-numbers]': {
+              counterReset: 'line',
+              '[data-line]::before': {
+                counterIncrement: 'line',
+                content: 'counter(line)',
+                display: 'inline-block',
+                width: '0.75rem',
+                marginRight: '2rem',
+                textAlign: 'right',
+                color: '#657B83',
+              },
+            },
+            '[data-line-numbers-max-digits="2"]': {
+              '[data-line]::before': {
+                width: '1.25rem',
+              },
+            },
+            '[data-line-numbers-max-digits="3"]': {
+              '[data-line]::before': {
+                width: '1.75rem',
+              },
+            },
+            '[data-line-numbers-max-digits="4"]': {
+              '[data-line]::before': {
+                width: '2.25rem',
+              },
+            },
+            '[data-highlighted-line]': {
+              backgroundColor: '#fbf0ea',
+              borderLeft: '4px solid theme(colors.gray.400)',
+              paddingLeft: '.75rem',
+            },
+            '[data-highlighted-chars]': {
+              boxShadow: '0 0 0 4px rgb(82 82 91 / 0.5)',
+              borderRadius: '0.25rem',
+              backgroundColor: 'theme(colors.zinc.600)',
+            },
+            '[data-chars-id]': {
+              boxShadow: 'none',
+              padding: '.25rem',
+              borderBottom: '2px solid theme(colors.gray.800)',
             },
             code: {
               color: theme('colors.indigo.500'),
@@ -151,6 +226,20 @@ module.exports = {
             },
           },
         },
+        lg: {
+          css: {
+            figure: {
+              marginTop: 0,
+            },
+            pre: {
+              margin: 0,
+              borderRadius: 0,
+              code: {
+                fontSize: '0.95em',
+              },
+            },
+          },
+        },
         invert: {
           css: {
             a: {
@@ -159,6 +248,21 @@ module.exports = {
                 color: `${theme('colors.primary.400')}`,
               },
               code: { color: theme('colors.primary.400') },
+            },
+            pre: {
+              code: {
+                span: {
+                  color: 'var(--shiki-dark, inherit)',
+                  fontStyle: 'var(--shiki-dark-font-style, inherit)',
+                  fontWeight: 'var(--shiki-dark-font-weight, inherit)',
+                  textDecoration: 'var(--shiki-dark-text-decoration, inherit)',
+                },
+              },
+            },
+            '[data-highlighted-line]': {
+              backgroundColor: '#37415180',
+              borderLeft: '4px solid theme(colors.gray.500)',
+              paddingLeft: '.75rem',
             },
             code: {
               color: theme('colors.primary.400'),
