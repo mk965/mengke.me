@@ -17,12 +17,7 @@ export function ScrollButtons() {
   }, [])
 
   return (
-    <div
-      className={clsx(
-        'fixed bottom-8 right-8 hidden flex-col gap-3',
-        show ? 'md:flex' : 'md:hidden'
-      )}
-    >
+    <div className={clsx('fixed bottom-8 right-8 hidden flex-col gap-3', show && 'lg:flex')}>
       <ScrollButton
         ariaLabel="Scroll To Top"
         onClick={() => window.scrollTo({ top: 0 })}
