@@ -19,11 +19,6 @@ export const SITE_METADATA = {
       shareUrl: 'https://analytics.eu.umami.is/share/EqvpZYPABxaQA3mr/mengke.me',
     },
   },
-  newsletter: {
-    // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus, beehive
-    // Please add your .env file and modify it according to your selection
-    provider: 'buttondown',
-  },
   comments: {
     giscusConfig: {
       // https://giscus.app/
@@ -41,8 +36,7 @@ export const SITE_METADATA = {
     },
   },
   search: {
-    provider: 'kbar',
-    kbarConfig: {
+    kbarConfigs: {
       // path to load documents to search
       searchDocumentsPath: `${process.env.BASE_PATH || ''}/search.json`,
     },

@@ -55,8 +55,28 @@ import Qiankun from '~/icons/qiankun.svg'
 import Weibo from '~/icons/weibo.svg'
 import I18n from '~/icons/i18n.svg'
 import Apple from '~/icons/apple.svg'
+import Commitlint from '~/icons/commitlint.svg'
+import Html from '~/icons/html5.svg'
+import Postcss from '~/icons/postcss.svg'
+import Env from '~/icons/env.svg'
 
 export const BrandsMap = {
+  Commitlint: {
+    Icon: Commitlint,
+    url: 'https://commitlint.js.org/',
+  },
+  Html: {
+    Icon: Html,
+    url: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
+  },
+  Postcss: {
+    Icon: Postcss,
+    url: 'https://postcss.org/',
+  },
+  Env: {
+    Icon: Env,
+    url: '/',
+  },
   React: {
     Icon: React,
     url: 'https://reactjs.org',

@@ -11,9 +11,9 @@ import { SITE_METADATA } from '~/data/site-metadata'
 import { Logo } from './logo'
 import { MobileNav } from './mobile-nav'
 import { MoreLinks } from './more-links'
-import { SearchButton } from './search'
 import { ThemeSwitcher } from './theme-switcher'
 import { AUTHOR_INFO } from '~/data/author-info'
+import { KbarSearchTrigger } from '../search/kbar-trigger'
 
 let logged = false
 function logASCIItext() {
@@ -73,7 +73,7 @@ export function Header() {
           />
           <div className="flex items-center gap-2">
             <ThemeSwitcher />
-            <SearchButton />
+            <KbarSearchTrigger />
             <MobileNav />
           </div>
         </div>

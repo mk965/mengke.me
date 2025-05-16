@@ -3,13 +3,14 @@ import { allAuthors, allSnippets } from 'contentlayer/generated'
 import 'css/prism.css'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
-import { allCoreContent, coreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { MDX_COMPONENTS } from '~/components/mdx'
 import { SITE_METADATA } from '~/data/site-metadata'
 import { PostBanner } from '~/layouts/post-banner'
 import { PostLayout } from '~/layouts/post-layout'
 import { PostSimple } from '~/layouts/post-simple'
+import { allCoreContent, coreContent } from '~/utils/contentlayer'
+import { MDXLayoutRenderer } from '~/components/mdx/layout-renderer'
+import { sortPosts } from '~/utils/misc'
 
 const DEFAULT_LAYOUT = 'PostSimple'
 const LAYOUTS = {
@@ -18,11 +19,10 @@ const LAYOUTS = {
   PostBanner,
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string[] }
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string[] }>
 }): Promise<Metadata | undefined> {
+  const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
   const snippet = allSnippets.find((s) => s.slug === slug)
   const authorList = snippet?.authors || ['default']
@@ -71,11 +71,8 @@ export async function generateMetadata({
   }
 }
 
-export const generateStaticParams = async () => {
-  return allSnippets.map((s) => ({ slug: s.slug.split('/').map((name) => decodeURI(name)) }))
-}
-
-export default async function Page({ params }: { params: { slug: string[] } }) {
+export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
+  const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
   // Filter out drafts in production
   const sortedCoreContents = allCoreContent(sortPosts(allSnippets))

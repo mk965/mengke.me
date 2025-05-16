@@ -3,12 +3,16 @@ import { allBlogs, allSnippets } from 'contentlayer/generated'
 import { slug } from 'github-slugger'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer'
 import { SITE_METADATA } from '~/data/site-metadata'
 import tagData from '~/json/tag-data.json'
 import { ListLayoutWithTags } from '~/layouts/list-layout-with-tags'
+import { allCoreContent } from '~/utils/contentlayer'
+import { sortPosts } from '~/utils/misc'
 
-export async function generateMetadata({ params }: { params: { tag: string } }): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ tag: string }>
+}): Promise<Metadata> {
+  const params = await props.params
   const tag = decodeURI(params.tag)
   return genPageMetadata({
     title: tag,
@@ -31,7 +35,8 @@ export const generateStaticParams = async () => {
   return paths
 }
 
-export default function TagPage({ params }: { params: { tag: string } }) {
+export default async function TagPage(props: { params: Promise<{ tag: string }> }) {
+  const params = await props.params
   const tag = decodeURI(params.tag)
   // Capitalize first letter and convert space to dash
   const title = '#' + tag[0] + tag.split(' ').join('-').slice(1)

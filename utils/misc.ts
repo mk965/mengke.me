@@ -1,3 +1,5 @@
+import type { MDXDocumentDate } from '~/types/data'
+
 export function formatDate(date: string) {
   return new Date(date).toLocaleDateString('en', {
     year: 'numeric',
@@ -35,8 +37,6 @@ export function getTimeAgo(time: string | number | Date, now = Date.now()) {
   const months = is(30, days)
   const years = is(12, months)
 
-  console.log(secs, mins, hours, days, weeks, months, years)
-
   let amount = years
   let cycle = 'year'
 
@@ -69,4 +69,17 @@ export function getTimeAgo(time: string | number | Date, now = Date.now()) {
   const v = Math.floor(amount)
 
   return `${v === 1 ? (amount === hours ? 'an' : 'a') : v} ${cycle}${v > 1 ? 's' : ''} ago`
+}
+
+function dateSortDesc(a: string, b: string) {
+  if (a > b) return -1
+  if (a < b) return 1
+  return 0
+}
+
+/**
+ * Sorts a list of MDX documents by date in descending order
+ */
+export function sortPosts<T extends MDXDocumentDate>(allBlogs: T[], dateKey: string = 'date'): T[] {
+  return allBlogs.sort((a, b) => dateSortDesc(a[dateKey], b[dateKey]))
 }

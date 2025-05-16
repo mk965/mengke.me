@@ -1,12 +1,12 @@
+import { genPageMetadata } from 'app/seo'
 import type { Author } from 'contentlayer/generated'
 import { allAuthors } from 'contentlayer/generated'
-import { MDXLayoutRenderer } from 'pliny/mdx-components'
 import { AuthorLayout } from '~/layouts/author-layout'
-import { coreContent } from 'pliny/utils/contentlayer'
-import { genPageMetadata } from 'app/seo'
+import { coreContent } from '~/utils/contentlayer'
 import { MDX_COMPONENTS } from '~/components/mdx'
 import { SocialAccounts } from '~/components/author/social-accounts'
 import { SupportMe } from '~/components/author/support-me'
+import { MDXLayoutRenderer } from '~/components/mdx/layout-renderer'
 
 export const metadata = genPageMetadata({ title: 'About' })
 

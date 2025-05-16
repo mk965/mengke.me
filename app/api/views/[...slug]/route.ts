@@ -6,8 +6,9 @@ type Params = {
 }
 
 const isProduction = process.env.NODE_ENV === 'production'
-export async function GET(req: Request, { params }: { params: Params }) {
+export async function GET(req: Request, props: { params: Promise<Params> }) {
   try {
+    const params = await props.params
     const slug = (
       typeof params.slug === 'string' ? params.slug.toString() : params.slug?.pop()?.toString()
     ) as string
@@ -23,8 +24,9 @@ export async function GET(req: Request, { params }: { params: Params }) {
   }
 }
 
-export async function POST(req: Request, { params }: { params: Params }) {
+export async function POST(req: Request, props: { params: Promise<Params> }) {
   try {
+    const params = await props.params
     const slug = (
       typeof params.slug === 'string' ? params.slug.toString() : params.slug?.pop()?.toString()
     ) as string

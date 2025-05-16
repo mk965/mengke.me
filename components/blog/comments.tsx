@@ -26,8 +26,8 @@ interface CommentsProps {
 }
 
 export function Comments({ configs, className }: CommentsProps) {
-  let defaultConfigs = SITE_METADATA.comments.giscusConfig as GiscusConfig
-  let {
+  const defaultConfigs = SITE_METADATA.comments.giscusConfig as GiscusConfig
+  const {
     themeURL,
     theme,
     darkTheme,
@@ -42,8 +42,8 @@ export function Comments({ configs, className }: CommentsProps) {
     mapping,
   } = { ...defaultConfigs, ...configs }
 
-  let { theme: siteTheme, resolvedTheme } = useTheme()
-  let commentsTheme =
+  const { theme: siteTheme, resolvedTheme } = useTheme()
+  const commentsTheme =
     themeURL === ''
       ? siteTheme === 'dark' || resolvedTheme === 'dark'
         ? darkTheme

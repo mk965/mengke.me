@@ -5,25 +5,23 @@ import { slug } from 'github-slugger'
 import { fromHtmlIsomorphic } from 'hast-util-from-html-isomorphic'
 import path from 'path'
 import readingTime from 'reading-time'
-// Remark packages
-import {
-  remarkCodeTitles,
-  remarkExtractFrontmatter,
-  remarkImgToJsx,
-} from 'pliny/mdx-plugins/index.js'
-import remarkGfm from 'remark-gfm'
-import { remarkAlert } from 'remark-github-blockquote-alert'
-import remarkMath from 'remark-math'
-// Rehype packages
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeSlug from 'rehype-slug'
-import rehypeKatex from 'rehype-katex'
-import { allCoreContent, sortPosts } from 'pliny/utils/contentlayer.js'
 import rehypeCitation from 'rehype-citation'
 import rehypePresetMinify from 'rehype-preset-minify'
-import rehypePrismPlus from 'rehype-prism-plus'
+import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
+import { remarkAlert } from 'remark-github-blockquote-alert'
+// import rehypePrismPlus from 'rehype-prism-plus'
+import remarkMath from 'remark-math'
 import { SITE_METADATA } from './data/site-metadata'
-import { extractTocHeadings } from './server/emark-toc-headings.server'
+import { allCoreContent } from './utils/contentlayer'
+import { sortPosts } from './utils/misc'
+import { remarkCodeTitles } from './utils/remark-code-titles'
+import { remarkExtractFrontmatter } from './utils/remark-extract-frontmatter'
+import { remarkImgToJsx } from './utils/remark-img-to-jsx'
+import { extractTocHeadings } from './utils/remark-toc-headings'
+import rehypeKatex from 'rehype-katex'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -57,7 +55,7 @@ function createTagCount(documents) {
   documents.forEach((file) => {
     if (file.tags && (!isProduction || file.draft !== true)) {
       file.tags.forEach((tag: string) => {
-        const formattedTag = slug(tag)
+        let formattedTag = slug(tag)
         if (formattedTag in tagCount) {
           tagCount[formattedTag] += 1
         } else {
@@ -67,18 +65,17 @@ function createTagCount(documents) {
     }
   })
   writeFileSync('./json/tag-data.json', JSON.stringify(tagCount))
+  console.log('🏷️. Tag list generated.')
 }
 
 function createSearchIndex(allBlogs) {
-  if (
-    SITE_METADATA?.search?.provider === 'kbar' &&
-    SITE_METADATA.search.kbarConfig.searchDocumentsPath
-  ) {
+  const searchDocsPath = SITE_METADATA.search.kbarConfigs.searchDocumentsPath
+  if (searchDocsPath) {
     writeFileSync(
-      `public/${path.basename(SITE_METADATA.search.kbarConfig.searchDocumentsPath)}`,
+      `public/${path.basename(searchDocsPath)}`,
       JSON.stringify(allCoreContent(sortPosts(allBlogs)))
     )
-    console.log('Local search index generated...')
+    console.log('🔍 Local search index generated.')
   }
 }
 
@@ -199,13 +196,27 @@ export default makeSource({
       ],
       rehypeKatex,
       [rehypeCitation, { path: path.join(root, 'data') }],
-      [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
+      // [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: 'github-dark-dimmed',
+            light: 'solarized-light',
+          },
+        },
+      ],
       rehypePresetMinify,
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs, allSnippets } = await importData()
-    createTagCount([...allBlogs, ...allSnippets])
-    createSearchIndex(allBlogs)
+    const { allBlogs, allSnippets, allAuthors } = await importData()
+    console.log('📝 Import Blogs:', allBlogs?.length || 0)
+    console.log('💡 Import Snippets:', allSnippets?.length || 0)
+    console.log('👤 Import Authors:', allAuthors?.length || 0)
+    const allPosts = [...allBlogs, ...allSnippets]
+    createTagCount(allPosts)
+    createSearchIndex(allPosts)
+    console.log('✨ Content source generated successfully!')
   },
 })

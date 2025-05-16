@@ -1,5 +1,4 @@
 import type { Author, Blog } from 'contentlayer/generated'
-import type { CoreContent } from 'pliny/utils/contentlayer'
 import type { ReactNode } from 'react'
 import { BackToPosts } from '~/components/blog/back-to-posts'
 import { Banner } from '~/components/blog/banner'
@@ -15,6 +14,7 @@ import { TableOfContents } from '~/components/blog/toc'
 import { Container } from '~/components/ui/container'
 import { GradientDivider } from '~/components/ui/gradient-divider'
 import { SITE_METADATA } from '~/data/site-metadata'
+import type { CoreContent } from '~/types/data'
 
 interface LayoutProps {
   content: CoreContent<Blog>
