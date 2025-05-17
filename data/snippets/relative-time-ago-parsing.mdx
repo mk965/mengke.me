@@ -1,0 +1,72 @@
+---
+heading: 'Relative time-ago parsing'
+title: 'Get Human-Readable "Time Ago" in TypeScript'
+date: '2025-05-18'
+icon: 'Typescript'
+draft: false
+summary: 'A simple TypeScript utility to display relative time like "5 minutes ago" or "2 days ago" from a given timestamp.'
+tags: ['typescript', 'date', 'time-ago', 'utility']
+---
+
+A simple TypeScript utility to display relative time like **"5 minutes ago"** or **"2 days ago"** from a given timestamp.
+
+```ts:time-ago.ts
+function is(interval: number, cycle: number) {
+  return cycle >= interval ? Math.floor(cycle / interval) : 0
+}
+
+export function getTimeAgo(time: string | number | Date, now = Date.now()) {
+  if (typeof time === 'string' || time instanceof Date) {
+    time = new Date(time).getTime()
+  }
+
+  const secs = (now - time) / 1000
+  const mins = is(60, secs)
+  const hours = is(60, mins)
+  const days = is(24, hours)
+  const weeks = is(7, days)
+  const months = is(30, days)
+  const years = is(12, months)
+
+  let amount = years
+  let cycle = 'year'
+
+  if (secs <= 1) {
+    return 'just now'
+  }
+  if (years > 0) {
+    amount = years
+    cycle = 'year'
+  } else if (months > 0) {
+    amount = months
+    cycle = 'month'
+  } else if (weeks > 0) {
+    amount = weeks
+    cycle = 'week'
+  } else if (days > 0) {
+    amount = days
+    cycle = 'day'
+  } else if (hours > 0) {
+    amount = hours
+    cycle = 'hour'
+  } else if (mins > 0) {
+    amount = mins
+    cycle = 'minute'
+  } else {
+    amount = secs
+    cycle = 'second'
+  }
+
+  const v = Math.floor(amount)
+
+  return `${v === 1 ? (amount === hours ? 'an' : 'a') : v} ${cycle}${v > 1 ? 's' : ''} ago`
+}
+```
+
+```ts:example.ts
+import { getTimeAgo } from './time-ago'
+
+getTimeAgo(new Date(Date.now() - 1000 * 60)) // → "a minute ago"
+getTimeAgo(Date.now() - 1000 * 60 * 60 * 5)  // → "5 hours ago"
+getTimeAgo('2024-05-18T12:00:00Z')           // → "1 year ago"
+```
