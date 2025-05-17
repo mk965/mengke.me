@@ -9,7 +9,7 @@ import { TableWrapper } from './table-wrapper'
 export const MDX_COMPONENTS: MDXComponents = {
   Image: ({ alt, src, ...rest }: ImageProps) => {
     return (
-      <Zoom zoomImg={{ src, alt }} canSwipeToUnzoom={false} zoomMargin={20}>
+      <Zoom zoomImg={{ src, alt }}>
         <Image alt={alt} src={src} {...rest} className="my-4" />
       </Zoom>
     )

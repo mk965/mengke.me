@@ -15,11 +15,7 @@ export function FriendCard({ friend }: { friend: ImdbFriends }) {
       <TiltedGridBackground className="inset-0 z-[-1]" />
       <div className="flex gap-5 md:gap-5">
         <div className="m-4 flex shrink-0 items-end">
-          <Zoom
-            zoomImg={{ src: imgSrc, alt: name }}
-            canSwipeToUnzoom={false} // Not working
-            zoomMargin={20}
-          >
+          <Zoom>
             <Image
               src={imgSrc}
               alt={name}
