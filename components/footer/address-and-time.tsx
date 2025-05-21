@@ -3,7 +3,7 @@
 import { Clock, Map } from 'lucide-react'
 import { GrowingUnderline } from '~/components/ui/growing-underline'
 import { Link } from '~/components/ui/link'
-import { Twemoji } from '~/components/ui/twemoji'
+// import { Twemoji } from '~/components/ui/twemoji'
 import { AUTHOR_INFO } from '~/data/author-info'
 
 const TIME_IS = 'https://time.is/Beijing'
@@ -39,11 +39,11 @@ export function AddressAndTime() {
         <Map className="h-5 w-5" />
         <span className="font-medium">
           {AUTHOR_INFO.address.city}
-          {AUTHOR_INFO.address.flag && (
+          {/* {AUTHOR_INFO.address.flag && (
             <>
               , <Twemoji emoji={AUTHOR_INFO.address.flag} className="!h-4.5" />
             </>
-          )}
+          )} */}
         </span>
       </div>
       <div className="flex items-center gap-2">

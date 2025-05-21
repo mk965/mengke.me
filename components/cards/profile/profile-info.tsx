@@ -1,9 +1,8 @@
-import { SITE_METADATA } from '~/data/site-metadata'
-import { BriefcaseBusiness, Github, Linkedin, Mail, MapPin } from 'lucide-react'
+// import { SITE_METADATA } from '~/data/site-metadata'
+import { BriefcaseBusiness, Github, Mail, MapPin } from 'lucide-react'
 import { Fragment } from 'react'
-import XIcon from '~/icons/x.svg'
 import JuejinIcon from '~/icons/juejin.svg'
-import { Twemoji } from '~/components/ui/twemoji'
+// import { Twemoji } from '~/components/ui/twemoji'
 import { AUTHOR_INFO } from '~/data/author-info'
 
 function getAccountHandle(url = '') {
@@ -63,11 +62,11 @@ export function ProfileCardInfo() {
           <MapPin strokeWidth={1.5} size={20} />
           <p className="px-2">
             {AUTHOR_INFO.address.city}
-            {AUTHOR_INFO.address.flag && (
+            {/* {AUTHOR_INFO.address.flag && (
               <span className="absolute ml-1 inline-flex pt-px">
                 <Twemoji emoji={AUTHOR_INFO.address.flag} />
               </span>
-            )}
+            )} */}
           </p>
         </div>
         <div className="flex items-center text-gray-700 dark:text-gray-200">
