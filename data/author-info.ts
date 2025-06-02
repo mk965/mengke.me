@@ -27,5 +27,6 @@ export const AUTHOR_INFO = {
   },
   support: {
     kofi: 'https://ko-fi.com/mengke',
+    wechat: '/static/images/wechat-reward-code.webp',
   },
 }
