@@ -2,12 +2,13 @@ import { AUTHOR_INFO } from '~/data/author-info'
 import { SUPPORTERS } from '~/data/supporters'
 import { Image } from '~/components/ui/image'
 import clsx from 'clsx'
+import { EyeClosedIcon } from 'lucide-react'
 
 export function SupportMe({ className }: { className?: string }) {
   const supportersSort = SUPPORTERS.sort((a, b) => {
     const dateA = new Date(a.date)
     const dateB = new Date(b.date)
-    return dateB.getTime() - dateA.getTime()
+    return dateA.getTime() - dateB.getTime()
   })
 
   return (
@@ -50,7 +51,14 @@ export function SupportMe({ className }: { className?: string }) {
             {supportersSort.map((supporter, index) => (
               <li key={index} className="text-sm">
                 <span className="text-gray-500 dark:text-gray-400">{supporter.date}</span>
-                <span className="ml-2 font-medium">{supporter?.name ?? 'Anonymous'}</span>
+                {supporter.name ? (
+                  <span className="ml-2 font-medium">{supporter.name}</span>
+                ) : (
+                  <span className="ml-2 inline-flex items-center gap-1 rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-500 dark:bg-gray-700 dark:text-gray-300">
+                    <EyeClosedIcon className="h-4 w-4" />
+                    Anonymous
+                  </span>
+                )}
                 {supporter.amount && supporter.currency && (
                   <span className="ml-2 font-medium text-green-600 dark:text-green-400">
                     {supporter.currency === 'CNY' ? '¥' : '$'}
