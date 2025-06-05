@@ -1,6 +1,7 @@
 ---
 title: 'Model Context Protocol (MCP) 快速开始'
 date: '2025-03-29'
+lastmod: '2025-06-05'
 tags: ['AI', 'MCP', 'LLM']
 draft: false
 summary: '探索 MCP 协议如何让 AI 从"回答问题"进化为"执行任务"。本文详细介绍了 MCP 的概念、架构和实现原理，并通过 Github MCP 的实例，展示了 AI 直接操作代码仓库的强大能力...'
@@ -60,7 +61,7 @@ MCP 的核心遵循 **客户端-服务器架构**，其中主机应用程序可�
 
 当你向 AI 提出问题时，流程是这样的：
 
-- **提问 ➜ Host ➜ LLM ➜ MCP Server ➜ MCP Client ➜ 执行操作 ➜ 返回结果 ➜ LLM生成回答 ➜ 展示答案**
+- **提问 ➜ Host ➜ LLM ➜ MCP Client ➜ MCP Server ➜ 执行操作 ➜ 返回结果 ➜ LLM生成回答 ➜ 展示答案**
 
 这样的架构设计可以让 LLM 更灵活的调用各种数据和工具，开发者只需要专注开发 MCP Server，用户也不需要额外的学习成本。
 
