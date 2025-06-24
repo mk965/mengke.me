@@ -6,6 +6,16 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: [
+        '/api/*',
+        '/test/*',
+        '/_next/*',
+        '/_vercel/*',
+        '/.well-known/*',
+        '/admin/*',
+        '/private/*',
+        '*.json$',
+      ],
     },
     sitemap: `${SITE_METADATA.siteUrl}/sitemap.xml`,
     host: SITE_METADATA.siteUrl,
