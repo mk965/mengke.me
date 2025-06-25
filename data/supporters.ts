@@ -74,4 +74,5 @@ export const SUPPORTERS: Supporter[] = [
     message: 'Hope this helps you keep doing what you love!',
   },
   { name: '阿蓝', amount: 0.66, currency: 'CNY', date: '2025-05-12', via: 'WeChat' },
+  { name: '默', amount: 66.66, currency: 'CNY', date: '2025-06-25', via: 'WeChat' },
 ]
