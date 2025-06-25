@@ -50,6 +50,9 @@ export async function generateMetadata(props: {
   return {
     title: snippet.title,
     description: snippet.summary,
+    alternates: {
+      canonical: `${SITE_METADATA.siteUrl}/snippets/${snippet.slug}`,
+    },
     openGraph: {
       title: snippet.title,
       description: snippet.summary,
@@ -58,7 +61,7 @@ export async function generateMetadata(props: {
       type: 'article',
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
-      url: './',
+      url: `${SITE_METADATA.siteUrl}/snippets/${snippet.slug}`,
       images: ogImages,
       authors: authors.length > 0 ? authors : [SITE_METADATA.author],
     },

@@ -45,17 +45,21 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_METADATA.title}`,
   },
   description: SITE_METADATA.description,
+  keywords: ['blog', 'programming', 'frontend', 'javascript', 'react', 'nextjs', 'web development'],
+  authors: [{ name: SITE_METADATA.author }],
+  creator: SITE_METADATA.author,
+  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     title: SITE_METADATA.title,
     description: SITE_METADATA.description,
-    url: './',
+    url: SITE_METADATA.siteUrl,
     siteName: SITE_METADATA.title,
     images: [SITE_METADATA.socialBanner],
     locale: 'en_US',
     type: 'website',
   },
   alternates: {
-    canonical: './',
+    canonical: SITE_METADATA.siteUrl,
     types: {
       'application/rss+xml': `${SITE_METADATA.siteUrl}/feed.xml`,
     },
@@ -75,6 +79,7 @@ export const metadata: Metadata = {
     title: SITE_METADATA.title,
     card: 'summary_large_image',
     images: [SITE_METADATA.socialBanner],
+    creator: '@_mk965',
   },
 }
 

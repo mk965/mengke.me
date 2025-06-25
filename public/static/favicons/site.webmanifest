@@ -1,8 +1,14 @@
 {
-  "name": "mengke.me",
-  "short_name": "mengke.me",
-  "description": "Mengke's blog - Mengke's coding journey",
+  "name": "Mengke's blog - Mengke's coding journey",
+  "short_name": "Mengke's blog",
+  "description": "A personal space on the cloud where I document my programming journey, sharing lessons, insights, and resources for fellow developers.",
   "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["blog", "technology", "programming"],
   "icons": [
     {
       "src": "/static/favicons/favicon-16x16.png",
@@ -27,10 +33,10 @@
     {
       "src": "/static/favicons/favicon-800x800.png",
       "sizes": "800x800",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#E3F6E6",
-  "background_color": "#FFFFFF",
-  "display": "standalone"
+  "background_color": "#FFFFFF"
 }
