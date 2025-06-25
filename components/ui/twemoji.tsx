@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import clsx from 'clsx'
 
-let variants = cva('twa inline-block', {
+const variants = cva('twa inline-block', {
   variants: {
     size: {
       base: '',

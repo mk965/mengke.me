@@ -17,9 +17,9 @@ export type Toc = TocItem[]
  */
 function remarkTocHeadings() {
   return (tree: Parent, file) => {
-    let toc: Toc = []
+    const toc: Toc = []
     visit(tree, 'heading', (node) => {
-      let textContent = toString(node).replace(/<[^>]*(>|$)/g, '')
+      const textContent = toString(node).replace(/<[^>]*(>|$)/g, '')
       if (textContent) {
         toc.push({
           value: textContent,
@@ -40,7 +40,7 @@ function remarkTocHeadings() {
  * @return {*}  {Promise<Toc>}
  */
 export async function extractTocHeadings(markdown: string): Promise<Toc> {
-  let vfile = await remark().use(remarkTocHeadings).process(markdown)
+  const vfile = await remark().use(remarkTocHeadings).process(markdown)
   // @ts-ignore
   return vfile.data.toc
 }

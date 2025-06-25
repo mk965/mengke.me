@@ -60,7 +60,7 @@ import Html from '~/icons/html5.svg'
 import Postcss from '~/icons/postcss.svg'
 import Env from '~/icons/env.svg'
 
-export let BrandsMap: Record<
+export const BrandsMap: Record<
   string,
   {
     Icon: React.FC<React.SVGProps<SVGSVGElement>>

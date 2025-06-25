@@ -34,7 +34,7 @@ export function KBarSearchProvider({
   useEffect(() => {
     function mapPosts(posts: CoreContent<MDXDocument>[]) {
       const actions: Action[] = []
-      for (let post of posts) {
+      for (const post of posts) {
         actions.push({
           id: post.path,
           name: post.title,

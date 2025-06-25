@@ -25,8 +25,8 @@ interface LayoutProps {
 }
 
 export function PostLayout({ content, next, prev, children }: LayoutProps) {
-  let { slug, images, lastmod, readingTime, date, title, tags, filePath, toc, type } = content
-  let postUrl = `${SITE_METADATA.siteUrl}/${type.toLowerCase()}/${slug}`
+  const { slug, images, lastmod, readingTime, date, title, tags, filePath, toc, type } = content
+  const postUrl = `${SITE_METADATA.siteUrl}/${type.toLowerCase()}/${slug}`
 
   return (
     <Container className="pt-4 lg:pt-12">

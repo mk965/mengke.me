@@ -1,6 +1,6 @@
-let { replace } = ''
-let ca = /[&<>'"]/g
-let esca = {
+const { replace } = ''
+const ca = /[&<>'"]/g
+const esca = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
