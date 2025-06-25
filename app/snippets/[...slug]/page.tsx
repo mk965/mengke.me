@@ -74,6 +74,10 @@ export async function generateMetadata(props: {
   }
 }
 
+export const generateStaticParams = async () => {
+  return allSnippets.map((s) => ({ slug: s.slug.split('/').map((name) => decodeURI(name)) }))
+}
+
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params
   const slug = decodeURI(params.slug.join('/'))
