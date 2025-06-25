@@ -5,7 +5,7 @@ import path from 'path'
 import { allBlogs, allSnippets } from '~/.contentlayer/generated/index.mjs'
 import { AUTHOR_INFO } from '~/data/author-info'
 import { SITE_METADATA } from '~/data/site-metadata'
-import tagData from '~/json/tag-data.json' assert { type: 'json' }
+import tagData from '~/json/tag-data.json'
 import mime from 'mime'
 import { escape } from '~/utils/html-escaper'
 import { sortPosts } from '~/utils/misc'

@@ -2,14 +2,14 @@ import { genPageMetadata } from '~/app/seo'
 import { PageHeader } from '~/components/ui/page-header'
 import { Container } from '~/components/ui/container'
 import { FriendsList } from './friends-list'
-import friends from '~/json/friends.json' assert { type: 'json' }
+import friends from '~/json/friends.json'
 
 // const MAX_POSTS_DISPLAY = 5
 // const MAX_SNIPPETS_DISPLAY = 6
 
 export const metadata = genPageMetadata({ title: 'My friends and tech bloggers' })
 
-export default async function HomePage() {
+export default async function FriendsPage() {
   const friendsList = friends.filter((f) => f.type === 'friend')
   const bloggersList = friends.filter((f) => f.type === 'techStar')
   return (
