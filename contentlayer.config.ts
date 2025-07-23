@@ -7,6 +7,8 @@ import path from 'path'
 import readingTime from 'reading-time'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeCitation from 'rehype-citation'
+import rehypeKatex from 'rehype-katex'
+import rehypeMermaid from 'rehype-mermaid'
 import rehypePresetMinify from 'rehype-preset-minify'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
@@ -21,7 +23,6 @@ import { remarkCodeTitles } from './utils/remark-code-titles'
 import { remarkExtractFrontmatter } from './utils/remark-extract-frontmatter'
 import { remarkImgToJsx } from './utils/remark-img-to-jsx'
 import { extractTocHeadings } from './utils/remark-toc-headings'
-import rehypeKatex from 'rehype-katex'
 
 const root = process.cwd()
 const isProduction = process.env.NODE_ENV === 'production'
@@ -195,6 +196,7 @@ export default makeSource({
         },
       ],
       rehypeKatex,
+      [rehypeMermaid, { strategy: 'img-svg', dark: true, prefix: 'mk-mermaid' }],
       [rehypeCitation, { path: path.join(root, 'data') }],
       // [rehypePrismPlus, { defaultLanguage: 'js', ignoreMissing: true }],
       [

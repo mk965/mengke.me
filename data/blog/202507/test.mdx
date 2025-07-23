@@ -1,0 +1,125 @@
+---
+title: 'Mermaid 图表测试'
+date: '2025-07-22'
+tags: ['test', 'mermaid', 'markdown', 'visualization']
+draft: false
+summary: '测试 Mermaid 图表在博客中的显示效果，包含流程图、序列图、甘特图等多种图表类型。'
+authors: ['default']
+---
+
+# Mermaid 图表功能测试
+
+这篇文章用于测试 Mermaid 图表功能是否正常工作。
+
+## 简单流程图
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
+## 详细序列图
+
+```mermaid
+sequenceDiagram
+    participant Host
+    participant Client
+    participant Server
+
+    Host->>+Client: 初始化 client
+    Client->>+Server: 使用 Client 的能力初始化一个会话
+    Server-->>Client: 返回 Server 支持的能力
+```
+
+## 复杂流程图
+
+```mermaid
+graph TB
+    A[开始] --> B{需要登录?}
+    B -->|是| C[跳转到登录页]
+    B -->|否| D[显示主页内容]
+    C --> E[验证用户凭据]
+    E --> F{验证成功?}
+    F -->|是| D
+    F -->|否| G[显示错误信息]
+    G --> C
+    D --> H[加载用户数据]
+    H --> I[渲染页面组件]
+    I --> J[结束]
+```
+
+## 类图示例
+
+```mermaid
+classDiagram
+    class User {
+        -String name
+        -String email
+        -Date createdAt
+        +login()
+        +logout()
+        +updateProfile()
+    }
+
+    class Post {
+        -String title
+        -String content
+        -Date publishedAt
+        +publish()
+        +draft()
+        +delete()
+    }
+
+    class Comment {
+        -String content
+        -Date createdAt
+        +create()
+        +update()
+    }
+```
+
+{/_  
+ User ||--o{ Post : "创建"
+Post ||--o{ Comment : "包含"
+User ||--o{ Comment : "发表" _/}
+
+## 时序图
+
+```mermaid
+sequenceDiagram
+    participant 用户
+    participant 浏览器
+    participant CDN
+    participant API服务器
+    participant 数据库
+
+    用户->>浏览器: 访问页面
+    浏览器->>CDN: 请求静态资源
+    CDN-->>浏览器: 返回CSS/JS
+    浏览器->>API服务器: 请求数据
+    API服务器->>数据库: 查询数据
+    数据库-->>API服务器: 返回数据
+    API服务器-->>浏览器: JSON响应
+    浏览器-->>用户: 渲染完成页面
+```
+
+## Git 流程图
+
+{/\* ```mermaid
+gitgraph
+commit id: "Initial commit"
+branch feature/mermaid
+checkout feature/mermaid
+commit id: "Add mermaid plugin"
+commit id: "Add examples"
+checkout main
+merge feature/mermaid
+commit id: "Release v2.1"
+
+```*/}
+
+如果您能看到上面的图表而不是代码块，说明 Mermaid 支持已经成功实现！
+```
