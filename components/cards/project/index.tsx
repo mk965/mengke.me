@@ -57,9 +57,7 @@ export function ProjectCard({
                   <Brand
                     key={tool}
                     name={tool as keyof typeof BrandsMap}
-                    iconClassName={clsx(
-                      tool === 'Pygame' ? 'h-5 md:h-5.5' : 'h-5 w-5 md:h-5.5 md:w-5.5'
-                    )}
+                    iconClassName={'h-5 w-5 md:h-5.5 md:w-5.5'}
                   />
                 )
               })}

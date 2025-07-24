@@ -330,7 +330,7 @@ export function Brand(props: {
   if (!Icon) return <span className="hidden">Missing brand icon for {name}</span>
 
   if (as === 'icon' || !url) {
-    return <Icon className={className} fill="currentColor" />
+    return <Icon className={iconClassName} fill="currentColor" />
   }
 
   return (
