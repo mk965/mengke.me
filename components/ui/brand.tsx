@@ -59,6 +59,7 @@ import Commitlint from '~/icons/commitlint.svg'
 import Html from '~/icons/html5.svg'
 import Postcss from '~/icons/postcss.svg'
 import Env from '~/icons/env.svg'
+import Solana from '~/icons/solana.svg'
 
 export const BrandsMap: Record<
   string,
@@ -310,6 +311,10 @@ export const BrandsMap: Record<
   Apple: {
     Icon: Apple,
     url: 'https://www.apple.com/ios',
+  },
+  Solana: {
+    Icon: Solana,
+    url: 'https://sloana.com/',
   },
 }
 

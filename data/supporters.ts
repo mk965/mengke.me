@@ -1,7 +1,7 @@
 export interface Supporter {
   name?: string
   amount?: number
-  currency?: 'CNY' | 'USD'
+  currency?: 'CNY' | 'USD' | 'SOL'
   date: string
   message?: string
   via: 'Ko-fi' | 'WeChat' | 'Other'

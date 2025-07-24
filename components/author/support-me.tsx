@@ -3,6 +3,18 @@ import { SUPPORTERS } from '~/data/supporters'
 import { Image } from '~/components/ui/image'
 import clsx from 'clsx'
 import { EyeClosedIcon } from 'lucide-react'
+import Solana from '~/icons/solana.svg'
+
+const getCurrencySymbol = (currency: string) => {
+  switch (currency) {
+    case 'CNY':
+      return '¥'
+    case 'USD':
+      return '$'
+    case 'SOL':
+      return <Solana className="mr-[2px] mt-[-2px] inline-block h-4 w-4" />
+  }
+}
 
 export function SupportMe({ className }: { className?: string }) {
   const supportersSort = SUPPORTERS.sort((a, b) => {
@@ -61,7 +73,7 @@ export function SupportMe({ className }: { className?: string }) {
                 )}
                 {supporter.amount && supporter.currency && (
                   <span className="ml-2 font-medium text-green-600 dark:text-green-400">
-                    {supporter.currency === 'CNY' ? '¥' : '$'}
+                    {getCurrencySymbol(supporter.currency)}
                     {supporter.amount}
                   </span>
                 )}
