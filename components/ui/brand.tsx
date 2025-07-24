@@ -60,6 +60,7 @@ import Html from '~/icons/html5.svg'
 import Postcss from '~/icons/postcss.svg'
 import Env from '~/icons/env.svg'
 import Solana from '~/icons/solana.svg'
+import clsx from 'clsx'
 
 export const BrandsMap: Record<
   string,
@@ -330,7 +331,7 @@ export function Brand(props: {
   if (!Icon) return <span className="hidden">Missing brand icon for {name}</span>
 
   if (as === 'icon' || !url) {
-    return <Icon className={iconClassName} fill="currentColor" />
+    return <Icon className={clsx([className, iconClassName])} fill="currentColor" />
   }
 
   return (
