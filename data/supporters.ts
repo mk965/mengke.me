@@ -75,4 +75,6 @@ export const SUPPORTERS: Supporter[] = [
   },
   { name: '阿蓝', amount: 0.66, currency: 'CNY', date: '2025-05-12', via: 'WeChat' },
   { name: '默', amount: 66.66, currency: 'CNY', date: '2025-06-25', via: 'WeChat' },
+  { name: 'Livid', amount: 0.001, currency: 'SOL', date: '2025-07-22', via: 'Other' },
+  { name: 'Yoooungvon', amount: 0.005, currency: 'SOL', date: '2025-07-22', via: 'Other' },
 ]
