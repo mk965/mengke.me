@@ -18,7 +18,7 @@ import { fetcher } from '~/utils/misc'
 export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
   const { title, description, imgSrc, url, repo, builtWith, links } = project
   const { data: repository } = useSWR<GithubRepository>(`/api/github?repo=${repo}`, fetcher)
-  const href = repository?.url || url
+  const href = url || repository?.url
   const lang = repository?.languages?.[0]
 
   return (
