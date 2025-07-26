@@ -122,6 +122,13 @@ export type GithubRepository = {
   repositoryTopics: string[]
 }
 
+export type NpmPackage = {
+  downloads: number
+  start: string
+  end: string
+  package: string
+}
+
 export type ImdbFriends = {
   type: string
   name: string
