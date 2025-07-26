@@ -11,15 +11,6 @@ export const PROJECTS: Project[] = [
     builtWith: ['WebGL', 'Typescript'],
   },
   {
-    type: 'self',
-    title: 'Asset Price MCP',
-    description: `A MCP server for retrieving and displaying current asset price information. This server provides tools to fetch real-time price information for various assets (including precious metals and cryptocurrencies), making it easy for large language models to access and display this data.`,
-    imgSrc: '/static/images/projects/MCP.webp',
-    url: 'https://www.npmjs.com/package/asset-price-mcp',
-    // demo: <AvpDemo />,
-    builtWith: ['Typescript'],
-  },
-  {
     type: 'work',
     title: "MoonFox Data - Aurora's Big Data Brand",
     description: `The MoonFox Data brand portal includes iAPP, iBrand, iMarkting, Alternative Data and other parts, and users can obtain the Moon Fox big data service on the website.`,
@@ -50,6 +41,15 @@ export const PROJECTS: Project[] = [
     imgSrc: '/static/images/projects/moonfox-top.jpg',
     url: '/',
     builtWith: ['NuxtJS', 'Vue', 'AMap', 'BaiduMap', 'VueX'],
+  },
+  {
+    type: 'self',
+    title: 'Asset Price MCP',
+    description: `A MCP server for retrieving and displaying current asset price information. This server provides tools to fetch real-time price information for various assets (including precious metals and cryptocurrencies), making it easy for large language models to access and display this data.`,
+    imgSrc: '/static/images/projects/MCP.webp',
+    repo: 'mk965/asset-price-mcp',
+    url: 'https://www.npmjs.com/package/asset-price-mcp',
+    builtWith: ['Typescript'],
   },
   {
     type: 'self',
