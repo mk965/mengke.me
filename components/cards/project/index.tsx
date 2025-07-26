@@ -61,7 +61,7 @@ export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
               </div>
             </div>
           </div>
-        ) : (
+        ) : links ? (
           <div className="space-y-1.5">
             <div className="text-xs text-gray-600 dark:text-gray-400">Links</div>
             <div className="flex flex-col items-start gap-0.5 sm:flex-row sm:items-center sm:gap-1.5">
@@ -79,7 +79,7 @@ export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
               ))}
             </div>
           </div>
-        )}
+        ) : null}
         <div className="space-y-1.5">
           <div className="text-xs text-gray-600 dark:text-gray-400">Stack</div>
           <div className="flex h-6 flex-wrap items-center gap-1.5">
