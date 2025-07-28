@@ -53,9 +53,9 @@ export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
       </div>
       <p className="mb-16 line-clamp-3 grow text-lg">{repository?.description || description}</p>
       <div className={clsx('mt-auto flex gap-6 sm:gap-9 md:grid md:gap-0', `grid-cols-3`)}>
-        {/* NPM Downloads */}
         {npmPackage
-          ? (npmPackage || (npm && typeof npm === 'object')) && (
+          ? // NPM Downloads
+            (npmPackage || (npm && typeof npm === 'object')) && (
               <div className="space-y-1.5">
                 <div className="text-xs text-gray-600 dark:text-gray-400">
                   <span className="hidden sm:inline">Monthly downloads</span>
@@ -73,7 +73,8 @@ export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
               </div>
             )
           : repository
-            ? (repository || (repo && typeof repo === 'object')) && (
+            ? // GitHub Stars
+              (repository || (repo && typeof repo === 'object')) && (
                 <div className="space-y-1.5">
                   <div className="text-xs text-gray-600 dark:text-gray-400">
                     <span className="hidden sm:inline">Github stars</span>
