@@ -1,7 +1,7 @@
 'use client'
 
 import clsx from 'clsx'
-import { Github } from 'lucide-react'
+import { Github, Download } from 'lucide-react'
 import { Fragment } from 'react'
 import useSWR from 'swr'
 import type { BrandsMap } from '~/components/ui/brand'
@@ -12,12 +12,22 @@ import { Image } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
 import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
 import type { PROJECTS } from '~/data/projects'
-import type { GithubRepository } from '~/types/data'
+import type { GithubRepository, NpmPackage } from '~/types/data'
 import { fetcher } from '~/utils/misc'
 
 export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
-  const { title, description, imgSrc, url, repo, builtWith, links } = project
-  const { data: repository } = useSWR<GithubRepository>(`/api/github?repo=${repo}`, fetcher)
+  const { title, description, imgSrc, url, repo, npm, builtWith, links } = project
+
+  const { data: repository } = useSWR<GithubRepository>(
+    repo && typeof repo === 'string' ? `/api/github?repo=${repo}` : null,
+    fetcher
+  )
+
+  const { data: npmPackage } = useSWR<NpmPackage>(
+    npm && typeof npm === 'string' ? `/api/npm?package=${npm}` : null,
+    fetcher
+  )
+
   const href = url || repository?.url
   const lang = repository?.languages?.[0]
 
@@ -42,58 +52,90 @@ export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
         </div>
       </div>
       <p className="mb-16 line-clamp-3 grow text-lg">{repository?.description || description}</p>
-      <div
-        className={clsx(
-          'mt-auto flex gap-6 sm:gap-9 md:grid md:gap-0',
-          repository ? 'grid-cols-3' : 'grid-cols-2'
-        )}
-      >
-        {repository ? (
-          <div className="space-y-1.5">
-            <div className="text-xs text-gray-600 dark:text-gray-400">
-              <span className="hidden sm:inline">Github stars</span>
-              <span className="sm:hidden">Stars</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="flex items-center space-x-1.5">
-                <Github size={16} strokeWidth={1.5} />
-                <span className="font-medium">{repository?.stargazerCount}</span>
+      <div className={clsx('mt-auto flex gap-6 sm:gap-9 md:grid md:gap-0', `grid-cols-3`)}>
+        {/* NPM Downloads */}
+        {npmPackage
+          ? (npmPackage || (npm && typeof npm === 'object')) && (
+              <div className="space-y-1.5">
+                <div className="text-xs text-gray-600 dark:text-gray-400">
+                  <span className="hidden sm:inline">Monthly downloads</span>
+                  <span className="sm:hidden">Downloads</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center space-x-1.5">
+                    <Download size={16} strokeWidth={1.5} />
+                    <span className="font-medium">
+                      {npmPackage?.downloads ||
+                        (npm && typeof npm === 'object' ? npm.downloads : 0)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )
+          : repository
+            ? (repository || (repo && typeof repo === 'object')) && (
+                <div className="space-y-1.5">
+                  <div className="text-xs text-gray-600 dark:text-gray-400">
+                    <span className="hidden sm:inline">Github stars</span>
+                    <span className="sm:hidden">Stars</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center space-x-1.5">
+                      <Github size={16} strokeWidth={1.5} />
+                      <span className="font-medium">
+                        {repository?.stargazerCount ||
+                          (repo && typeof repo === 'object' ? repo.stargazerCount : 0)}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )
+            : null}
+
+        {/* Links (only show if no repo and no npm) */}
+        {!repository &&
+          !npmPackage &&
+          !(repo && typeof repo === 'object') &&
+          !(npm && typeof npm === 'object') &&
+          links && (
+            <div className="space-y-1.5">
+              <div className="text-xs text-gray-600 dark:text-gray-400">Links</div>
+              <div className="flex flex-col items-start gap-0.5 sm:flex-row sm:items-center sm:gap-1.5">
+                {links?.map(({ title, url }, idx) => (
+                  <Fragment key={url}>
+                    <Link href={url} className="flex items-center gap-1.5">
+                      <GrowingUnderline className="font-medium" data-umami-event="project-link">
+                        {title}
+                      </GrowingUnderline>
+                    </Link>
+                    {idx !== links.length - 1 && (
+                      <span className="hidden text-gray-400 dark:text-gray-500 md:inline">|</span>
+                    )}
+                  </Fragment>
+                ))}
               </div>
             </div>
-          </div>
-        ) : links ? (
+          )}
+
+        {/* Stack */}
+        {builtWith && builtWith.length > 0 && (
           <div className="space-y-1.5">
-            <div className="text-xs text-gray-600 dark:text-gray-400">Links</div>
-            <div className="flex flex-col items-start gap-0.5 sm:flex-row sm:items-center sm:gap-1.5">
-              {links?.map(({ title, url }, idx) => (
-                <Fragment key={url}>
-                  <Link href={url} className="flex items-center gap-1.5">
-                    <GrowingUnderline className="font-medium" data-umami-event="project-link">
-                      {title}
-                    </GrowingUnderline>
-                  </Link>
-                  {idx !== links.length - 1 && (
-                    <span className="hidden text-gray-400 dark:text-gray-500 md:inline">|</span>
-                  )}
-                </Fragment>
-              ))}
+            <div className="text-xs text-gray-600 dark:text-gray-400">Stack</div>
+            <div className="flex h-6 flex-wrap items-center gap-1.5">
+              {builtWith?.map((tool) => {
+                return (
+                  <Brand
+                    key={tool}
+                    name={tool as keyof typeof BrandsMap}
+                    iconClassName={clsx(tool === 'Pygame' ? 'h-4' : 'h-4 w-4')}
+                  />
+                )
+              })}
             </div>
           </div>
-        ) : null}
-        <div className="space-y-1.5">
-          <div className="text-xs text-gray-600 dark:text-gray-400">Stack</div>
-          <div className="flex h-6 flex-wrap items-center gap-1.5">
-            {builtWith?.map((tool) => {
-              return (
-                <Brand
-                  key={tool}
-                  name={tool as keyof typeof BrandsMap}
-                  iconClassName={clsx(tool === 'Pygame' ? 'h-4' : 'h-4 w-4')}
-                />
-              )
-            })}
-          </div>
-        </div>
+        )}
+
+        {/* Language */}
         {lang && (
           <div className="space-y-1.5">
             <div className="text-xs text-gray-600 dark:text-gray-400">Language</div>
