@@ -9,7 +9,7 @@ import HeadlessUI from '~/icons/headlessui.svg'
 import Hydrogen from '~/icons/hydrogen.svg'
 import IMBb from '~/icons/imdb.svg'
 import Java from '~/icons/java.svg'
-import Javascript from '~/icons/javascript.svg'
+import JavaScript from '~/icons/javascript.svg'
 import JWT from '~/icons/jsonwebtokens.svg'
 import Koa from '~/icons/koa.svg'
 import Liquid from '~/icons/liquid.svg'
@@ -33,7 +33,7 @@ import Shopify from '~/icons/shopify.svg'
 import Spotify from '~/icons/spotify.svg'
 import TailwindCSS from '~/icons/tailwind.svg'
 import Turborepo from '~/icons/turborepo.svg'
-import Typescript from '~/icons/typescript.svg'
+import TypeScript from '~/icons/typescript.svg'
 import Umami from '~/icons/umami.svg'
 import Vercel from '~/icons/vercel.svg'
 import Webpack from '~/icons/webpack.svg'
@@ -102,12 +102,12 @@ export const BrandsMap: Record<
     Icon: GitHub,
     url: 'https://github.com',
   },
-  Javascript: {
-    Icon: Javascript,
+  JavaScript: {
+    Icon: JavaScript,
     url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
   },
-  Typescript: {
-    Icon: Typescript,
+  TypeScript: {
+    Icon: TypeScript,
     url: 'https://www.typescriptlang.org',
   },
   Node: {
