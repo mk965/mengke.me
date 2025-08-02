@@ -8,7 +8,7 @@ export const PROJECTS: Project[] = [
     imgSrc: '/static/images/projects/AVP2.svg',
     url: '/blog/202309/AVP_Introduction',
     // demo: <AvpDemo />,
-    builtWith: ['WebGL', 'Typescript'],
+    builtWith: ['WebGL', 'TypeScript'],
   },
   {
     type: 'work',
@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
     description: `View iAPP data on your phone at any time.`,
     imgSrc: '/static/images/projects/iapp_lite.jpg',
     url: '/',
-    builtWith: ['WechatMiniProgram', 'AntV', 'Javascript'],
+    builtWith: ['WechatMiniProgram', 'AntV', 'JavaScript'],
   },
   {
     type: 'work',
@@ -48,9 +48,9 @@ export const PROJECTS: Project[] = [
     description: `A MCP server for retrieving and displaying current asset price information. This server provides tools to fetch real-time price information for various assets (including precious metals and cryptocurrencies), making it easy for large language models to access and display this data.`,
     imgSrc: '/static/images/projects/MCP.webp',
     repo: 'mk965/asset-price-mcp',
-    npm: 'asset-price-mcp',
+    npmPackageName: 'asset-price-mcp',
     url: 'https://www.npmjs.com/package/asset-price-mcp',
-    builtWith: ['Typescript'],
+    builtWith: ['TypeScript'],
   },
   {
     type: 'self',
@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     imgSrc: '/static/images/home_page.webp',
     repo: 'mk965/mengke.me',
     url: 'https://mengke.me',
-    builtWith: ['NextJS', 'TailwindCSS', 'Typescript', 'Prisma', 'Umami'],
+    builtWith: ['NextJS', 'TailwindCSS', 'TypeScript', 'Prisma', 'Umami'],
   },
   {
     type: 'self',
@@ -77,7 +77,7 @@ export const PROJECTS: Project[] = [
     imgSrc: '/static/images/projects/coord-check.jpg',
     repo: 'mk965/check-coord',
     url: 'https://www.npmjs.com/package/check-coord',
-    builtWith: ['Javascript'],
+    builtWith: ['JavaScript'],
   },
   {
     type: 'self',
