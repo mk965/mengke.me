@@ -17,10 +17,7 @@ import { fetcher } from '~/utils/misc'
 function NpmStats({ npmPackageName, downloads }: { npmPackageName: string; downloads: number }) {
   return (
     <div className="space-y-1.5">
-      <div className="text-xs text-gray-600 dark:text-gray-400">
-        <span className="hidden sm:inline">Monthly downloads</span>
-        <span className="sm:hidden">Downloads</span>
-      </div>
+      <div className="text-xs text-gray-600 dark:text-gray-400">Downloads</div>
       <div className="flex items-center gap-2">
         <Link
           href={`https://www.npmjs.com/package/${npmPackageName}`}
