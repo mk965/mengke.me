@@ -76,6 +76,7 @@ export const PROJECTS: Project[] = [
     description: `Quickly check a set of string coordinates for incorrect coordinates and format them.`,
     imgSrc: '/static/images/projects/coord-check.jpg',
     repo: 'mk965/check-coord',
+    npmPackageName: 'check-coord',
     url: 'https://www.npmjs.com/package/check-coord',
     builtWith: ['JavaScript'],
   },
