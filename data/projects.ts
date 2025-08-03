@@ -72,9 +72,9 @@ export const PROJECTS: Project[] = [
   },
   {
     type: 'self',
-    title: 'coord-check - Geographic coordinate checking',
-    description: `Quickly check a set of string coordinates for incorrect coordinates and format them.`,
-    imgSrc: '/static/images/projects/coord-check.jpg',
+    title: 'check-coord - Geographic coordinate checking',
+    description: `A powerful coordinate format validation, conversion and analysis tool. Supports validation and geometric calculations for point, line, and region coordinates.`,
+    imgSrc: '/static/images/projects/check-coord.png',
     repo: 'mk965/check-coord',
     npmPackageName: 'check-coord',
     url: 'https://www.npmjs.com/package/check-coord',
