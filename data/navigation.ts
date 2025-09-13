@@ -3,9 +3,7 @@ import { SITE_METADATA } from './site-metadata'
 export const HEADER_NAV_LINKS = [
   { href: '/blog', title: 'Blog', emoji: 'writing-hand' },
   { href: '/snippets', title: 'Snippets', emoji: 'dna' },
-  ...(SITE_METADATA.momentApi
-    ? [{ href: '/moment', title: 'Moment', emoji: 'speech-balloon' }]
-    : []),
+  ...(SITE_METADATA.momentApi ? [{ href: '/moment', title: 'Moment', emoji: 'snowboarder' }] : []),
   { href: '/projects', title: 'Projects', emoji: 'man-technologist' },
   { href: '/about', title: 'About', emoji: 'smiling-face-with-sunglasses' },
 ]
@@ -26,6 +24,7 @@ export const FOOTER_NAV_LINKS = [
 
 export const FOOTER_PERSONAL_STUFF = [
   { href: '/about', title: 'About' },
+  { href: '/moment', title: 'Moment' },
   { href: '/friends', title: 'Friends' },
   // { href: SITE_METADATA.analytics.umamiAnalytics.shareUrl, title: 'Blog stats' },
 ]
