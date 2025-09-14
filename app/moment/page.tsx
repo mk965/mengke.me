@@ -1,3 +1,4 @@
+import React from 'react'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
 import { Image, Zoom } from '~/components/ui/image'
@@ -40,7 +41,7 @@ interface Resource {
 }
 
 async function fetchPublicMoment(): Promise<Moment[]> {
-  const url = `${SITE_METADATA.momentApi}/api/v1/memos?visibility=PUBLIC`
+  const url = `${SITE_METADATA.memosApi}/api/v1/memos?visibility=PUBLIC`
   if (!url) return []
   const res = await fetch(url, { next: { revalidate: 60 } })
   if (!res.ok) return []
@@ -56,17 +57,17 @@ function getResourceUrl(resource: Resource): string | null {
   // resource.name like: "resources/7JoNrgZzCgvtWeLVyjMpT6"
   const id = resource.name?.split('/')?.[1]
   if (!id) return null
-  return `${SITE_METADATA.momentApi}/file/${resource.name}/${resource.filename}`
+  return `${SITE_METADATA.memosApi}/file/${resource.name}/${resource.filename}`
 }
 
 export default async function MomentPage() {
   const moments = await fetchPublicMoment()
 
-  if (!SITE_METADATA.momentApi) {
+  if (!SITE_METADATA.memosApi) {
     return (
       <Container className="py-6">
         <PageHeader
-          title="Moments"
+          title="Moment"
           description="Data source not configured"
           className="border-b border-gray-200 pb-6 dark:border-gray-700"
         />
@@ -87,7 +88,7 @@ export default async function MomentPage() {
   return (
     <Container className="py-6">
       <PageHeader
-        title="Moments"
+        title="Moment"
         description="Record every bit of life and share your daily thoughts and insights"
         className="border-b border-gray-200 pb-6 dark:border-gray-700"
       />
@@ -246,7 +247,11 @@ function renderContent(moment: Moment) {
       )
     }
     if (node.type === 'LINE_BREAK') {
-      return idx !== 0 && moment.nodes?.[idx - 1].type === 'LINE_BREAK' ? <br key={idx} /> : <></>
+      return idx !== 0 && moment.nodes?.[idx - 1].type === 'LINE_BREAK' ? (
+        <br key={`br_${idx}`} />
+      ) : (
+        <React.Fragment key={`empty_${idx}`}></React.Fragment>
+      )
     }
     return null
   })
