@@ -66,7 +66,7 @@ export default async function MomentPage() {
     return (
       <Container className="py-6">
         <PageHeader
-          title="Moments"
+          title="Moment"
           description="Data source not configured"
           className="border-b border-gray-200 pb-6 dark:border-gray-700"
         />
@@ -87,7 +87,7 @@ export default async function MomentPage() {
   return (
     <Container className="py-6">
       <PageHeader
-        title="Moments"
+        title="Moment"
         description="Record every bit of life and share your daily thoughts and insights"
         className="border-b border-gray-200 pb-6 dark:border-gray-700"
       />
