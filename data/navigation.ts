@@ -3,7 +3,7 @@ import { SITE_METADATA } from './site-metadata'
 export const HEADER_NAV_LINKS = [
   { href: '/blog', title: 'Blog', emoji: 'writing-hand' },
   { href: '/snippets', title: 'Snippets', emoji: 'dna' },
-  ...(SITE_METADATA.momentApi ? [{ href: '/moment', title: 'Moment', emoji: 'snowboarder' }] : []),
+  ...(SITE_METADATA.memosApi ? [{ href: '/moment', title: 'Moment', emoji: 'snowboarder' }] : []),
   { href: '/projects', title: 'Projects', emoji: 'man-technologist' },
   { href: '/about', title: 'About', emoji: 'smiling-face-with-sunglasses' },
 ]

@@ -22,7 +22,7 @@ const LINKS = [
     emoji: 'dna',
     event: 'home-link-snippets',
   },
-  ...(SITE_METADATA.momentApi
+  ...(SITE_METADATA.memosApi
     ? [{ title: `My moment`, href: `/moment`, emoji: 'snowboarder', event: 'home-link-moment' }]
     : []),
   {

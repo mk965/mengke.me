@@ -35,7 +35,7 @@ export const SITE_METADATA = {
       lang: 'en',
     },
   },
-  momentApi: 'https://mengke.zeabur.app',
+  memosApi: 'https://mengke.zeabur.app',
   search: {
     kbarConfigs: {
       // path to load documents to search
