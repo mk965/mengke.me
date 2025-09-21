@@ -91,9 +91,40 @@ module.exports = () => {
     },
     async headers() {
       return [
+        // Global security headers
         {
           source: '/(.*)',
           headers: securityHeaders,
+        },
+        // Cache static images for 1 year
+        {
+          source: '/static/images/(.*)',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
+        // Cache favicons for 1 year
+        {
+          source: '/static/favicons/(.*)',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=31536000, immutable',
+            },
+          ],
+        },
+        // Cache other static assets for 30 days
+        {
+          source: '/static/(.*)',
+          headers: [
+            {
+              key: 'Cache-Control',
+              value: 'public, max-age=2592000',
+            },
+          ],
         },
       ]
     },
