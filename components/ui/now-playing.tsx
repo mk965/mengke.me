@@ -2,9 +2,9 @@
 
 import { clsx } from 'clsx'
 import { Brand } from '~/components/ui/brand'
-import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { GrowingUnderline } from '~/components/effects/growing-underline'
 import { Link } from '~/components/ui/link'
-import { MusicWaves } from '~/components/ui/music-waves'
+import { MusicWaves } from '~/components/effects/music-waves'
 import { useNowPlaying } from '~/hooks/use-now-playing'
 import { Image } from './image'
 

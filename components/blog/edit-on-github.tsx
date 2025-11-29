@@ -1,4 +1,4 @@
-import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { GrowingUnderline } from '~/components/effects/growing-underline'
 import { Link } from '~/components/ui/link'
 import { SITE_METADATA } from '~/data/site-metadata'
 export function EditOnGithub({ filePath }: { filePath: string }) {

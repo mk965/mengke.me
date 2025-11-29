@@ -1,7 +1,7 @@
 'use client'
 
 import { Clock, Map } from 'lucide-react'
-import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { GrowingUnderline } from '~/components/effects/growing-underline'
 import { Link } from '~/components/ui/link'
 // import { Twemoji } from '~/components/ui/twemoji'
 import { AUTHOR_INFO } from '~/data/author-info'

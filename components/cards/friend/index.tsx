@@ -1,10 +1,10 @@
 'use client'
 
-import { GradientBorder } from '~/components/ui/gradient-border'
-import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { GradientBorder } from '~/components/effects/gradient-border'
+import { GrowingUnderline } from '~/components/effects/growing-underline'
 import { Image, Zoom } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
-import { TiltedGridBackground } from '~/components/ui/tilted-grid-background'
+import { TiltedGridBackground } from '~/components/effects/tilted-grid-background'
 import type { ImdbFriends } from '~/types/data'
 
 export function FriendCard({ friend }: { friend: ImdbFriends }) {

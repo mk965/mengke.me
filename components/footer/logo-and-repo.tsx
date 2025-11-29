@@ -3,7 +3,7 @@
 import { Star } from 'lucide-react'
 import useSWR from 'swr'
 import { Logo } from '~/components/header/logo'
-import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { GrowingUnderline } from '~/components/effects/growing-underline'
 import { Link } from '~/components/ui/link'
 import { SITE_METADATA } from '~/data/site-metadata'
 import type { GithubRepository } from '~/types/data'

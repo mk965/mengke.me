@@ -3,7 +3,7 @@ import { Minus, Plus } from 'lucide-react'
 import { Image } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
 import { Twemoji } from '~/components/ui/twemoji'
-import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { GrowingUnderline } from '~/components/effects/growing-underline'
 
 const EXPERIENCES = [
   {

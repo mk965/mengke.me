@@ -3,7 +3,7 @@
 import { Menu, MenuButton, MenuItem, MenuItems, Transition } from '@headlessui/react'
 import { ChevronDown } from 'lucide-react'
 import { Fragment } from 'react'
-import { GrowingUnderline } from '~/components/ui/growing-underline'
+import { GrowingUnderline } from '~/components/effects/growing-underline'
 import { Link } from '~/components/ui/link'
 import { Twemoji } from '~/components/ui/twemoji'
 import { MORE_NAV_LINKS } from '~/data/navigation'

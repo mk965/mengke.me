@@ -8,7 +8,7 @@ import { ScrollButtons } from '~/components/blog/scroll-buttons'
 import { SocialShare } from '~/components/blog/social-share'
 import { TagsList } from '~/components/blog/tags'
 import { Container } from '~/components/ui/container'
-import { GradientDivider } from '~/components/ui/gradient-divider'
+import { GradientDivider } from '~/components/effects/gradient-divider'
 import { SITE_METADATA } from '~/data/site-metadata'
 import type { CoreContent } from '~/types/data'
 
