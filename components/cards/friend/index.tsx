@@ -1,56 +1,42 @@
 'use client'
 
-import { GradientBorder } from '~/components/effects/gradient-border'
-import { GrowingUnderline } from '~/components/effects/growing-underline'
-import { Image, Zoom } from '~/components/ui/image'
+import { Image } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
-import { TiltedGridBackground } from '~/components/effects/tilted-grid-background'
 import type { ImdbFriends } from '~/types/data'
+import { ArrowUpRight } from 'lucide-react'
 
 export function FriendCard({ friend }: { friend: ImdbFriends }) {
   const { name, slogan, imgSrc, url } = friend
 
   return (
-    <GradientBorder className="rounded-xl shadow-sm dark:bg-white/5">
-      <TiltedGridBackground className="inset-0 z-[-1]" />
-      <div className="flex gap-5 md:gap-5">
-        <div className="m-4 flex shrink-0 items-end">
-          <Zoom>
-            <Image
-              src={imgSrc}
-              alt={name}
-              width={300}
-              height={450}
-              className="h-24 w-24 rounded-lg shadow-[rgba(13,_38,_76,_0.19)_0px_9px_20px] md:h-36 md:w-36"
-            />
-          </Zoom>
+    <Link
+      href={url}
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-transparent transition-all hover:border-primary-500 hover:shadow-lg dark:border-gray-800 dark:hover:border-primary-500"
+    >
+      <div className="flex h-full flex-row items-center gap-5 p-5">
+        <div className="shrink-0">
+          <Image
+            src={imgSrc}
+            alt={name}
+            width={80}
+            height={80}
+            className="h-20 w-20 rounded-full shadow-sm ring-2 ring-gray-100 transition-all group-hover:ring-primary-500 dark:ring-gray-800"
+          />
         </div>
-        <div className="relative flex grow flex-col gap-1 overflow-hidden pb-4 pr-2 pt-2 md:pr-4">
-          <div className="flex items-start justify-between gap-3 text-xl font-semibold md:text-2xl">
-            <Link href={url}>
-              <GrowingUnderline>{name}</GrowingUnderline>
-            </Link>
+
+        <div className="flex min-w-0 flex-1 flex-col justify-center">
+          <div className="mb-1 flex items-center justify-between">
+            <h4 className="truncate text-lg font-bold text-gray-900 transition-colors group-hover:text-primary-500 dark:text-gray-100">
+              {name}
+            </h4>
+            <ArrowUpRight className="h-5 w-5 text-gray-400 opacity-0 transition-all group-hover:text-primary-500 group-hover:opacity-100" />
           </div>
-          <div className="grow">
-            <div className="flex flex-wrap items-center gap-1 text-gray-500 dark:text-gray-400">
-              <span>{slogan}</span>
-            </div>
-          </div>
-          <Link href={url} className="" aria-label="All posts">
-            <GrowingUnderline data-umami-event="visit-friend">
-              <span className="hidden md:inline-block">Visit</span>
-              <span className="md:hidden">More</span> &rarr;
-            </GrowingUnderline>
-          </Link>
+
+          <p className="line-clamp-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+            {slogan}
+          </p>
         </div>
       </div>
-    </GradientBorder>
+    </Link>
   )
-}
-
-function formatRuntime(runtime: string) {
-  const _mins = Number(runtime)
-  const hours = Math.floor(_mins / 60)
-  const mins = _mins % 60
-  return `${hours}h ${mins < 10 ? '0' : ''}${mins}m`
 }
