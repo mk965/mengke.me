@@ -1,82 +1,60 @@
 'use client'
 
 import clsx from 'clsx'
-import { Github, Download } from 'lucide-react'
+import { Github, Download, ExternalLink } from 'lucide-react'
 import useSWR from 'swr'
-import type { BrandsMap } from '~/components/ui/brand'
-import { Brand } from '~/components/ui/brand'
-import { GradientBorder } from '~/components/effects/gradient-border'
-import { GrowingUnderline } from '~/components/effects/growing-underline'
+import { Brand, type BrandsMap } from '~/components/ui/brand'
 import { Image } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
-import { TiltedGridBackground } from '~/components/effects/tilted-grid-background'
 import type { PROJECTS } from '~/data/projects'
 import type { GithubRepository, NpmPackage } from '~/types/data'
 import { fetcher } from '~/utils/misc'
 
 function NpmStats({ npmPackageName, downloads }: { npmPackageName: string; downloads: number }) {
   return (
-    <div className="space-y-1.5">
-      <div className="text-xs text-gray-600 dark:text-gray-400">Downloads</div>
-      <div className="flex items-center gap-2">
-        <Link
-          href={`https://www.npmjs.com/package/${npmPackageName}`}
-          className="flex items-center gap-1.5"
-        >
-          <GrowingUnderline data-umami-event="project-npm-link">
-            <div className="flex items-center space-x-1.5">
-              <Download size={16} strokeWidth={1.5} />
-              <span className="font-medium">{downloads}</span>
-            </div>
-          </GrowingUnderline>
-        </Link>
-      </div>
-    </div>
+    <Link
+      href={`https://www.npmjs.com/package/${npmPackageName}`}
+      className="flex items-center gap-1.5 text-xs text-gray-500 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+    >
+      <Download size={14} strokeWidth={1.5} />
+      <span>{downloads.toLocaleString()} downloads</span>
+    </Link>
   )
 }
 
 function GithubStats({ repository }: { repository: GithubRepository }) {
   return (
-    <div className="space-y-1.5">
-      <div className="text-xs text-gray-600 dark:text-gray-400">
-        <span className="hidden sm:inline">Github stars</span>
-        <span className="sm:hidden">Stars</span>
-      </div>
-      <div className="flex items-center gap-2">
-        <Link href={repository.url} className="flex items-center gap-1.5">
-          <GrowingUnderline data-umami-event="project-github-link">
-            <div className="flex items-center space-x-1.5">
-              <Github size={16} strokeWidth={1.5} />
-              <span className="font-medium">{repository.stargazerCount}</span>
-            </div>
-          </GrowingUnderline>
-        </Link>
-      </div>
-    </div>
+    <Link
+      href={repository.url}
+      className="flex items-center gap-1.5 text-xs text-gray-500 transition-colors hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+    >
+      <Github size={14} strokeWidth={1.5} />
+      <span>{repository.stargazerCount.toLocaleString()} stars</span>
+    </Link>
   )
 }
 
 function Stack({ builtWith }: { builtWith: string[] }) {
   return (
-    <div className="space-y-1.5">
-      <div className="text-xs text-gray-600 dark:text-gray-400">Stack</div>
-      <div className="flex h-6 flex-wrap items-center gap-1.5">
-        {builtWith?.map((tool) => {
-          return (
-            <Brand
-              key={tool}
-              name={tool as keyof typeof BrandsMap}
-              iconClassName={clsx(tool === 'Pygame' ? 'h-4' : 'h-4 w-4')}
-            />
-          )
-        })}
-      </div>
+    <div className="flex flex-wrap items-center gap-1.5">
+      {builtWith?.map((tool) => (
+        <div
+          key={tool}
+          className="flex items-center gap-1 rounded-md bg-gray-100 px-2 py-1 text-xs text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+        >
+          <Brand
+            name={tool as keyof typeof BrandsMap}
+            iconClassName={clsx(tool === 'Pygame' ? 'h-3 w-3' : 'h-3 w-3')}
+          />
+          <span>{tool}</span>
+        </div>
+      ))}
     </div>
   )
 }
 
 export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
-  const { title, description, imgSrc, url, repo, npmPackageName, builtWith, links } = project
+  const { title, description, imgSrc, url, repo, npmPackageName, builtWith } = project
 
   const { data: repository } = useSWR<GithubRepository>(
     repo ? `/api/github?repo=${repo}` : null,
@@ -87,46 +65,53 @@ export function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
     npmPackageName ? `/api/npm?package=${npmPackageName}` : null,
     fetcher
   )
+
   const href = url || repository?.url
 
-  const propertyCount = (npmPackage ? 1 : 0) + (repository ? 1 : 0) + (builtWith.length > 0 ? 1 : 0)
-
   return (
-    <GradientBorder
-      offset={28}
-      className="flex flex-col rounded-[40px] p-6 [box-shadow:0_8px_32px_rgba(194,194,218,.3)] dark:bg-white/5 dark:shadow-none md:p-8"
-    >
-      <TiltedGridBackground className="inset-0 z-[-1] rounded-[40px]" />
-      <div className="mb-6 flex items-center gap-4">
-        <Image src={imgSrc} alt={title} width={100} height={100} className="h-15 w-15 shrink-0" />
-        <div className="flex flex-col items-start gap-1 pt-1">
-          <h2 className="text-[22px] font-bold leading-[30px]">
+    <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all hover:border-primary-500 hover:shadow-lg dark:border-gray-800 dark:bg-white/5 dark:hover:border-primary-500">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+        <Image
+          src={imgSrc}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      </div>
+
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-3 flex items-start justify-between gap-4">
+          <h2 className="text-xl font-bold leading-tight text-gray-900 transition-colors group-hover:text-primary-600 dark:text-gray-100 dark:group-hover:text-primary-400">
             {href ? (
-              <Link href={href} aria-label={`Link to ${title}`}>
-                <GrowingUnderline data-umami-event="project-title-link">{title}</GrowingUnderline>
+              <Link href={href} className="flex items-center gap-2">
+                {title}
+                <ExternalLink
+                  size={16}
+                  className="opacity-0 transition-opacity group-hover:opacity-100"
+                />
               </Link>
             ) : (
               title
             )}
           </h2>
         </div>
+
+        <p className="mb-4 line-clamp-3 text-sm text-gray-600 dark:text-gray-400">{description}</p>
+
+        <div className="mt-auto flex flex-col gap-4">
+          <Stack builtWith={builtWith} />
+
+          {(npmPackageName || repository) && (
+            <div className="flex items-center gap-4 border-t border-gray-100 pt-3 dark:border-gray-700/50">
+              {npmPackageName && (
+                <NpmStats npmPackageName={npmPackageName} downloads={npmPackage?.downloads || 0} />
+              )}
+              {repository && <GithubStats repository={repository} />}
+            </div>
+          )}
+        </div>
       </div>
-      <p className="mb-16 line-clamp-3 grow text-lg">{description}</p>
-      <div
-        className={clsx('mt-auto flex gap-6 sm:gap-9 md:grid md:gap-0', {
-          'md:grid-cols-1': propertyCount === 1,
-          'md:grid-cols-2': propertyCount === 2,
-          'md:grid-cols-3': propertyCount === 3,
-          'md:grid-cols-4': propertyCount === 4,
-        })}
-      >
-        {/* {projectProperty} */}
-        {npmPackageName && (
-          <NpmStats npmPackageName={npmPackageName} downloads={npmPackage?.downloads || 0} />
-        )}
-        {repository && <GithubStats repository={repository} />}
-        {builtWith.length > 0 && <Stack builtWith={builtWith} />}
-      </div>
-    </GradientBorder>
+    </div>
   )
 }
