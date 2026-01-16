@@ -7,7 +7,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is *.i.posthog.com static.cloudflareinsights.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is cloud.umami.is va.vercel-scripts.com *.i.posthog.com static.cloudflareinsights.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data:;
   media-src *.s3.amazonaws.com;
@@ -88,6 +88,17 @@ module.exports = () => {
         },
       ],
       unoptimized,
+    },
+    async rewrites() {
+      return [
+        // Proxy Umami script/events to avoid blockers while keeping a stable local path.
+        // /stats/script.js  -> https://analytics.umami.is/script.js
+        // /stats/api/send   -> https://analytics.umami.is/api/send
+        {
+          source: '/stats/:path*',
+          destination: 'https://analytics.umami.is/:path*',
+        },
+      ]
     },
     async headers() {
       return [

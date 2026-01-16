@@ -5,7 +5,7 @@ import 'remark-github-blockquote-alert/alert.css'
 import 'katex/dist/katex.css'
 
 import clsx from 'clsx'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { JetBrains_Mono, Nunito, Playpen_Sans } from 'next/font/google'
 import { UmamiAnalytics } from '~/components/analytics/umami'
 import { Footer } from '~/components/footer'
@@ -38,6 +38,11 @@ const FONT_JETBRAINS_MONO = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
 })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_METADATA.siteUrl),
   title: {
@@ -48,7 +53,6 @@ export const metadata: Metadata = {
   keywords: ['blog', 'programming', 'frontend', 'javascript', 'react', 'nextjs', 'web development'],
   authors: [{ name: SITE_METADATA.author }],
   creator: SITE_METADATA.author,
-  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     title: SITE_METADATA.title,
     description: SITE_METADATA.description,

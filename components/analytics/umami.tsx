@@ -7,7 +7,8 @@ interface UmamiAnalyticsProps {
 
 export function UmamiAnalytics({ websiteId, src = '/stats/script.js' }: UmamiAnalyticsProps) {
   if (websiteId) {
-    return <Script async defer data-website-id={websiteId} src={src} />
+    // Delay loading analytics to reduce TBT impact on initial render.
+    return <Script strategy="lazyOnload" async defer data-website-id={websiteId} src={src} />
   }
   return null
 }

@@ -16,7 +16,7 @@ export const SITE_METADATA = {
   analytics: {
     umamiAnalytics: {
       websiteId: process.env.NEXT_UMAMI_ID,
-      shareUrl: 'https://analytics.eu.umami.is/share/EqvpZYPABxaQA3mr/mengke.me',
+      shareUrl: 'https://analytics.umami.is/share/EqvpZYPABxaQA3mr/mengke.me',
     },
   },
   comments: {
