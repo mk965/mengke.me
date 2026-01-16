@@ -1,6 +1,7 @@
 'use client'
 
 import { Clock, Map } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { GrowingUnderline } from '~/components/effects/growing-underline'
 import { Link } from '~/components/ui/link'
 // import { Twemoji } from '~/components/ui/twemoji'
@@ -32,7 +33,16 @@ function getTime() {
 }
 
 export function AddressAndTime() {
-  const { time, diff } = getTime()
+  // NOTE:
+  // This component depends on the visitor's timezone. If we render it on the server,
+  // the server timezone will likely differ and cause a hydration mismatch (React #418).
+  // So we only compute time after the client has mounted.
+  const [timeInfo, setTimeInfo] = useState<{ time: string; diff: string } | null>(null)
+
+  useEffect(() => {
+    setTimeInfo(getTime())
+  }, [])
+
   return (
     <div className="space-y-2 py-1.5 text-gray-800 dark:text-gray-200">
       <div className="flex items-center gap-2">
@@ -50,7 +60,8 @@ export function AddressAndTime() {
         <Clock className="h-5 w-5" />
         <Link href={TIME_IS}>
           <GrowingUnderline className="font-medium" data-umami-event="footer-time">
-            {time} <span className="text-gray-500 dark:text-gray-400">({diff})</span>
+            {timeInfo?.time ?? '--:--'}{' '}
+            <span className="text-gray-500 dark:text-gray-400">({timeInfo?.diff ?? '...'})</span>
           </GrowingUnderline>
         </Link>
       </div>
