@@ -50,6 +50,16 @@ function useActiveTocItem(ids: string[]) {
 export function TableOfContents({ toc, className }: { toc: TocItem[]; className?: string }) {
   const ids = toc.map((item) => item.url)
   const activeId = useActiveTocItem(ids)
+  const tocItemRefs = useRef<Map<string, HTMLLIElement>>(new Map())
+
+  useEffect(() => {
+    if (!activeId) return
+
+    tocItemRefs.current.get(`#${activeId}`)?.scrollIntoView({
+      block: 'nearest',
+      inline: 'nearest',
+    })
+  }, [activeId])
 
   return (
     <details className={clsx('space-y-4 [&_.chevron-right]:open:rotate-90', className)} open>
@@ -61,17 +71,25 @@ export function TableOfContents({ toc, className }: { toc: TocItem[]; className?
         />
         <span className="text-lg font-medium">On this page</span>
       </summary>
-      <ul className="flex flex-col space-y-2">
+      <ul className="no-scrollbar flex flex-col space-y-2 lg:max-h-[calc(100vh-16rem)] lg:overflow-y-auto lg:pr-2">
         {toc.map(({ value, depth, url }) => (
           <li
             key={url}
+            ref={(node) => {
+              if (node) {
+                tocItemRefs.current.set(url, node)
+                return
+              }
+
+              tocItemRefs.current.delete(url)
+            }}
             className={clsx([
-              'font-medium',
+              'font-medium transition-colors duration-200',
               url === `#${activeId}`
                 ? 'text-gray-700 dark:text-gray-200'
                 : 'text-gray-400 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-200',
             ])}
-            style={{ paddingLeft: (depth - 2) * 16 }}
+            style={{ paddingLeft: Math.max(0, depth - 2) * 16 }}
           >
             <Link href={url}>{value}</Link>
           </li>
