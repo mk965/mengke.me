@@ -74,6 +74,16 @@ export function LatestPosts({
           </div>
         </div>
       )}
+      <div className="flex justify-end pt-5">
+        <Link
+          href={view === 'posts' ? '/blog' : '/snippets'}
+          className="text-base font-medium leading-6"
+        >
+          <GrowingUnderline data-umami-event={`all-${view}-bottom`}>
+            View all {view} &rarr;
+          </GrowingUnderline>
+        </Link>
+      </div>
     </div>
   )
 }
