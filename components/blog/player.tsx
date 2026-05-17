@@ -1,7 +1,9 @@
 'use client'
 
 import clsx from 'clsx'
-import { Plyr, type PlyrProps } from 'plyr-react'
+import { useEffect, useMemo, useState } from 'react'
+import type { ComponentType } from 'react'
+import type { PlyrProps } from 'plyr-react'
 import 'plyr-react/plyr.css'
 
 type MediaType = 'video' | 'audio'
@@ -43,11 +45,28 @@ function mimeFromSrc(src: string, mediaType: MediaType): string {
 }
 
 export function Player({ src, type = 'video', poster, className }: PlayerProps) {
-  const source: PlyrProps['source'] = {
-    type,
-    sources: [{ src, type: mimeFromSrc(src, type) }],
-    ...(poster ? { poster } : {}),
-  }
+  const [Plyr, setPlyr] = useState<ComponentType<PlyrProps> | null>(null)
+
+  useEffect(() => {
+    let mounted = true
+
+    import('plyr-react').then((mod) => {
+      if (mounted) setPlyr(() => mod.Plyr)
+    })
+
+    return () => {
+      mounted = false
+    }
+  }, [])
+
+  const source = useMemo<PlyrProps['source']>(
+    () => ({
+      type,
+      sources: [{ src, type: mimeFromSrc(src, type) }],
+      ...(poster ? { poster } : {}),
+    }),
+    [poster, src, type]
+  )
 
   return (
     <div
@@ -56,7 +75,11 @@ export function Player({ src, type = 'video', poster, className }: PlayerProps) 
         className
       )}
     >
-      <Plyr source={source} options={PLAYER_OPTIONS} />
+      {Plyr ? (
+        <Plyr source={source} options={PLAYER_OPTIONS} />
+      ) : (
+        <div className="aspect-video w-full animate-pulse rounded-xl bg-gray-200 dark:bg-gray-800" />
+      )}
     </div>
   )
 }
