@@ -151,6 +151,22 @@ export const Snippet = defineDocumentType(() => ({
   },
 }))
 
+export const Moment = defineDocumentType(() => ({
+  name: 'Moment',
+  filePathPattern: 'moments/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    date: { type: 'date', required: true },
+    images: { type: 'json' },
+    draft: { type: 'boolean' },
+  },
+  computedFields: {
+    slug: { type: 'string', resolve: (doc) => doc._raw.flattenedPath.replace(/^.+?(\/)/, '') },
+    path: { type: 'string', resolve: (doc) => doc._raw.flattenedPath },
+    filePath: { type: 'string', resolve: (doc) => doc._raw.sourceFilePath },
+  },
+}))
+
 export const Author = defineDocumentType(() => ({
   name: 'Author',
   filePathPattern: 'authors/**/*.mdx',
@@ -171,7 +187,7 @@ export const Author = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Snippet, Author],
+  documentTypes: [Blog, Snippet, Moment, Author],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [
@@ -210,9 +226,10 @@ export default makeSource({
     ],
   },
   onSuccess: async (importData) => {
-    const { allBlogs, allSnippets, allAuthors } = await importData()
+    const { allBlogs, allSnippets, allMoments, allAuthors } = await importData()
     console.log('📝 Import Blogs:', allBlogs?.length || 0)
     console.log('💡 Import Snippets:', allSnippets?.length || 0)
+    console.log('📸 Import Moments:', allMoments?.length || 0)
     console.log('👤 Import Authors:', allAuthors?.length || 0)
     const allPosts = [...allBlogs, ...allSnippets]
     createTagCount(allPosts)

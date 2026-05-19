@@ -22,9 +22,12 @@ const LINKS = [
     emoji: 'dna',
     event: 'home-link-snippets',
   },
-  ...(SITE_METADATA.memosApi
-    ? [{ title: `My moment`, href: `/moment`, emoji: 'snowboarder', event: 'home-link-moment' }]
-    : []),
+  {
+    title: `My moment`,
+    href: `/moment`,
+    emoji: 'snowboarder',
+    event: 'home-link-moment',
+  },
   {
     title: `About me & this blog`,
     href: `/about`,

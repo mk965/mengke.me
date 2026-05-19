@@ -82,10 +82,6 @@ module.exports = () => {
           protocol: 'https',
           hostname: 'm.media-amazon.com', // IMDB movie posters
         },
-        {
-          protocol: 'https',
-          hostname: 'mengke.zeabur.app', // usemoment resources
-        },
       ],
       unoptimized,
     },

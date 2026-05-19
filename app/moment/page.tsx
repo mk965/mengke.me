@@ -1,89 +1,27 @@
-import React from 'react'
+import { allMoments } from 'contentlayer/generated'
+import { clsx } from 'clsx'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
 import { Image, Zoom } from '~/components/ui/image'
 import { GritBackground } from '~/components/effects/grit-background'
+import { MDXLayoutRenderer } from '~/components/mdx/layout-renderer'
+import { MDX_COMPONENTS } from '~/components/mdx'
 import { SITE_METADATA } from '~/data/site-metadata'
 import { AUTHOR_INFO } from '~/data/author-info'
 import { formatDate } from '~/utils/date'
-import { clsx } from 'clsx'
+import { sortPosts } from '~/utils/misc'
 
-type MomentResponse = { moment: Moment[] } | { memos: Moment[] }
+const isProduction = process.env.NODE_ENV === 'production'
 
-interface Moment {
-  name: string
-  state: string
-  creator: string
-  createTime: string
-  updateTime: string
-  displayTime: string
-  content: string
-  nodes?: any[]
-  visibility: 'PUBLIC' | 'PRIVATE' | string
-  tags?: string[]
-  pinned?: boolean
-  resources?: Resource[]
-  relations?: any[]
-  reactions?: any[]
-  property?: Record<string, unknown>
-  snippet?: string
+function getMomentImages(images: unknown): string[] {
+  if (!images) return []
+  if (typeof images === 'string') return [images]
+  if (Array.isArray(images)) return images.filter((i): i is string => typeof i === 'string')
+  return []
 }
 
-interface Resource {
-  name: string
-  createTime: string
-  filename: string
-  content: string
-  externalLink: string
-  type: string
-  size: string
-  memo: string
-}
-
-async function fetchPublicMoment(): Promise<Moment[]> {
-  const url = `${SITE_METADATA.memosApi}/api/v1/memos?visibility=PUBLIC`
-  if (!url) return []
-  const res = await fetch(url, { next: { revalidate: 60 } })
-  if (!res.ok) return []
-  const data = (await res.json()) as MomentResponse
-  // 兼容两种字段：memos / moment
-  // @ts-ignore
-  return (data.memos as Moment[]) || (data.moment as Moment[]) || []
-}
-
-function getResourceUrl(resource: Resource): string | null {
-  if (resource.externalLink) return resource.externalLink
-  // Build raw URL for self-hosted usememos
-  // resource.name like: "resources/7JoNrgZzCgvtWeLVyjMpT6"
-  const id = resource.name?.split('/')?.[1]
-  if (!id) return null
-  return `${SITE_METADATA.memosApi}/file/${resource.name}/${resource.filename}`
-}
-
-export default async function MomentPage() {
-  const moments = await fetchPublicMoment()
-
-  if (!SITE_METADATA.memosApi) {
-    return (
-      <Container className="py-6">
-        <PageHeader
-          title="Moment"
-          description="Data source not configured"
-          className="border-b border-gray-200 pb-6 dark:border-gray-700"
-        />
-        <div className="mx-auto mt-8 max-w-2xl">
-          <div className="rounded-2xl border border-gray-200 bg-gray-50 p-12 text-center dark:border-gray-700 dark:bg-gray-800/50">
-            <div className="text-gray-500 dark:text-gray-400">
-              <div className="mb-2 text-lg font-medium">Data source not configured</div>
-              <div className="text-sm">
-                Please configure `NEXT_PUBLIC_MOMENT_API` in the environment variable
-              </div>
-            </div>
-          </div>
-        </div>
-      </Container>
-    )
-  }
+export default function MomentPage() {
+  const moments = sortPosts(allMoments.filter((m) => (isProduction ? m.draft !== true : true)))
 
   return (
     <Container className="py-6">
@@ -93,14 +31,10 @@ export default async function MomentPage() {
         className="border-b border-gray-200 pb-6 dark:border-gray-700"
       />
       <div className="mx-auto mt-8 max-w-2xl space-y-8">
-        {moments.map((momentItem) => {
-          const images = (momentItem.resources || [])
-            .filter((r) => r.type.startsWith('image/'))
-            .map((r) => ({ url: getResourceUrl(r), filename: r.filename }))
-            .filter((r) => !!r.url) as { url: string; filename: string }[]
-
+        {moments.map((moment) => {
+          const images = getMomentImages(moment.images)
           return (
-            <article key={momentItem.name} className="group">
+            <article key={moment._id} className="group">
               <div
                 className={clsx([
                   'relative overflow-hidden rounded-2xl',
@@ -129,12 +63,12 @@ export default async function MomentPage() {
                         {AUTHOR_INFO.name}
                       </div>
                       <div className="text-sm text-gray-500 dark:text-gray-400">
-                        {formatDate(momentItem.displayTime || momentItem.createTime)}
+                        {formatDate(moment.date)}
                       </div>
                     </div>
                   </div>
                   <div className="prose prose-sm prose-gray max-w-none dark:prose-invert">
-                    {renderContent(momentItem)}
+                    <MDXLayoutRenderer code={moment.body.code} components={MDX_COMPONENTS} />
                   </div>
                   {images.length > 0 && (
                     <div
@@ -143,11 +77,11 @@ export default async function MomentPage() {
                         images.length === 1 ? 'grid-cols-1' : 'grid-cols-2 sm:grid-cols-3',
                       ])}
                     >
-                      {images.map((img) => (
-                        <Zoom key={img.url!}>
+                      {images.map((src) => (
+                        <Zoom key={src}>
                           <Image
-                            src={img.url}
-                            alt={img.filename}
+                            src={src}
+                            alt="moment image"
                             width={600}
                             height={600}
                             className={clsx([
@@ -178,81 +112,4 @@ export default async function MomentPage() {
       </div>
     </Container>
   )
-}
-
-function renderContent(moment: Moment) {
-  if (!moment.nodes || moment.nodes.length === 0) {
-    return moment.content
-  }
-  return moment.nodes.map((node: any, idx: number) => {
-    if (node.type === 'PARAGRAPH') {
-      const text = (node.paragraphNode?.children || [])
-        .map((c: any) => {
-          if (c.type === 'TEXT') return c.textNode?.content
-          if (c.type === 'AUTO_LINK') {
-            const url = c.autoLinkNode?.url
-            return url
-              ? `<a class="text-blue-600 hover:underline dark:text-blue-400" href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
-              : ''
-          }
-          return ''
-        })
-        .join('')
-      if (!text) return null
-      return <p key={idx} className="mb-0 mt-0" dangerouslySetInnerHTML={{ __html: text }} />
-    }
-    if (node.type === 'CODE_BLOCK') {
-      const lang = node.codeBlockNode?.language || ''
-      const code = node.codeBlockNode?.content || ''
-      return (
-        <pre
-          key={idx}
-          className="my-4 overflow-x-auto rounded-lg bg-gray-100 p-4 text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-100"
-        >
-          <code className={`language-${lang}`}>{code}</code>
-        </pre>
-      )
-    }
-    if (node.type === 'LIST') {
-      const ordered = node.listNode?.kind === 'ORDERED'
-      const items: any[] = node.listNode?.children || []
-      const elements = items
-        .map((it: any, i: number) => {
-          if (it.type === 'LINE_BREAK') return null
-          const container = it.orderedListItemNode || it.unorderedListItemNode
-          if (!container) return null
-          const content = (container.children || [])
-            .map((c: any) => {
-              if (c.type === 'TEXT') return c.textNode?.content
-              if (c.type === 'AUTO_LINK') {
-                const url = c.autoLinkNode?.url
-                return url
-                  ? `<a class="text-blue-600 hover:underline dark:text-blue-400" href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`
-                  : ''
-              }
-              return ''
-            })
-            .join('')
-          return <li key={i} className="mb-1" dangerouslySetInnerHTML={{ __html: content }} />
-        })
-        .filter(Boolean)
-      return ordered ? (
-        <ol key={idx} className="my-4 list-decimal space-y-1 pl-6">
-          {elements}
-        </ol>
-      ) : (
-        <ul key={idx} className="my-4 list-disc space-y-1 pl-6">
-          {elements}
-        </ul>
-      )
-    }
-    if (node.type === 'LINE_BREAK') {
-      return idx !== 0 && moment.nodes?.[idx - 1].type === 'LINE_BREAK' ? (
-        <br key={`br_${idx}`} />
-      ) : (
-        <React.Fragment key={`empty_${idx}`}></React.Fragment>
-      )
-    }
-    return null
-  })
 }
