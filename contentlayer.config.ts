@@ -100,16 +100,29 @@ export const Blog = defineDocumentType(() => ({
     ...computedFields,
     structuredData: {
       type: 'json',
-      resolve: (doc) => ({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: doc.title,
-        datePublished: doc.date,
-        dateModified: doc.lastmod || doc.date,
-        description: doc.summary,
-        image: doc.images ? doc.images[0] : SITE_METADATA.socialBanner,
-        url: `${SITE_METADATA.siteUrl}/${doc._raw.flattenedPath}`,
-      }),
+      resolve: (doc) => {
+        const url = `${SITE_METADATA.siteUrl}/${doc._raw.flattenedPath}`
+        const rawImage = Array.isArray(doc.images) ? doc.images[0] : doc.images
+        const image = rawImage
+          ? rawImage.startsWith('http')
+            ? rawImage
+            : `${SITE_METADATA.siteUrl}${rawImage}`
+          : `${SITE_METADATA.siteUrl}${SITE_METADATA.socialBanner}`
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: doc.title,
+          datePublished: doc.date,
+          dateModified: doc.lastmod || doc.date,
+          description: doc.summary,
+          image,
+          url,
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': url,
+          },
+        }
+      },
     },
   },
 }))

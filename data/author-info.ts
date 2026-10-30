@@ -29,3 +29,8 @@ export const AUTHOR_INFO = {
     wechat: '/static/images/wechat-reward-code.webp',
   },
 }
+
+/** Public profile URLs of the author, used for JSON-LD `sameAs` entity linking. */
+export const AUTHOR_SAME_AS: string[] = Object.values(AUTHOR_INFO.social).filter(
+  (url): url is string => typeof url === 'string' && url.startsWith('http')
+)

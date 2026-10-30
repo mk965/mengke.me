@@ -1,0 +1,20 @@
+# Mengke's blog - Mengke's coding journey
+
+> A personal space on the cloud where Mengke, a front-end engineer, documents his programming journey, sharing lessons, insights, and resources for fellow developers. Main topics: JavaScript, TypeScript, React, Vue, Next.js, MCP, and web development, plus notes on life.
+
+## Main
+
+- [Home](https://www.mengke.me/): Latest blog posts and snippets
+- [Blog](https://www.mengke.me/blog): All blog posts, searchable by title and tag
+- [Snippets](https://www.mengke.me/snippets): Short code snippets and notes
+- [Projects](https://www.mengke.me/projects): Things Mengke has built
+- [About](https://www.mengke.me/about): About the author
+
+## Feeds
+
+- [RSS feed](https://www.mengke.me/feed.xml): Full list of blog posts as a feed
+- [Sitemap](https://www.mengke.me/sitemap.xml): All public pages on the site
+
+## Author
+
+- [GitHub](https://github.com/mk965): The author's GitHub profile; this site's source is at https://github.com/mk965/mengke.me

@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { MDXLayoutRenderer } from '~/components/mdx/layout-renderer'
 import { MDX_COMPONENTS } from '~/components/mdx'
+import { AUTHOR_SAME_AS } from '~/data/author-info'
 import { SITE_METADATA } from '~/data/site-metadata'
 import { PostBanner } from '~/layouts/post-banner'
 import { PostLayout } from '~/layouts/post-layout'
@@ -102,8 +103,16 @@ export default async function Page(props: { params: Promise<{ slug: string[] }> 
     return {
       '@type': 'Person',
       name: author.name,
+      url: SITE_METADATA.siteUrl,
+      sameAs: AUTHOR_SAME_AS,
     }
   })
+  jsonLd['publisher'] = {
+    '@type': 'Person',
+    name: SITE_METADATA.author,
+    url: SITE_METADATA.siteUrl,
+    sameAs: AUTHOR_SAME_AS,
+  }
 
   const Layout = LAYOUTS[post.layout || DEFAULT_LAYOUT]
 
