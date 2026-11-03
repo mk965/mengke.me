@@ -34,6 +34,7 @@ export function PostCardListView({
             alt={title}
             width={500}
             height={500}
+            sizes="(max-width: 767px) 100vw, 276px"
             className="aspect-video h-full w-full rounded-xl shadow-2xl"
             loading={loading}
           />

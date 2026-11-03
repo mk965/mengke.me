@@ -28,7 +28,7 @@ export interface ImageProps extends Omit<NextImageProps, 'src' | 'priority'> {
 }
 
 export function Image(props: ImageProps) {
-  const { alt, src, loading = 'lazy', style, className, ...rest } = props
+  const { alt, src, loading = 'lazy', style, className, quality = 75, ...rest } = props
   const [loaded, onLoad] = useImageLoadedState(src)
 
   return (
@@ -50,7 +50,7 @@ export function Image(props: ImageProps) {
         style={{ objectFit: 'cover', ...style }}
         loading={loading}
         priority={loading === 'eager'}
-        quality={100}
+        quality={quality}
         onLoad={onLoad}
         {...rest}
       />
