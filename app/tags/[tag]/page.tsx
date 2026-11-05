@@ -17,6 +17,7 @@ export async function generateMetadata(props: {
   return genPageMetadata({
     title: tag,
     description: `${SITE_METADATA.title} ${tag} tagged content`,
+    path: `/tags/${tag}`,
     alternates: {
       canonical: `${SITE_METADATA.siteUrl}/tags/${tag}`,
       types: {
