@@ -4,7 +4,7 @@ import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
 import { PROJECTS } from '~/data/projects'
 
-export let metadata = genPageMetadata({ title: 'Projects' })
+export let metadata = genPageMetadata({ title: 'Projects', path: '/projects' })
 
 export default async function Projects() {
   const workProjects = PROJECTS.filter(({ type }) => type === 'work')

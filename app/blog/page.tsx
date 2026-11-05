@@ -5,7 +5,7 @@ import { POSTS_PER_PAGE } from '~/utils/const'
 import { allCoreContent } from '~/utils/contentlayer'
 import { sortPosts } from '~/utils/misc'
 
-export const metadata = genPageMetadata({ title: 'Blog' })
+export const metadata = genPageMetadata({ title: 'Blog', path: '/blog' })
 
 export default function BlogPage() {
   const posts = allCoreContent(sortPosts(allBlogs))

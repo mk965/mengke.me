@@ -1,4 +1,5 @@
 import { allMoments } from 'contentlayer/generated'
+import { genPageMetadata } from 'app/seo'
 import { clsx } from 'clsx'
 import { Container } from '~/components/ui/container'
 import { PageHeader } from '~/components/ui/page-header'
@@ -10,6 +11,12 @@ import { SITE_METADATA } from '~/data/site-metadata'
 import { AUTHOR_INFO } from '~/data/author-info'
 import { formatDate } from '~/utils/date'
 import { sortPosts } from '~/utils/misc'
+
+export const metadata = genPageMetadata({
+  title: 'Moment',
+  description: 'Record every bit of life and share your daily thoughts and insights',
+  path: '/moment',
+})
 
 const isProduction = process.env.NODE_ENV === 'production'
 

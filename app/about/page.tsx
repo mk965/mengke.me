@@ -8,7 +8,7 @@ import { SocialAccounts } from '~/components/author/social-accounts'
 import { SupportMe } from '~/components/author/support-me'
 import { MDXLayoutRenderer } from '~/components/mdx/layout-renderer'
 
-export const metadata = genPageMetadata({ title: 'About' })
+export const metadata = genPageMetadata({ title: 'About', path: '/about' })
 
 export default function AboutPage() {
   const author = allAuthors.find((p) => p.slug === 'default') as Author

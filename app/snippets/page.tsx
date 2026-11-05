@@ -6,7 +6,7 @@ import { SnippetCard } from '~/components/cards/snippet'
 import { allCoreContent } from '~/utils/contentlayer'
 import { sortPosts } from '~/utils/misc'
 
-export const metadata = genPageMetadata({ title: 'Snippets' })
+export const metadata = genPageMetadata({ title: 'Snippets', path: '/snippets' })
 
 export default function Snippets() {
   const snippets = allCoreContent(sortPosts(allSnippets))

@@ -6,21 +6,33 @@ interface PageSEOProps {
   title: string
   description?: string
   image?: string
+  path?: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 }
 
-export function genPageMetadata({ title, description, image, ...rest }: PageSEOProps): Metadata {
+export function genPageMetadata({ title, description, image, path, ...rest }: PageSEOProps): Metadata {
   const fullTitle = `${title} | ${SITE_METADATA.title}`
   const pageDescription = description || SITE_METADATA.description
+  const pageUrl = path ? `${SITE_METADATA.siteUrl}${path}` : SITE_METADATA.siteUrl
 
   return {
     title,
     description: pageDescription,
+    ...(path
+      ? {
+          alternates: {
+            canonical: pageUrl,
+            types: {
+              'application/rss+xml': `${SITE_METADATA.siteUrl}/feed.xml`,
+            },
+          },
+        }
+      : {}),
     openGraph: {
       title: fullTitle,
       description: pageDescription,
-      url: SITE_METADATA.siteUrl,
+      url: pageUrl,
       siteName: SITE_METADATA.title,
       images: image ? [image] : [SITE_METADATA.socialBanner],
       locale: 'en_US',
