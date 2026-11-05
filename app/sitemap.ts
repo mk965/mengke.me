@@ -19,7 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const snippetRoutes = allSnippets
     .filter((s) => !s.draft)
     .map(({ path, lastmod, date }) => ({
-      url: `${siteUrl}/snippets/${path}`,
+      url: `${siteUrl}/${path}`,
       lastModified: lastmod || date,
       priority: 0.6,
       changeFrequency: 'monthly' as const,
