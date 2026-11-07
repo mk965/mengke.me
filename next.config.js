@@ -61,9 +61,13 @@ const unoptimized = process.env.UNOPTIMIZED ? true : undefined
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
-module.exports = () => {
-  const plugins = [withContentCollections, withBundleAnalyzer]
-  return plugins.reduce((acc, next) => next(acc), {
+module.exports = async () => {
+  // withContentCollections is async (it kicks off the content build and
+  // resolves with the config unchanged), so it must be awaited before the
+  // remaining wrappers are applied — a plain plugins.reduce would hand the
+  // Promise to withBundleAnalyzer and silently drop this whole config
+  // object (including the @svgr/webpack rule below).
+  const config = {
     output,
     basePath,
     reactStrictMode: true,
@@ -161,5 +165,6 @@ module.exports = () => {
 
       return config
     },
-  })
+  }
+  return withBundleAnalyzer(await withContentCollections(config))
 }
