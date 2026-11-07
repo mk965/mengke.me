@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-import { type Snippet } from 'contentlayer/generated'
+import { type Snippet } from 'content-collections'
 import type { BrandsMap } from '~/components/ui/brand'
 import { Brand } from '~/components/ui/brand'
 import { GradientBorder } from '~/components/effects/gradient-border'

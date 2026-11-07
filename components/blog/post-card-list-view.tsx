@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import type { Blog } from 'contentlayer/generated'
+import type { Blog } from 'content-collections'
 import { TagsList } from '~/components/blog/tags'
 import { GritBackground } from '~/components/effects/grit-background'
 import { GrowingUnderline } from '~/components/effects/growing-underline'

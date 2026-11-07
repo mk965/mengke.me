@@ -2,7 +2,7 @@
 
 import { clsx } from 'clsx'
 import { useState } from 'react'
-import type { Blog, Snippet } from '~/.contentlayer/generated'
+import type { Blog, Snippet } from 'content-collections'
 import { PostCardListView } from '~/components/blog/post-card-list-view'
 import { SnippetCard } from '~/components/cards/snippet'
 import { GrowingUnderline } from '~/components/effects/growing-underline'

@@ -1,4 +1,4 @@
-import { allBlogs } from 'contentlayer/generated'
+import { allBlogs } from 'content-collections'
 import { genPageMetadata } from 'app/seo'
 import type { Metadata } from 'next'
 import { ListLayout } from '~/layouts/list-layout'

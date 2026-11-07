@@ -1,4 +1,4 @@
-import type { Author, Blog } from 'contentlayer/generated'
+import type { Author, Blog } from 'content-collections'
 import type { ReactNode } from 'react'
 import { BackToPosts } from '~/components/blog/back-to-posts'
 import { Banner } from '~/components/blog/banner'

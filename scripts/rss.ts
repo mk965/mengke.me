@@ -1,8 +1,8 @@
-import type { Blog, Snippet } from 'contentlayer/generated'
+import type { Blog, Snippet } from 'content-collections'
 import { mkdirSync, writeFileSync } from 'fs'
 import { slug } from 'github-slugger'
 import path from 'path'
-import { allBlogs, allSnippets } from '~/.contentlayer/generated/index.mjs'
+import { allBlogs, allSnippets } from 'content-collections'
 import { AUTHOR_INFO } from '~/data/author-info'
 import { SITE_METADATA } from '~/data/site-metadata'
 import tagData from '~/json/tag-data.json'
@@ -17,6 +17,9 @@ const RSS_PAGE = 'feed.xml'
 function generateRssItem(item: Blog | Snippet) {
   const { siteUrl, author } = SITE_METADATA
   const { email } = AUTHOR_INFO
+  // `images` frontmatter can be a single string or a list; the RSS enclosure
+  // loop below needs a list either way.
+  const images = Array.isArray(item.images) ? item.images : item.images ? [item.images] : []
   return `
 		<item>
 			<guid>${siteUrl}/blog/${item.slug}</guid>
@@ -26,7 +29,7 @@ function generateRssItem(item: Blog | Snippet) {
 			<pubDate>${new Date(item.date).toUTCString()}</pubDate>
 			<author>${email} (${author})</author>
 			${item.tags?.length ? item.tags?.map((t) => `<category>${t}</category>`).join('') : ''}
-      ${item.images?.length ? item.images?.map((i) => `<enclosure url="${siteUrl}${i}" length="0" type="${mime.getType(i)}" />`).join('') : ''}
+      ${images.length ? images.map((i) => `<enclosure url="${siteUrl}${i}" length="0" type="${mime.getType(i)}" />`).join('') : ''}
 		</item>
 	`
 }

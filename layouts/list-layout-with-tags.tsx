@@ -1,7 +1,7 @@
 'use client'
 
 import { clsx } from 'clsx'
-import type { Blog, Snippet } from 'contentlayer/generated'
+import type { Blog, Snippet } from 'content-collections'
 import { useState } from 'react'
 import { PostCardGridView } from '~/components/blog/post-card-grid-view'
 import { Tag } from '~/components/blog/tags'

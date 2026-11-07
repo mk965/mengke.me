@@ -1,6 +1,6 @@
 import { genPageMetadata } from 'app/seo'
-import type { Author } from 'contentlayer/generated'
-import { allAuthors } from 'contentlayer/generated'
+import type { Author } from 'content-collections'
+import { allAuthors } from 'content-collections'
 import { AuthorLayout } from '~/layouts/author-layout'
 import { coreContent } from '~/utils/contentlayer'
 import { MDX_COMPONENTS } from '~/components/mdx'

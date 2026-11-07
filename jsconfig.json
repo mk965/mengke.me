@@ -6,7 +6,7 @@
       "@/data/*": ["data/*"],
       "@/layouts/*": ["layouts/*"],
       "@/css/*": ["css/*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "content-collections": ["./.content-collections/generated"]
     }
   }
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import type { Blog } from 'contentlayer/generated'
+import type { Blog } from 'content-collections'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'

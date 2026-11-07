@@ -1,4 +1,4 @@
-import { allBlogs, allSnippets } from 'contentlayer/generated'
+import { allBlogs, allSnippets } from 'content-collections'
 import type { Metadata } from 'next'
 import { Home } from '~/components/home-page'
 import { SITE_METADATA } from '~/data/site-metadata'

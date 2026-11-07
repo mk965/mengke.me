@@ -4,7 +4,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 
 /**
  * A typesafe omit helper function
- * @example omit(content, ['body', '_raw', '_id'])
+ * @example omit(content, ['body', '_meta'])
  *
  * @param {Obj} obj
  * @param {Keys[]} keys
@@ -19,13 +19,13 @@ function omit<Obj, Keys extends keyof Obj>(obj: Obj, keys: Keys[]): Omit<Obj, Ke
 }
 
 /**t
- * Omit body, _raw, _id from MDX document and return only the core content
+ * Omit body and _meta from MDX document and return only the core content
  *
  * @param {T} content
  * @return {*}  {CoreContent<T>}
  */
 export function coreContent<T extends MDXDocument>(content: T): CoreContent<T> {
-  return omit(content, ['body', '_raw', '_id'] as Array<keyof T>) as CoreContent<T>
+  return omit(content, ['body', '_meta'] as Array<keyof T>) as CoreContent<T>
 }
 
 /**
