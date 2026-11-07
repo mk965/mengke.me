@@ -1,5 +1,5 @@
-import type { Author, Snippet } from 'contentlayer/generated'
-import { allAuthors, allSnippets } from 'contentlayer/generated'
+import type { Author, Snippet } from 'content-collections'
+import { allAuthors, allSnippets } from 'content-collections'
 // import 'css/prism.css'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'

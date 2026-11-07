@@ -1,4 +1,4 @@
-import type { Blog, Snippet } from '~/.contentlayer/generated'
+import type { Blog, Snippet } from 'content-collections'
 import { ProfileCard } from '~/components/cards/profile'
 import { Container } from '~/components/ui/container'
 import { Twemoji } from '~/components/ui/twemoji'

@@ -1,4 +1,4 @@
-import { allMoments } from 'contentlayer/generated'
+import { allMoments } from 'content-collections'
 import { genPageMetadata } from 'app/seo'
 import { clsx } from 'clsx'
 import { Container } from '~/components/ui/container'
@@ -41,7 +41,7 @@ export default function MomentPage() {
         {moments.map((moment) => {
           const images = getMomentImages(moment.images)
           return (
-            <article key={moment._id} className="group">
+            <article key={moment.path} className="group">
               <div
                 className={clsx([
                   'relative overflow-hidden rounded-2xl',

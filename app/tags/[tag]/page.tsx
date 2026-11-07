@@ -1,5 +1,5 @@
 import { genPageMetadata } from 'app/seo'
-import { allBlogs, allSnippets } from 'contentlayer/generated'
+import { allBlogs, allSnippets } from 'content-collections'
 import { slug } from 'github-slugger'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'

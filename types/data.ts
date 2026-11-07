@@ -1,4 +1,4 @@
-import type { Document, MDX } from 'contentlayer2/core'
+import type { Meta } from '@content-collections/core'
 
 export type SpotifyNowPlayingData = {
   isPlaying: boolean
@@ -148,9 +148,14 @@ export interface ViewCounterProps {
   className?: string
 }
 
-export type MDXDocument = Document & { body: MDX }
+export type MDXDocument = {
+  body: { code: string; raw: string }
+  _meta: Meta
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
+}
 export type MDXDocumentDate = MDXDocument & {
   date: string
 }
 
-export type CoreContent<T> = Omit<T, 'body' | '_raw' | '_id'>
+export type CoreContent<T> = Omit<T, 'body' | '_meta'>

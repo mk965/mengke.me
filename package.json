@@ -5,7 +5,7 @@
   "scripts": {
     "start": "next dev",
     "dev": "PORT=3434 cross-env INIT_CWD=$PWD next dev",
-    "build": "cross-env INIT_CWD=$PWD prisma generate && next build && npm run postbuild",
+    "build": "cross-env INIT_CWD=$PWD content-collections build && cross-env NODE_ENV=production tsx ./scripts/content-hooks.ts && prisma generate && next build && npm run postbuild",
     "postbuild": "cross-env NODE_OPTIONS='--experimental-json-modules' tsx ./scripts/post-build.ts",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
@@ -28,6 +28,10 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "@content-collections/cli": "^0.1.9",
+    "@content-collections/core": "^0.15.3",
+    "@content-collections/mdx": "^0.2.2",
+    "@content-collections/next": "^0.2.11",
     "contentlayer2": "0.5.3",
     "dotenv": "^16.4.7",
     "esbuild": "0.25.0",
@@ -66,7 +70,8 @@
     "swr": "^2.3.0",
     "tailwindcss": "^3.4.17",
     "typed.js": "^2.1.0",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",

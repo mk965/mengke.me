@@ -1,4 +1,4 @@
-import type { Author } from '~/.contentlayer/generated'
+import type { Author } from 'content-collections'
 import { Image } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
 import type { CoreContent } from '~/types/data'

@@ -19,7 +19,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./*"],
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "content-collections": ["./.content-collections/generated"]
     },
     "plugins": [{ "name": "next" }],
     "strictNullChecks": true
@@ -31,8 +31,8 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.json",
-    ".contentlayer/generated",
-    ".contentlayer/generated/**/*.json",
+    ".content-collections/generated",
+    ".content-collections/generated/**/*.json",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]

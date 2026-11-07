@@ -1,4 +1,4 @@
-import type { Author } from 'contentlayer/generated'
+import type { Author } from 'content-collections'
 import type { ReactNode } from 'react'
 import { ProfileCard } from '~/components/cards/profile'
 import { Container } from '~/components/ui/container'
@@ -6,7 +6,7 @@ import { PageHeader } from '~/components/ui/page-header'
 
 interface Props {
   children?: ReactNode
-  content: Omit<Author, '_id' | '_raw' | 'body'>
+  content: Omit<Author, '_meta' | 'body'>
 }
 
 export function AuthorLayout({ children }: Props) {

@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-import type { Blog } from 'contentlayer/generated'
+import type { Blog } from 'content-collections'
 import type { ReactNode } from 'react'
 import { Banner } from '~/components/blog/banner'
 import { BlogMeta } from '~/components/blog/blog-meta'

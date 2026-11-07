@@ -1,5 +1,5 @@
-import type { Author, Blog } from 'contentlayer/generated'
-import { allAuthors, allBlogs } from 'contentlayer/generated'
+import type { Author, Blog } from 'content-collections'
+import { allAuthors, allBlogs } from 'content-collections'
 // import 'css/prism.css'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'

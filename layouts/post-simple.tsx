@@ -1,4 +1,4 @@
-import type { Blog, Snippet } from 'contentlayer/generated'
+import type { Blog, Snippet } from 'content-collections'
 import type { ReactNode } from 'react'
 import { BlogMeta } from '~/components/blog/blog-meta'
 import { Comments } from '~/components/blog/comments'
