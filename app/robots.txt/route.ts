@@ -15,7 +15,7 @@ const DISALLOW = [
 
 // Content Signals (https://contentsignals.org/): declares how automated
 // systems may use this site's content. Zhang's choice (2026-11-09):
-// ai-train=no, search=yes, ai-input=yes.
+// ai-train=no, search=yes, ai-input=no.
 const CONTENT_SIGNALS_PREAMBLE = `# As a condition of accessing this website, you agree to
 # abide by the following content signals:
 #
@@ -54,7 +54,7 @@ export function GET() {
     CONTENT_SIGNALS_PREAMBLE,
     '',
     'User-Agent: *',
-    'Content-Signal: ai-train=no, search=yes, ai-input=yes',
+    'Content-Signal: ai-train=no, search=yes, ai-input=no',
     'Allow: /',
     ...DISALLOW.map((path) => `Disallow: ${path}`),
     '',
