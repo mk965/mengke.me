@@ -5,7 +5,6 @@ import { Comments } from '~/components/blog/comments'
 import { EditOnGithub } from '~/components/blog/edit-on-github'
 import { PostTitle } from '~/components/blog/post-title'
 import { ScrollButtons } from '~/components/blog/scroll-buttons'
-import { SocialShare } from '~/components/blog/social-share'
 import { TagsList } from '~/components/blog/tags'
 import { Container } from '~/components/ui/container'
 import { GradientDivider } from '~/components/effects/gradient-divider'
@@ -21,7 +20,6 @@ interface PostSimpleProps {
 
 export function PostSimple({ content, children }: PostSimpleProps) {
   const { slug, date, title, type, tags, readingTime, filePath } = content
-  const postUrl = `${SITE_METADATA.siteUrl}/${type.toLowerCase()}/${slug}`
 
   return (
     <Container className="pt-4 lg:pt-12">
@@ -45,7 +43,6 @@ export function PostSimple({ content, children }: PostSimpleProps) {
             <div className="flex items-center gap-2">
               <EditOnGithub filePath={filePath} />
             </div>
-            <SocialShare postUrl={postUrl} title={title} />
           </div>
           <Comments />
         </div>

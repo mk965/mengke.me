@@ -7,7 +7,6 @@ import { Comments } from '~/components/blog/comments'
 import { EditOnGithub } from '~/components/blog/edit-on-github'
 import { PostTitle } from '~/components/blog/post-title'
 import { ScrollButtons } from '~/components/blog/scroll-buttons'
-import { SocialShare } from '~/components/blog/social-share'
 import { TagsList } from '~/components/blog/tags'
 import { Container } from '~/components/ui/container'
 import { SITE_METADATA } from '~/data/site-metadata'
@@ -22,7 +21,6 @@ interface LayoutProps {
 
 export function PostBanner({ content, children }: LayoutProps) {
   const { slug, type, title, images, date, lastmod, readingTime, tags, filePath, toc } = content
-  const postUrl = `${SITE_METADATA.siteUrl}/${type.toLowerCase()}/${slug}`
 
   return (
     <Container className="pt-4 lg:pt-12">
@@ -50,7 +48,6 @@ export function PostBanner({ content, children }: LayoutProps) {
             <div className="flex items-center gap-2">
               <EditOnGithub filePath={filePath} />
             </div>
-            <SocialShare postUrl={postUrl} title={title} />
           </div>
           <Comments />
         </div>

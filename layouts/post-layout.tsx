@@ -8,7 +8,6 @@ import { EditOnGithub } from '~/components/blog/edit-on-github'
 import { PostNav } from '~/components/blog/post-nav'
 import { PostTitle } from '~/components/blog/post-title'
 import { ScrollButtons } from '~/components/blog/scroll-buttons'
-import { SocialShare } from '~/components/blog/social-share'
 import { TagsList } from '~/components/blog/tags'
 import { TableOfContents } from '~/components/blog/toc'
 import { Container } from '~/components/ui/container'
@@ -26,7 +25,6 @@ interface LayoutProps {
 
 export function PostLayout({ content, next, prev, children }: LayoutProps) {
   const { slug, images, lastmod, readingTime, date, title, tags, filePath, toc, type } = content
-  const postUrl = `${SITE_METADATA.siteUrl}/${type.toLowerCase()}/${slug}`
 
   return (
     <Container className="pt-4 lg:pt-12">
@@ -40,7 +38,6 @@ export function PostLayout({ content, next, prev, children }: LayoutProps) {
           </div>
           <div className="flex items-center justify-between gap-2 pb-4 lg:pt-2">
             <BlogMeta date={date} lastmod={lastmod} slug={slug} readingTime={readingTime} />
-            <SocialShare postUrl={postUrl} title={title} className="hidden md:flex" />
           </div>
         </div>
         <GradientDivider className="mb-2 mt-1" />
