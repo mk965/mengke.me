@@ -50,6 +50,7 @@ export function Image(props: ImageProps) {
         style={{ objectFit: 'cover', ...style }}
         loading={loading}
         priority={loading === 'eager'}
+        fetchPriority={loading === 'eager' ? 'high' : undefined}
         quality={quality}
         onLoad={onLoad}
         {...rest}
