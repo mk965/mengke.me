@@ -6,7 +6,11 @@ import friends from '~/json/friends.json'
 import { SITE_METADATA } from '~/data/site-metadata'
 import { AUTHOR_INFO } from '~/data/author-info'
 
-export const metadata = genPageMetadata({ title: 'Friends', path: '/friends' })
+export const metadata = genPageMetadata({
+  title: 'Friends',
+  description: "Links to friends' blogs and sites.",
+  path: '/friends',
+})
 
 export default async function FriendsPage() {
   const friendsList = friends.filter((f) => f.type === 'friend')
