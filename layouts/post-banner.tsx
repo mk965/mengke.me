@@ -38,6 +38,7 @@ export function PostBanner({ content, children }: LayoutProps) {
           <div className="space-y-4 pt-4 md:pt-10">
             <Banner
               banner={images?.[0] || SITE_METADATA.socialBanner}
+              alt={title}
               className="lg:-mx-8 xl:-mx-36 2xl:-mx-52"
             />
           </div>

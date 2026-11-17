@@ -4,15 +4,23 @@ import { Image, Zoom } from '~/components/ui/image'
 import { Link } from '~/components/ui/link'
 import { capitalize, kebabCaseToPlainText } from '~/utils/misc'
 
-export function Banner({ banner, className }: { banner: string; className?: string }) {
+export function Banner({
+  banner,
+  className,
+  alt,
+}: {
+  banner: string
+  className?: string
+  alt?: string
+}) {
   const [path, author, id] = banner.split('__')
-  const handle = path.split('/').pop() || ''
+  const handle = (path.split('/').pop() || '').replace(/\.[a-z0-9]+$/i, '')
   return (
     <div className={clsx('relative', className)}>
       <Zoom>
         <Image
           src={banner}
-          alt={capitalize(kebabCaseToPlainText(handle)) || 'Article banner photo'}
+          alt={alt || capitalize(kebabCaseToPlainText(handle)) || 'Article banner photo'}
           width={1600}
           height={900}
           className="h-auto w-full rounded-lg"
